@@ -16,7 +16,7 @@
         android:scaleType="fitXY" />
 
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="134dp"
@@ -44,10 +44,10 @@
             android:textColor="#49454F"
             android:textSize="12sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/emailHintTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:text="Inserisci la tua email"
             android:textColor="#1D1B20"
             android:textSize="16sp" />
@@ -80,10 +80,10 @@
             android:textColor="#49454F"
             android:textSize="12sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/passwordHintTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:text="Inserisci la tua password"
             android:textColor="#1D1B20"
             android:textSize="16sp" />
@@ -117,4 +117,17 @@
             android:textColor="#F5F5F5"
             android:textSize="16sp" />
     </LinearLayout>
+
+    <TextView
+            android:id="@+id/errore"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="35dp"
+            android:layout_marginTop="20dp"
+            android:text="Email o Password non corretti"
+            android:textColor="#E91E63"
+            android:textSize="25sp"
+            android:visibility="gone"
+            />
+
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.dietiestates25.view
 
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,15 +18,18 @@ class RegistrazioneActivity : AppCompatActivity() {
 
 
         val registrazioneButton = findViewById<LinearLayout>(R.id.createButtonContainer)
+        val erroreLabel = findViewById<TextView>(R.id.errore)
+
         registrazioneButton.setOnClickListener {
-            val email = findViewById<TextView>(R.id.emailHintTextView).text.toString()
-            val password = findViewById<TextView>(R.id.passwordHintTextView).text.toString()
+            val email = findViewById<EditText>(R.id.emailHintTextView).text.toString()
+            val password = findViewById<EditText>(R.id.passwordHintTextView).text.toString()
 
             if (controller.areValid(email, password)) {
                 controller.registerUser(email, password)
+                erroreLabel.visibility = TextView.GONE
             }
             else {
-                // Mostra una label di errore
+                erroreLabel.visibility = TextView.VISIBLE
             }
         }
     }
