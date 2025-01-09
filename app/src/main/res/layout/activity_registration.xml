@@ -46,9 +46,9 @@
 
         <EditText
             android:id="@+id/emailHintTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="Inserisci la tua email"
+            android:hint="Inserisci la tua email"
             android:textColor="#1D1B20"
             android:textSize="16sp" />
     </LinearLayout>
@@ -82,9 +82,9 @@
 
         <EditText
             android:id="@+id/passwordHintTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="Inserisci la tua password"
+            android:hint="Inserisci la tua password"
             android:textColor="#1D1B20"
             android:textSize="16sp" />
     </LinearLayout>

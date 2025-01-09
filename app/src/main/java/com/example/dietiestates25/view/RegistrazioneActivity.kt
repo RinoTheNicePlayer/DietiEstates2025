@@ -18,19 +18,23 @@ class RegistrazioneActivity : AppCompatActivity() {
 
 
         val registrazioneButton = findViewById<LinearLayout>(R.id.createButtonContainer)
-        val erroreLabel = findViewById<TextView>(R.id.errore)
 
         registrazioneButton.setOnClickListener {
-            val email = findViewById<EditText>(R.id.emailHintTextView).text.toString()
-            val password = findViewById<EditText>(R.id.passwordHintTextView).text.toString()
+            registrazione()
+        }
+    }
 
-            if (controller.areValid(email, password)) {
-                controller.registerUser(email, password)
-                erroreLabel.visibility = TextView.GONE
-            }
-            else {
-                erroreLabel.visibility = TextView.VISIBLE
-            }
+    private fun registrazione(){
+        val email = findViewById<EditText>(R.id.emailHintTextView).text.toString()
+        val password = findViewById<EditText>(R.id.passwordHintTextView).text.toString()
+        val erroreLabel = findViewById<TextView>(R.id.errore)
+
+        if (controller.areValid(email, password)) {
+            controller.registerUser(email, password)
+            erroreLabel.visibility = TextView.GONE
+        }
+        else {
+            erroreLabel.visibility = TextView.VISIBLE
         }
     }
 }

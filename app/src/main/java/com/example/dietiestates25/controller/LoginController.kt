@@ -14,32 +14,32 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import java.io.IOException
 
-class RegistrazioneController(private val context: Context) {
+class LoginController(private val context: Context) {
     private val client = OkHttpClient()
 
-    fun registerUser(email: String, password: String, group: String = "Clienti"){
+    fun login(email: String, password: String, group: String = "Clienti") {
         val utente = Utente(email, password, group)
         val json = Json.encodeToString(utente)
 
         val body = json.toRequestBody("application/json; charset=utf-8".toMediaType())
         val request = Request.Builder()
-            .url("https://localhost:8080/auth/registrazione") // Replace this cloud URL
+            .url("https://localhost:8080/auth/login") // Replace this cloud URL
             .post(body)
             .build()
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: okhttp3.Call, e: IOException) {
                 e.printStackTrace()
-                showToast("Registrazione fallita")
+                showToast("Login fallito")
             }
 
             override fun onResponse(call: okhttp3.Call, response: Response) {
                 response.use {
                     if (!it.isSuccessful) {
-                        showToast("Registrazione fallita")
-                        throw IOException("Registrazione fallita $it")
+                        showToast("Login fallito")
+                        throw IOException("Login fallito $it")
                     }
-                    showToast("Registrazione completata")
+                    showToast("Login completato")
                 }
             }
         })
