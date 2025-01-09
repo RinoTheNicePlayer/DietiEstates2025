@@ -1,5 +1,6 @@
 package com.example.dietiestates25.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -17,12 +18,15 @@ class MainActivity : AppCompatActivity() {
         loginController = LoginController(this)
 
         val loginButton = findViewById<LinearLayout>(R.id.loginButtonContainer)
+        val registrazioneLink = findViewById<TextView>(R.id.registerTextView)
 
         loginButton.setOnClickListener{
             login()
         }
 
-        /// TODO: settare il link per la registrazione
+        registrazioneLink.setOnClickListener {
+            goToRegistrare()
+        }
     }
 
     private fun login() {
@@ -37,5 +41,10 @@ class MainActivity : AppCompatActivity() {
         else {
             erroreLabel.visibility = TextView.VISIBLE
         }
+    }
+
+    private fun goToRegistrare() {
+        val intent = Intent(this, RegistrazioneActivity::class.java)
+        startActivity(intent)
     }
 }
