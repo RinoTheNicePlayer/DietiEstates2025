@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:gravity="center_horizontal"
-        android:background="@drawable/buttonStyle2"
+        android:background="@drawable/button_style1"
         android:paddingVertical="15dp"
         android:clickable="true"
         android:focusable="true"
