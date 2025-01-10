@@ -18,33 +18,33 @@ class MainActivity : AppCompatActivity() {
         loginController = LoginController(this)
 
         val loginButton = findViewById<LinearLayout>(R.id.loginButtonContainer)
-        val registrazioneLink = findViewById<TextView>(R.id.registerTextView)
+        val registerLink = findViewById<TextView>(R.id.registerTextView)
 
         loginButton.setOnClickListener{
             login()
         }
 
-        registrazioneLink.setOnClickListener {
-            goToRegistrare()
+        registerLink.setOnClickListener {
+            goToRegister()
         }
     }
 
     private fun login() {
         val email = findViewById<EditText>(R.id.emailHintTextView).text.toString()
         val password = findViewById<EditText>(R.id.passwordHintTextView).text.toString()
-        val erroreLabel = findViewById<TextView>(R.id.erroreLabel)
+        val errorLabel = findViewById<TextView>(R.id.erroreLabel)
 
         if (loginController.areValid(email, password)){
             loginController.login(email, password)
-            erroreLabel.visibility = TextView.GONE
+            errorLabel.visibility = TextView.GONE
         }
         else {
-            erroreLabel.visibility = TextView.VISIBLE
+            errorLabel.visibility = TextView.VISIBLE
         }
     }
 
-    private fun goToRegistrare() {
-        val intent = Intent(this, RegistrazioneActivity::class.java)
+    private fun goToRegister() {
+        val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
     }
 }

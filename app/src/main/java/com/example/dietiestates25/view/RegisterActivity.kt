@@ -6,20 +6,20 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dietiestates25.R
-import com.example.dietiestates25.controller.RegistrazioneController
+import com.example.dietiestates25.controller.RegisterController
 
-class RegistrazioneActivity : AppCompatActivity() {
-    private lateinit var controller: RegistrazioneController
+class RegisterActivity : AppCompatActivity() {
+    private lateinit var controller: RegisterController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
-        controller = RegistrazioneController(this)
+        controller = RegisterController(this)
 
 
-        val registrazioneButton = findViewById<LinearLayout>(R.id.createButtonContainer)
+        val registerButton = findViewById<LinearLayout>(R.id.createButtonContainer)
 
-        registrazioneButton.setOnClickListener {
+        registerButton.setOnClickListener {
             registrazione()
         }
     }
@@ -27,14 +27,14 @@ class RegistrazioneActivity : AppCompatActivity() {
     private fun registrazione(){
         val email = findViewById<EditText>(R.id.emailHintTextView).text.toString()
         val password = findViewById<EditText>(R.id.passwordHintTextView).text.toString()
-        val erroreLabel = findViewById<TextView>(R.id.errore)
+        val errorLabel = findViewById<TextView>(R.id.errore)
 
         if (controller.areValid(email, password)) {
             controller.registerUser(email, password)
-            erroreLabel.visibility = TextView.GONE
+            errorLabel.visibility = TextView.GONE
         }
         else {
-            erroreLabel.visibility = TextView.VISIBLE
+            errorLabel.visibility = TextView.VISIBLE
         }
     }
 }

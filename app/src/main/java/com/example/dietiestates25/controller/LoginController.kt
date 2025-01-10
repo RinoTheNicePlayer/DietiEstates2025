@@ -3,7 +3,7 @@ package com.example.dietiestates25.controller
 import android.content.Context
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.dietiestates25.model.Utente
+import com.example.dietiestates25.model.User
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.Callback
@@ -18,8 +18,8 @@ class LoginController(private val context: Context) {
     private val client = OkHttpClient()
 
     fun login(email: String, password: String, group: String = "Clienti") {
-        val utente = Utente(email, password, group)
-        val json = Json.encodeToString(utente)
+        val user = User(email, password, group)
+        val json = Json.encodeToString(user)
 
         val body = json.toRequestBody("application/json; charset=utf-8".toMediaType())
         val request = Request.Builder()
