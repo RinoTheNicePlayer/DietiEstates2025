@@ -1,0 +1,127 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ScrollView
+            android:id="@+id/rjyydqs4vvna"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:paddingTop="89dp">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/rvh8ixmnnla"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="49dp"
+                    android:layout_marginHorizontal="64dp"
+                    android:layout_weight="1"
+                    android:text="OFFERTA INVIATA!"
+                    android:textColor="#94D82D"
+                    android:textSize="32sp" />
+
+            <ImageView
+                    android:id="@+id/r11ab8ot2d5u"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="32dp"
+                    android:layout_marginHorizontal="156dp"
+                    android:src="@drawable/verified"
+                    android:scaleType="fitXY" />
+
+            <TextView
+                    android:id="@+id/r47sb5k3tb66"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:layout_marginStart="26dp"
+                    android:text="Riepilogo:"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+            <TextView
+                    android:id="@+id/rnt3e8ecbli"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="18dp"
+                    android:layout_marginHorizontal="97dp"
+                    android:layout_weight="1"
+                    android:text="Hai offerto “€ 100.000” per:"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+            <LinearLayout
+                    android:id="@+id/rmwxvnfvs7z"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/button_style4"
+                    android:paddingVertical="26dp"
+                    android:paddingHorizontal="12dp"
+                    android:layout_marginBottom="76dp"
+                    android:layout_marginHorizontal="41dp"
+                    android:elevation="3dp"
+                    android:orientation="horizontal">
+
+                <ImageView
+                        android:id="@+id/r4vsj2e2nq3k"
+                        android:layout_width="99dp"
+                        android:layout_height="80dp"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/image3"
+                        android:scaleType="fitXY" />
+
+                <LinearLayout
+                        android:id="@+id/racheveluhf7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                    <TextView
+                            android:id="@+id/rfod9xv74r49"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="17dp"
+                            android:layout_weight="1"
+                            android:text="Appartamento - Via Napoli 12, Calvizzano, Napoli"
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
+
+                    <TextView
+                            android:id="@+id/r88spbw4p2yp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Prezzo precedente: € 120.000"
+                            android:textColor="#757575"
+                            android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                    android:id="@+id/ro2lkyhajdpd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="93dp"
+                    android:layout_weight="1"
+                    android:text="Riceverai un riscontro a breve"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

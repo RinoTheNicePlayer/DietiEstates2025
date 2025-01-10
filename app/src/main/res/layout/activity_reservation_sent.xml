@@ -1,0 +1,76 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ScrollView
+            android:id="@+id/ruksj8oh3c9"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:paddingTop="89dp">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/rvg9gp6wkgn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="17dp"
+                    android:layout_marginHorizontal="85dp"
+                    android:layout_weight="1"
+                    android:text="PRENOTAZIONE EFFETTUATA!"
+                    android:textColor="#94D82D"
+                    android:textSize="32sp" />
+
+            <ImageView
+                    android:id="@+id/rj4d6mtwfl1f"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="32dp"
+                    android:layout_marginHorizontal="156dp"
+                    android:src="@drawable/verified"
+                    android:scaleType="fitXY" />
+
+            <TextView
+                    android:id="@+id/rhlyfywbrb8k"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:layout_marginStart="25dp"
+                    android:text="Riepilogo:"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+            <TextView
+                    android:id="@+id/rv1rbcwjdgjn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="80dp"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_weight="1"
+                    android:text="Indirizzo: Affiliato Tecnocasa Maremi S.R.L. - Via Vincenzo Merolla, 80, 80016 Marano di Napoli (NA) Data e ora: 02/12/2024, ore 9:00"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+            <TextView
+                    android:id="@+id/rte5c8ejeyej"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="95dp"
+                    android:layout_weight="1"
+                    android:text="Riceverai un riscontro a breve"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
