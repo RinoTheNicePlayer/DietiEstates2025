@@ -99,6 +99,21 @@ class AuthController{
         )
     }
 
+    fun updatePassword(oldPassword: String, newPassword: String, errorLabel: TextView) {
+        Amplify.Auth.updatePassword(
+            oldPassword,
+            newPassword,
+            {
+                Log.i("Amplify", "Password updated successfully")
+                errorLabel.visibility = TextView.GONE
+            },
+            { error ->
+                Log.e("Amplify", "Password update failed", error)
+                errorLabel.visibility = TextView.VISIBLE
+            }
+        )
+    }
+
     fun areValid(email: String, password: String): Boolean {
         return email.isNotEmpty() && password.isNotEmpty()
     }
