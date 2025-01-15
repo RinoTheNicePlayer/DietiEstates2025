@@ -37,7 +37,8 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.aws.auth.cognito)
+    implementation(libs.core)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

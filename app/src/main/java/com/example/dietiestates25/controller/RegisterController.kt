@@ -1,57 +1,31 @@
 package com.example.dietiestates25.controller
 
-import android.content.Context
-import android.widget.Toast
+import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.dietiestates25.model.User
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import okhttp3.Callback
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.Response
-import java.io.IOException
+import com.amplifyframework.auth.options.AuthSignUpOptions
+import com.amplifyframework.core.Amplify
 
-class RegisterController(private val context: Context) {
-    private val client = OkHttpClient()
+class RegisterController {
 
-    fun registerUser(email: String, password: String, group: String = "Clienti"){
-        val user = User(email, password, group)
-        val json = Json.encodeToString(user)
-
-        val body = json.toRequestBody("application/json; charset=utf-8".toMediaType())
-        val request = Request.Builder()
-            .url("https://localhost:8080/auth/registrazione") // Replace this cloud URL
-            .post(body)
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: okhttp3.Call, e: IOException) {
-                e.printStackTrace()
-                showToast("Registrazione fallita")
+    fun signUpWithAmplify(email: String, password: String, errorLabel: TextView, activity: AppCompatActivity){
+        Amplify.Auth.signUp(
+            email,
+            password,
+            AuthSignUpOptions.builder().build(),
+            {
+                Log.i("Amplify", "Sign up succeeded")
+                activity.finish() //chiude current activity
+                errorLabel.visibility = TextView.GONE
+            },
+            {
+                Log.e("Amplify", "Sign up failed", it)
+                errorLabel.visibility = TextView.VISIBLE
             }
-
-            override fun onResponse(call: okhttp3.Call, response: Response) {
-                response.use {
-                    if (!it.isSuccessful) {
-                        showToast("Registrazione fallita")
-                        throw IOException("Registrazione fallita $it")
-                    }
-                    showToast("Registrazione completata")
-                }
-            }
-        })
+        )
     }
 
     fun areValid(email: String, password: String): Boolean {
         return email.isNotEmpty() && password.isNotEmpty()
-    }
-
-    private fun showToast(message: String) {
-        (context as? AppCompatActivity)?.runOnUiThread {
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-        }
     }
 }

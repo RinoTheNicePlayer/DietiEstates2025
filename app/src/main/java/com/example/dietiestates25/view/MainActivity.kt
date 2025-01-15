@@ -15,32 +15,41 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        loginController = LoginController(this)
+        loginController = LoginController()
 
         val loginButton = findViewById<LinearLayout>(R.id.loginButtonContainer)
         val registerLink = findViewById<TextView>(R.id.registerTextView)
+        val googleLogin = findViewById<LinearLayout>(R.id.googleLoginContainer)
+
+        val errorLabel = findViewById<TextView>(R.id.erroreLabel)
 
         loginButton.setOnClickListener{
-            login()
+            login(errorLabel)
         }
 
         registerLink.setOnClickListener {
             goToRegister()
         }
+
+        googleLogin.setOnClickListener {
+            loginExternal(errorLabel)
+        }
     }
 
-    private fun login() {
+    private fun login(errorLabel: TextView) {
         val email = findViewById<EditText>(R.id.emailHintTextView).text.toString()
         val password = findViewById<EditText>(R.id.passwordHintTextView).text.toString()
-        val errorLabel = findViewById<TextView>(R.id.erroreLabel)
 
         if (loginController.areValid(email, password)){
-            loginController.login(email, password)
-            errorLabel.visibility = TextView.GONE
+            loginController.loginWithAmplify(email, password, errorLabel)
         }
         else {
             errorLabel.visibility = TextView.VISIBLE
         }
+    }
+
+    private fun loginExternal(errorLabel: TextView) {
+        loginController.loginWithThirdProviders(errorLabel, this)
     }
 
     private fun goToRegister() {
