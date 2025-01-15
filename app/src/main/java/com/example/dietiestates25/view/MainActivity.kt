@@ -7,15 +7,15 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dietiestates25.R
-import com.example.dietiestates25.controller.LoginController
+import com.example.dietiestates25.controller.AuthController
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var loginController: LoginController
+    private lateinit var authController: AuthController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        loginController = LoginController()
+        authController = AuthController()
 
         val loginButton = findViewById<LinearLayout>(R.id.loginButtonContainer)
         val registerLink = findViewById<TextView>(R.id.registerTextView)
@@ -43,15 +43,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleIntent(intent: Intent?) {
-        loginController.handleRedirection(intent)
+        authController.handleRedirection(intent)
     }
 
     private fun login(errorLabel: TextView) {
         val email = findViewById<EditText>(R.id.emailHintTextView).text.toString()
         val password = findViewById<EditText>(R.id.passwordHintTextView).text.toString()
 
-        if (loginController.areValid(email, password)){
-            loginController.loginWithAmplify(email, password, errorLabel)
+        if (authController.areValid(email, password)){
+            authController.loginWithAmplify(email, password, errorLabel)
         }
         else {
             errorLabel.visibility = TextView.VISIBLE
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loginExternal(errorLabel: TextView) {
-        loginController.loginWithThirdProviders(errorLabel, this)
+        authController.loginWithThirdProviders(errorLabel, this)
     }
 
     private fun goToRegister() {
