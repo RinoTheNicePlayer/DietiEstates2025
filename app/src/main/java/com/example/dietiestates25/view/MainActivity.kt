@@ -36,6 +36,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleIntent(intent)
+    }
+
+    private fun handleIntent(intent: Intent?) {
+        loginController.handleRedirection(intent)
+    }
+
     private fun login(errorLabel: TextView) {
         val email = findViewById<EditText>(R.id.emailHintTextView).text.toString()
         val password = findViewById<EditText>(R.id.passwordHintTextView).text.toString()

@@ -1,10 +1,10 @@
 package com.example.dietiestates25.controller
 
+import android.content.Intent
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
-import com.amplifyframework.auth.result.AuthSignInResult
 import com.amplifyframework.core.Amplify
 
 class LoginController{
@@ -14,7 +14,8 @@ class LoginController{
             email,
             password,
             { result -> if (result.isSignInComplete) {
-                getToken(result)
+                Log.i("AuthQuickstart", result.toString())
+                getToken()
                 erroreLabel.visibility = TextView.GONE
             }},
             { error ->
@@ -28,22 +29,29 @@ class LoginController{
         Amplify.Auth.signInWithWebUI(
             activity,
             { result -> if (result.isSignInComplete) {
-                getToken(result)
+                Log.i("AuthQuickstart", result.toString())
                 erroreLabel.visibility = TextView.GONE
             }},
             { error ->
                 erroreLabel.visibility = TextView.VISIBLE
-                Log.e("AuthQuickstart", error.toString()) }
+                Log.e("AuthQuickstart", error.toString())
+            }
         )
+    }
+
+    fun handleRedirection(intent: Intent?) {
+        intent?.data?.let { uri ->
+            if (uri.scheme == "myapp" && uri.host == "callback") {
+                getToken()
+            }
+        }
     }
 
     fun areValid(email: String, password: String): Boolean {
         return email.isNotEmpty() && password.isNotEmpty()
     }
 
-    private fun getToken(result: AuthSignInResult) {
-        Log.i("AuthQuickstart", result.toString())
-
+    private fun getToken() {
         Amplify.Auth.fetchAuthSession(
             { session -> if (session.isSignedIn) {
                 val idToken = (session as AWSCognitoAuthSession).userPoolTokens.value?.idToken
