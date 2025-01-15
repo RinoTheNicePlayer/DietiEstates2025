@@ -1,5 +1,4 @@
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:background="#FFFFFF"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -26,6 +25,7 @@
                     android:layout_marginHorizontal="64dp"
                     android:layout_weight="1"
                     android:text="OFFERTA INVIATA!"
+                    android:gravity="center"
                     android:textColor="#94D82D"
                     android:textSize="32sp" />
 
@@ -56,6 +56,7 @@
                     android:layout_marginHorizontal="97dp"
                     android:layout_weight="1"
                     android:text="Hai offerto “€ 100.000” per:"
+                    android:gravity="center"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
@@ -117,6 +118,7 @@
                     android:layout_marginHorizontal="93dp"
                     android:layout_weight="1"
                     android:text="Riceverai un riscontro a breve"
+                    android:gravity="center"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
