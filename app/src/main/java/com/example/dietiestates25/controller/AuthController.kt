@@ -1,5 +1,6 @@
 package com.example.dietiestates25.controller
 
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.TextView
@@ -9,8 +10,9 @@ import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
 import com.amplifyframework.auth.options.AuthSignUpOptions
 import com.amplifyframework.core.Amplify
+import com.example.dietiestates25.view.HomeClienteActivity
 
-class AuthController{
+class AuthController(private val context: Context){
 
     fun signUpWithAmplify(email: String, password: String, role: String, errorLabel: TextView){
         val attributes = listOf(
@@ -26,13 +28,13 @@ class AuthController{
             password,
             options,
             {
-                Log.i("Amplify", "Sign up succeeded")
                 loginWithAmplify(email, password, errorLabel)
                 errorLabel.visibility = TextView.GONE
+                Log.i("Amplify", "Sign up succeeded")
             },
             {
-                Log.e("Amplify", "Sign up failed", it)
                 errorLabel.visibility = TextView.VISIBLE
+                Log.e("Amplify", "Sign up failed", it)
             }
         )
     }
@@ -42,9 +44,10 @@ class AuthController{
             email,
             password,
             { result -> if (result.isSignInComplete) {
-                Log.i("AuthQuickstart", result.toString())
                 getToken()
+                fetchUserRole()
                 erroreLabel.visibility = TextView.GONE
+                Log.i("AuthQuickstart", result.toString())
             }},
             { error ->
                 erroreLabel.visibility = TextView.VISIBLE
@@ -53,15 +56,13 @@ class AuthController{
         )
     }
 
-    fun loginWithThirdProviders(erroreLabel: TextView, activity: AppCompatActivity){
+    fun loginWithThirdProviders(activity: AppCompatActivity){
         Amplify.Auth.signInWithWebUI(
             activity,
             { result -> if (result.isSignInComplete) {
                 Log.i("AuthQuickstart", result.toString())
-                erroreLabel.visibility = TextView.GONE
             }},
             { error ->
-                erroreLabel.visibility = TextView.VISIBLE
                 Log.e("AuthQuickstart", error.toString())
             }
         )
@@ -71,6 +72,7 @@ class AuthController{
         intent?.data?.let { uri ->
             if (uri.scheme == "myapp" && uri.host == "callback") {
                 getToken()
+                fetchUserRole()
             }
         }
     }
@@ -89,12 +91,12 @@ class AuthController{
             password,
             options,
             {
-                Log.i("Amplify", "Sign up succeeded")
                 errorLabel.visibility = TextView.GONE
+                Log.i("Amplify", "Sign up succeeded")
             },
             {
-                Log.e("Amplify", "Sign up failed", it)
                 errorLabel.visibility = TextView.VISIBLE
+                Log.e("Amplify", "Sign up failed", it)
             }
         )
     }
@@ -104,12 +106,12 @@ class AuthController{
             oldPassword,
             newPassword,
             {
-                Log.i("Amplify", "Password updated successfully")
                 errorLabel.visibility = TextView.GONE
+                Log.i("Amplify", "Password updated successfully")
             },
             { error ->
-                Log.e("Amplify", "Password update failed", error)
                 errorLabel.visibility = TextView.VISIBLE
+                Log.e("Amplify", "Password update failed", error)
             }
         )
     }
@@ -123,24 +125,39 @@ class AuthController{
             { session -> if (session.isSignedIn) {
                 val idToken = (session as AWSCognitoAuthSession).userPoolTokens.value?.idToken
                 TokenManager.getInstance().idToken = idToken
-                ///TODO: invio token al server
-                ///TODO: redirect to home
-                ///TODO: fetch user role
             }},
             { error -> Log.e("Auth", "Failed to fetch auth session", error) }
         )
     }
 
-    /*
     private fun fetchUserRole() {
         Amplify.Auth.fetchUserAttributes(
             { attributes ->
                 val role = attributes.firstOrNull { it.key.keyString == "custom:role" }?.value
+                TokenManager.getInstance().role = role
+                goToHome(role)
+
                 Log.i("AuthQuickstart", "User role: $role")
-                // Handle the role as needed
             },
             { error -> Log.e("Auth", "Failed to fetch user attributes", error) }
         )
     }
-     */
+
+    private fun goToHome(role: String?){
+        if (role == "Clienti") {
+            goToHomeClienti()
+        } else if (role != null){
+            goToHomeAgenti()
+        }
+    }
+
+    private fun goToHomeClienti(){
+        val intent = Intent(context, HomeClienteActivity::class.java)
+        context.startActivity(intent)
+    }
+
+    private fun goToHomeAgenti() {
+        val intent = Intent(context, HomeAgenteActivity::class.java) //non creata ancora
+        context.startActivity(intent)
+    }
 }

@@ -16,7 +16,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        controller = AuthController()
+        controller = AuthController(this)
 
 
         val registerButton = findViewById<LinearLayout>(R.id.createButtonContainer)
@@ -32,7 +32,7 @@ class RegisterActivity : AppCompatActivity() {
         val errorLabel = findViewById<TextView>(R.id.errore)
 
         if (controller.areValid(email, password)) {
-            controller.signUpWithAmplify(email, password, "user", errorLabel)
+            controller.signUpWithAmplify(email, password, "Clienti", errorLabel)
         }
         else {
             errorLabel.visibility = TextView.VISIBLE

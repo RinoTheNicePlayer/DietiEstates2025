@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        authController = AuthController()
+        authController = AuthController(this)
 
         val loginButton = findViewById<LinearLayout>(R.id.loginButtonContainer)
         val registerLink = findViewById<TextView>(R.id.registerTextView)
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         googleLogin.setOnClickListener {
-            loginExternal(errorLabel)
+            loginExternal()
         }
     }
 
@@ -58,8 +58,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loginExternal(errorLabel: TextView) {
-        authController.loginWithThirdProviders(errorLabel, this)
+    private fun loginExternal() {
+        authController.loginWithThirdProviders(this)
     }
 
     private fun goToRegister() {
