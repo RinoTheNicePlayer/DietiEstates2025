@@ -5,17 +5,20 @@ import android.content.Intent
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.amplifyframework.auth.AuthProvider
 import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
 import com.amplifyframework.auth.options.AuthSignUpOptions
 import com.amplifyframework.core.Amplify
 import com.example.dietiestates25.view.HomeClienteActivity
+import com.example.dietiestates25.view.SearchActivity
 
 class AuthController(private val context: Context){
 
     fun signUpWithAmplify(email: String, password: String, role: String, errorLabel: TextView){
         val attributes = listOf(
+            AuthUserAttribute(AuthUserAttributeKey.email(), email),
             AuthUserAttribute(AuthUserAttributeKey.custom("role"), role)
         )
 
@@ -56,6 +59,26 @@ class AuthController(private val context: Context){
         )
     }
 
+    fun loginWithGoogle(activity: AppCompatActivity){
+        Amplify.Auth.signInWithSocialWebUI(
+            AuthProvider.facebook(),
+            activity,
+            { Log.i("AuthQuickstart", "Sign in OK: $it") },
+            { Log.e("AuthQuickstart", "Sign in failed", it) }
+        )
+    }
+
+    fun loginWithFacebook(activity: AppCompatActivity){
+        Amplify.Auth.signInWithSocialWebUI(
+            AuthProvider.facebook(),
+            activity,
+            { Log.i("AuthQuickstart", "Sign in OK: $it") },
+            { Log.e("AuthQuickstart", "Sign in failed", it) }
+        )
+    }
+
+
+/*
     fun loginWithThirdProviders(activity: AppCompatActivity){
         Amplify.Auth.signInWithWebUI(
             activity,
@@ -68,16 +91,19 @@ class AuthController(private val context: Context){
         )
     }
 
+ */
+
     fun handleRedirection(intent: Intent?) {
         intent?.data?.let { uri ->
             if (uri.scheme == "myapp" && uri.host == "callback") {
+                //Amplify.Auth.handleWebUISignInResponse(intent)
                 getToken()
                 fetchUserRole()
             }
         }
     }
 
-    fun signUpGestoriOrAgenti(email: String, password: String, role: String, errorLabel: TextView){
+    fun signUpGestoreOrAgente(email: String, password: String, role: String, errorLabel: TextView){
         val attributes = listOf(
             AuthUserAttribute(AuthUserAttributeKey.custom("role"), role)
         )
@@ -144,7 +170,7 @@ class AuthController(private val context: Context){
     }
 
     private fun goToHome(role: String?){
-        if (role == "Clienti") {
+        if (role == "Cliente") {
             goToHomeClienti()
         } else if (role != null){
             goToHomeAgenti()
@@ -157,7 +183,7 @@ class AuthController(private val context: Context){
     }
 
     private fun goToHomeAgenti() {
-        val intent = Intent(context, HomeAgenteActivity::class.java) //non creata ancora
+        val intent = Intent(context, SearchActivity::class.java) //TODO: non creata ancora
         context.startActivity(intent)
     }
 }

@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "dietiestates25f844e1bc": {}
+        "dietiestates25f844e1bc": {},
+        "userPoolGroups": {}
       }
     }
   }

@@ -32,7 +32,7 @@ class RegisterActivity : AppCompatActivity() {
         val errorLabel = findViewById<TextView>(R.id.errore)
 
         if (controller.areValid(email, password)) {
-            controller.signUpWithAmplify(email, password, "Clienti", errorLabel)
+            controller.signUpWithAmplify(email, password, "Cliente", errorLabel)
         }
         else {
             errorLabel.visibility = TextView.VISIBLE
