@@ -77,26 +77,10 @@ class AuthController(private val context: Context){
         )
     }
 
-
-/*
-    fun loginWithThirdProviders(activity: AppCompatActivity){
-        Amplify.Auth.signInWithWebUI(
-            activity,
-            { result -> if (result.isSignInComplete) {
-                Log.i("AuthQuickstart", result.toString())
-            }},
-            { error ->
-                Log.e("AuthQuickstart", error.toString())
-            }
-        )
-    }
-
- */
-
     fun handleRedirection(intent: Intent?) {
         intent?.data?.let { uri ->
             if (uri.scheme == "myapp" && uri.host == "callback") {
-                //Amplify.Auth.handleWebUISignInResponse(intent)
+                Amplify.Auth.handleWebUISignInResponse(intent)
                 getToken()
                 fetchUserRole()
             }
