@@ -13,7 +13,7 @@ class HomeClienteActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        homeClienteController = HomeClienteController(this)
+        homeClienteController = HomeClienteController()
 
         val searchButton = findViewById<LinearLayout>(R.id.searchButton)
 

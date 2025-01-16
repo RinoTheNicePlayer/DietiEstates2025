@@ -1,7 +1,5 @@
 package com.example.dietiestates25.controller
 
-import android.content.Context
-
-class HomeClienteController(private val context: Context) {
+class HomeClienteController {
     /// TODO: Gestire riepilogo
 }

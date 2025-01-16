@@ -11,7 +11,7 @@ class SearchActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_property)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)  // Mostra il tasto indietro nella ActionBar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         /// qui funzioni
     }

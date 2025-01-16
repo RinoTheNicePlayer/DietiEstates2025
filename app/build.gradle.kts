@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.example.dietiestates25"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.dietiestates25"
         minSdk = 31
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -37,7 +37,8 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.aws.auth.cognito)
+    implementation(libs.core)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
