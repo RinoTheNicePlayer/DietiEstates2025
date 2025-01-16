@@ -1,5 +1,4 @@
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF">
@@ -55,8 +54,10 @@
                         android:textSize="24sp"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="Cerca il tuo immobile" />
+                        android:text="Cerca il tuo immobile"
+                        android:gravity="center" />
             </LinearLayout>
+
         </LinearLayout>
 
         <TextView
@@ -118,7 +119,8 @@
                         android:layout_marginTop="4dp"
                         android:layout_height="wrap_content"
                         android:layout_width="149dp"
-                        android:text="Appartamento - Via Napoli 12, Calvizzano, Napoli" />
+                        android:text="Appartamento - Via Napoli 12, Calvizzano, Napoli"
+                        android:gravity="center" />
 
                 <View
                         android:layout_width="0dp"
@@ -132,6 +134,7 @@
                         android:src="@drawable/right_arrow1"
                         android:scaleType="fitXY" />
             </LinearLayout>
+
         </LinearLayout>
 
         <TextView
@@ -170,8 +173,9 @@
                     android:textSize="16sp"
                     android:layout_marginEnd="23dp"
                     android:layout_height="wrap_content"
-                    android:layout_width="220dp"
-                    android:text="Indirizzo: Affiliato Tecnocasa Maremi S.R.L. - Via Vincenzo Merolla, 80, 80016 Marano di Napoli (NA) Data e ora: 02/12/2024, ore 9:00" />
+                    android:layout_width="230dp"
+                    android:text="Indirizzo: Affiliato Tecnocasa Maremi S.R.L. - Via Vincenzo Merolla, 80, 80016 Marano di Napoli (NA) Data e ora: 02/12/2024, ore 9:00"
+                    android:gravity="center" />
 
             <ImageView
                     android:id="@+id/rskbdz8i989e"
@@ -180,5 +184,7 @@
                     android:src="@drawable/right_arrow1"
                     android:scaleType="fitXY" />
         </LinearLayout>
+
     </LinearLayout>
+
 </ScrollView>

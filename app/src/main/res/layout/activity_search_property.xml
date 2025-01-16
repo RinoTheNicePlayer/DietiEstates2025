@@ -1,5 +1,4 @@
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:background="#FFFFFF"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -30,8 +29,7 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="110dp"
-            >
+            android:layout_marginBottom="110dp">
 
         <LinearLayout
                 android:id="@+id/rmugv8ooplei"
@@ -69,6 +67,7 @@
                         android:layout_width="wrap_content"
                         android:text="Ricerca per nome" />
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -107,6 +106,7 @@
                         android:layout_width="wrap_content"
                         android:text="Disegna area su mappa" />
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -144,7 +144,9 @@
                         android:layout_width="wrap_content"
                         android:text="Distanza da un punto" />
             </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
