@@ -199,7 +199,9 @@
                     android:elevation="30dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="52dp">
+                    android:paddingHorizontal="52dp"
+                    android:clickable="true"
+                    android:focusable="true">
 
                 <ImageView
                         android:id="@+id/googleIcon"
@@ -209,7 +211,7 @@
                         android:scaleType="fitXY"
                         android:src="@drawable/google" />
 
-                <EditText
+                <TextView
                         android:id="@+id/googleLoginEditText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -232,7 +234,9 @@
                     android:elevation="30dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="52dp">
+                    android:paddingHorizontal="52dp"
+                    android:clickable="true"
+                    android:focusable="true">
 
                 <ImageView
                         android:id="@+id/facebookIcon"
@@ -242,7 +246,7 @@
                         android:scaleType="fitXY"
                         android:src="@drawable/facebook" />
 
-                <EditText
+                <TextView
                         android:id="@+id/facebookLoginEditText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -275,7 +279,7 @@
                         android:scaleType="fitXY"
                         android:src="@drawable/github" />
 
-                <EditText
+                <TextView
                         android:id="@+id/githubLoginEditText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

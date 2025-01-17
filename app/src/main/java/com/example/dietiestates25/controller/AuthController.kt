@@ -2,6 +2,7 @@ package com.example.dietiestates25.controller
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
 import com.amplifyframework.auth.options.AuthSignUpOptions
 import com.amplifyframework.core.Amplify
+import com.example.dietiestates25.R
 import com.example.dietiestates25.view.HomeClienteActivity
 import com.example.dietiestates25.view.SearchActivity
 
@@ -60,12 +62,10 @@ class AuthController(private val context: Context){
     }
 
     fun loginWithGoogle(activity: AppCompatActivity){
-        Amplify.Auth.signInWithSocialWebUI(
-            AuthProvider.facebook(),
-            activity,
-            { Log.i("AuthQuickstart", "Sign in OK: $it") },
-            { Log.e("AuthQuickstart", "Sign in failed", it) }
-        )
+        val url = context.getString(R.string.domain_link)
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        activity.startActivity(intent)
     }
 
     fun loginWithFacebook(activity: AppCompatActivity){
