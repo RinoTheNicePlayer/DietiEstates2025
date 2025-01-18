@@ -1,16 +1,16 @@
 package com.example.dietiestates25.controller;
 
-public class TokenManager {
-    private static TokenManager instance;
+public class AuthManager {
+    private static AuthManager instance;
     private String idToken;
 
     private String role;
 
-    private TokenManager() {}
+    private AuthManager() {}
 
-    public static synchronized TokenManager getInstance() {
+    public static synchronized AuthManager getInstance() {
         if (instance == null) {
-            instance = new TokenManager();
+            instance = new AuthManager();
         }
         return instance;
     }

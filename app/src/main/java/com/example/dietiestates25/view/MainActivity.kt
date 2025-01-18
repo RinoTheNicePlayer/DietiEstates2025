@@ -19,8 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         val loginButton = findViewById<LinearLayout>(R.id.loginButtonContainer)
         val registerLink = findViewById<TextView>(R.id.registerTextView)
-        val googleLogin = findViewById<LinearLayout>(R.id.googleLoginContainer)
-        val facebookLogin = findViewById<LinearLayout>(R.id.facebookLoginContainer)
+        val externalLogin = findViewById<LinearLayout>(R.id.googleLoginContainer)
 
         val errorLabel = findViewById<TextView>(R.id.erroreLabel)
 
@@ -32,12 +31,8 @@ class MainActivity : AppCompatActivity() {
             goToRegister()
         }
 
-        googleLogin.setOnClickListener {
+        externalLogin.setOnClickListener {
             loginExternal()
-        }
-
-        facebookLogin.setOnClickListener {
-            loginFacebook()
         }
     }
 
@@ -64,12 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loginExternal() {
-        authController.loginWithGoogle(this)
-        //authController.loginWithThirdProviders(this)
-    }
-
-    private fun loginFacebook() {
-        authController.loginWithFacebook(this)
+        authController.loginWithThirdProviders(this)
     }
 
     private fun goToRegister() {

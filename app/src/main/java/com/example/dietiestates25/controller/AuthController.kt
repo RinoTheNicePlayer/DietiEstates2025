@@ -6,7 +6,6 @@ import android.net.Uri
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.amplifyframework.auth.AuthProvider
 import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
@@ -34,7 +33,7 @@ class AuthController(private val context: Context){
             options,
             {
                 loginWithAmplify(email, password, errorLabel)
-                errorLabel.visibility = TextView.GONE
+                errorLabel.visibility = TextView.INVISIBLE
                 Log.i("Amplify", "Sign up succeeded")
             },
             {
@@ -49,9 +48,8 @@ class AuthController(private val context: Context){
             email,
             password,
             { result -> if (result.isSignInComplete) {
-                getToken()
                 fetchUserRole()
-                erroreLabel.visibility = TextView.GONE
+                erroreLabel.visibility = TextView.INVISIBLE
                 Log.i("AuthQuickstart", result.toString())
             }},
             { error ->
@@ -61,27 +59,17 @@ class AuthController(private val context: Context){
         )
     }
 
-    fun loginWithGoogle(activity: AppCompatActivity){
+    fun loginWithThirdProviders(activity: AppCompatActivity){
         val url = context.getString(R.string.domain_link)
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         activity.startActivity(intent)
     }
 
-    fun loginWithFacebook(activity: AppCompatActivity){
-        Amplify.Auth.signInWithSocialWebUI(
-            AuthProvider.facebook(),
-            activity,
-            { Log.i("AuthQuickstart", "Sign in OK: $it") },
-            { Log.e("AuthQuickstart", "Sign in failed", it) }
-        )
-    }
-
     fun handleRedirection(intent: Intent?) {
         intent?.data?.let { uri ->
             if (uri.scheme == "myapp" && uri.host == "callback") {
                 Amplify.Auth.handleWebUISignInResponse(intent)
-                getToken()
                 fetchUserRole()
             }
         }
@@ -89,6 +77,7 @@ class AuthController(private val context: Context){
 
     fun signUpGestoreOrAgente(email: String, password: String, role: String, errorLabel: TextView){
         val attributes = listOf(
+            AuthUserAttribute(AuthUserAttributeKey.email(), email),
             AuthUserAttribute(AuthUserAttributeKey.custom("role"), role)
         )
 
@@ -101,7 +90,7 @@ class AuthController(private val context: Context){
             password,
             options,
             {
-                errorLabel.visibility = TextView.GONE
+                errorLabel.visibility = TextView.INVISIBLE
                 Log.i("Amplify", "Sign up succeeded")
             },
             {
@@ -116,7 +105,7 @@ class AuthController(private val context: Context){
             oldPassword,
             newPassword,
             {
-                errorLabel.visibility = TextView.GONE
+                errorLabel.visibility = TextView.INVISIBLE
                 Log.i("Amplify", "Password updated successfully")
             },
             { error ->
@@ -134,7 +123,7 @@ class AuthController(private val context: Context){
         Amplify.Auth.fetchAuthSession(
             { session -> if (session.isSignedIn) {
                 val idToken = (session as AWSCognitoAuthSession).userPoolTokens.value?.idToken
-                TokenManager.getInstance().idToken = idToken
+                AuthManager.getInstance().idToken = idToken
             }},
             { error -> Log.e("Auth", "Failed to fetch auth session", error) }
         )
@@ -144,7 +133,7 @@ class AuthController(private val context: Context){
         Amplify.Auth.fetchUserAttributes(
             { attributes ->
                 val role = attributes.firstOrNull { it.key.keyString == "custom:role" }?.value
-                TokenManager.getInstance().role = role
+                AuthManager.getInstance().role = role
                 goToHome(role)
 
                 Log.i("AuthQuickstart", "User role: $role")
@@ -154,9 +143,9 @@ class AuthController(private val context: Context){
     }
 
     private fun goToHome(role: String?){
-        if (role == "Cliente") {
+        if (role == "Cliente" || role == null){
             goToHomeClienti()
-        } else if (role != null){
+        } else {
             goToHomeAgenti()
         }
     }
