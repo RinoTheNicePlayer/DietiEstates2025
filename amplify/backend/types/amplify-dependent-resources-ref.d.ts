@@ -17,5 +17,11 @@ export type AmplifyDependentResourcesAttributes = {
       "ClienteGroupRole": "string",
       "GestoreGroupRole": "string"
     }
+  },
+  "storage": {
+    "s39befbc0f": {
+      "BucketName": "string",
+      "Region": "string"
+    }
   }
 }

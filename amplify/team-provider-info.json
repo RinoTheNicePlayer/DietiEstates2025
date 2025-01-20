@@ -15,6 +15,9 @@
       "auth": {
         "dietiestates25f844e1bc": {},
         "userPoolGroups": {}
+      },
+      "storage": {
+        "s39befbc0f": {}
       }
     }
   }

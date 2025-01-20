@@ -47,7 +47,7 @@ class AuthController(private val context: Context){
         Amplify.Auth.signIn(
             email,
             password,
-            { result -> if (result.isSignInComplete) {
+            { result -> if (result.isSignedIn) {
                 fetchUserRole()
                 erroreLabel.visibility = TextView.INVISIBLE
                 Log.i("AuthQuickstart", result.toString())
@@ -122,7 +122,7 @@ class AuthController(private val context: Context){
     private fun getToken() {
         Amplify.Auth.fetchAuthSession(
             { session -> if (session.isSignedIn) {
-                val idToken = (session as AWSCognitoAuthSession).userPoolTokens.value?.idToken
+                val idToken = (session as AWSCognitoAuthSession).userPoolTokensResult.value?.idToken
                 AuthManager.getInstance().idToken = idToken
             }},
             { error -> Log.e("Auth", "Failed to fetch auth session", error) }
