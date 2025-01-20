@@ -1,190 +1,746 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF">
+        android:layout_height="match_parent">
 
-    <LinearLayout
-            android:orientation="vertical"
+    <ScrollView
+            android:id="@+id/r3f3y5453ctp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:paddingTop="52dp">
 
         <LinearLayout
-                android:id="@+id/r1d03rkczmez"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/curtain"
-                android:paddingTop="13dp"
-                android:paddingBottom="36dp"
-                android:layout_marginBottom="26dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-            <ImageView
-                    android:id="@+id/rf8mxvipyi1"
-                    android:layout_width="match_parent"
-                    android:layout_height="144dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginHorizontal="134dp"
-                    android:src="@drawable/home"
-                    android:scaleType="fitXY" />
-
             <LinearLayout
-                    android:id="@+id/searchButton"
+                    android:id="@+id/rz9g7ryhinns"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/button_style3"
-                    android:paddingVertical="26dp"
-                    android:layout_marginHorizontal="26dp"
-                    android:elevation="3dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:orientation="horizontal">
+                    android:background="@drawable/curtain"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="36dp"
+                    android:layout_marginBottom="26dp"
+                    android:orientation="vertical">
 
                 <ImageView
-                        android:id="@+id/rx9u2ajf0ro8"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="13dp"
-                        android:src="@drawable/magnifying_glass"
+                        android:id="@+id/resvm8dcwnf9"
+                        android:layout_width="match_parent"
+                        android:layout_height="144dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginHorizontal="134dp"
+                        android:src="@drawable/home"
                         android:scaleType="fitXY" />
 
-                <TextView
-                        android:id="@+id/rszj5m7ddt6r"
-                        android:textColor="#000000"
-                        android:textSize="24sp"
+                <LinearLayout
+                        android:id="@+id/rrvsoqu15vx"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="Cerca il tuo immobile"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:background="@drawable/button_style3"
+                        android:paddingVertical="26dp"
+                        android:layout_marginHorizontal="26dp"
+                        android:elevation="3dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                            android:id="@+id/rua7tamn6u5j"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="13dp"
+                            android:src="@drawable/magnifying_glass"
+                            android:scaleType="fitXY" />
+
+                    <TextView
+                            android:id="@+id/r79egbpcewx5"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="Cerca il tuo immobile" />
+                </LinearLayout>
             </LinearLayout>
 
-        </LinearLayout>
-
-        <TextView
-                android:id="@+id/rdborvcx6a4e"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:layout_marginBottom="18dp"
-                android:layout_marginStart="26dp"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Offerte inviate:" />
-
-        <LinearLayout
-                android:id="@+id/r3wdaw2phtk1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_style4"
-                android:paddingTop="35dp"
-                android:paddingBottom="46dp"
-                android:layout_marginBottom="26dp"
-                android:layout_marginHorizontal="23dp"
-                android:elevation="3dp"
-                android:orientation="vertical">
-
             <TextView
-                    android:id="@+id/r560u1ptwfxy"
-                    android:textColor="#009951"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="7dp"
-                    android:layout_marginHorizontal="144dp"
+                    android:id="@+id/rcserjjsfnb"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="22dp"
+                    android:layout_marginStart="26dp"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="€ 100.000" />
+                    android:layout_width="wrap_content"
+                    android:text="Offerte:" />
 
             <LinearLayout
-                    android:id="@+id/rr1x95nr58p"
+                    android:id="@+id/rz5a1vzy0p7j"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
-                    android:orientation="horizontal">
-
-                <ImageView
-                        android:id="@+id/rmvy87paerdo"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:src="@drawable/left_arrow1"
-                        android:scaleType="fitXY" />
-
-                <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                    android:background="@drawable/button_style4"
+                    android:paddingTop="41dp"
+                    android:paddingBottom="17dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginHorizontal="24dp"
+                    android:elevation="4dp"
+                    android:orientation="vertical">
 
                 <TextView
-                        android:id="@+id/r9y9rli6nw5e"
+                        android:id="@+id/rgah6s79wmu8"
                         android:textColor="#000000"
                         android:textSize="16sp"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="13dp"
                         android:layout_height="wrap_content"
-                        android:layout_width="149dp"
-                        android:text="Appartamento - Via Napoli 12, Calvizzano, Napoli"
-                        android:gravity="center" />
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Offerte inviate" />
 
-                <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                <LinearLayout
+                        android:id="@+id/r2r8os7zyq7k"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#D9D9D9"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:orientation="vertical"></LinearLayout>
 
-                <ImageView
-                        android:id="@+id/rmvuv1bi878"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:src="@drawable/right_arrow1"
-                        android:scaleType="fitXY" />
+                <LinearLayout
+                        android:id="@+id/rpq1j2vzr56"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                            android:id="@+id/rr6ri0gmh63"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/offer"
+                            android:scaleType="fitXY" />
+
+                    <LinearLayout
+                            android:id="@+id/rbo5r8ke8feg"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/ryb0zt7eokf"
+                                android:textColor="#000000"
+                                android:textSize="16sp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginStart="1dp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="Immobile #4" />
+
+                        <TextView
+                                android:id="@+id/rosx7b47e2z"
+                                android:textColor="#757575"
+                                android:textSize="14sp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="Giulia Ferrari" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/r446zvijv8yp"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"></LinearLayout>
+
+                    <TextView
+                            android:id="@+id/ry5f28ewxye"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="€ 175.000" />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/rpq1j2vzr56"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                            android:id="@+id/rr6ri0gmh63"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/offer"
+                            android:scaleType="fitXY" />
+
+                    <LinearLayout
+                            android:id="@+id/rbo5r8ke8feg"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/ryb0zt7eokf"
+                                android:textColor="#B3B3B3"
+                                android:textSize="16sp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginStart="1dp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="null" />
+
+                        <TextView
+                                android:id="@+id/rosx7b47e2z"
+                                android:textColor="#B3B3B3"
+                                android:textSize="14sp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="null" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/r446zvijv8yp"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"></LinearLayout>
+
+                    <TextView
+                            android:id="@+id/ry5f28ewxye"
+                            android:textColor="#B3B3B3"
+                            android:textSize="16sp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="null" />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/rpq1j2vzr56"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                            android:id="@+id/rr6ri0gmh63"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/offer"
+                            android:scaleType="fitXY" />
+
+                    <LinearLayout
+                            android:id="@+id/rbo5r8ke8feg"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/ryb0zt7eokf"
+                                android:textColor="#B3B3B3"
+                                android:textSize="16sp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginStart="1dp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="null" />
+
+                        <TextView
+                                android:id="@+id/rosx7b47e2z"
+                                android:textColor="#B3B3B3"
+                                android:textSize="14sp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="null" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/r446zvijv8yp"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"></LinearLayout>
+
+                    <TextView
+                            android:id="@+id/ry5f28ewxye"
+                            android:textColor="#B3B3B3"
+                            android:textSize="16sp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="null" />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/r0spf34ci4t3m"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#D9D9D9"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:orientation="vertical"></LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/rnqmk0ipnhng"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="44dp"
+                        android:layout_marginEnd="57dp"
+                        android:orientation="horizontal">
+
+                    <LinearLayout
+                            android:id="@+id/r9fqyca8z4z5"
+                            android:layout_width="32dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:background="@drawable/button_style1"
+                            android:paddingVertical="10dp"
+                            android:layout_marginEnd="22dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/r2at8ilpca7m"
+                                android:textColor="#F5F5F5"
+                                android:textSize="16sp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="1" />
+                    </LinearLayout>
+
+                    <TextView
+                            android:id="@+id/rnm7gyoxaynm"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="2" />
+
+                    <LinearLayout
+                            android:id="@+id/re733phsfevu"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"></LinearLayout>
+
+                    <TextView
+                            android:id="@+id/rkr6ilqtkeo8"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="3" />
+
+                    <TextView
+                            android:id="@+id/rmsza60tjwv8"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="39dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="..." />
+
+                    <TextView
+                            android:id="@+id/rc5hx6mmefj8"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="35dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="67" />
+
+                    <TextView
+                            android:id="@+id/rn2awqnccyc"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="68" />
+                </LinearLayout>
             </LinearLayout>
 
-        </LinearLayout>
-
-        <TextView
-                android:id="@+id/r6wfs6rscjit"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:layout_marginBottom="18dp"
-                android:layout_marginHorizontal="26dp"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:text="Prenotazioni effettuate:" />
-
-        <LinearLayout
-                android:id="@+id/rj54bxf9w8l"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:background="@drawable/button_style4"
-                android:paddingVertical="26dp"
-                android:paddingHorizontal="8dp"
-                android:layout_marginHorizontal="23dp"
-                android:elevation="3dp"
-                android:orientation="horizontal">
-
-            <ImageView
-                    android:id="@+id/r1t7h02slm25"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/left_arrow1"
-                    android:scaleType="fitXY" />
-
             <TextView
-                    android:id="@+id/r25bxdo7f95k"
+                    android:id="@+id/rshuovrjetpo"
                     android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:layout_marginEnd="23dp"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="22dp"
+                    android:layout_marginStart="26dp"
                     android:layout_height="wrap_content"
-                    android:layout_width="230dp"
-                    android:text="Indirizzo: Affiliato Tecnocasa Maremi S.R.L. - Via Vincenzo Merolla, 80, 80016 Marano di Napoli (NA) Data e ora: 02/12/2024, ore 9:00"
-                    android:gravity="center" />
+                    android:layout_width="wrap_content"
+                    android:text="Prenotazioni visite:" />
 
-            <ImageView
-                    android:id="@+id/rskbdz8i989e"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/right_arrow1"
-                    android:scaleType="fitXY" />
+            <LinearLayout
+                    android:id="@+id/ru86kc89u0dg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_style4"
+                    android:paddingTop="40dp"
+                    android:paddingBottom="18dp"
+                    android:layout_marginHorizontal="24dp"
+                    android:elevation="4dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:id="@+id/rdsv87wbjn1"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Prenotazioni visite confermate" />
+
+                <LinearLayout
+                        android:id="@+id/r33l1mt5fljg"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#D9D9D9"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:orientation="vertical"></LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/rpq1j2vzr56"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                            android:id="@+id/rghj1z9egsdr"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/reservation"
+                            android:scaleType="fitXY" />
+
+                    <LinearLayout
+                            android:id="@+id/rbo5r8ke8feg"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/ryb0zt7eokf"
+                                android:textColor="#000000"
+                                android:textSize="16sp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginStart="1dp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="Immobile #4" />
+
+                        <TextView
+                                android:id="@+id/rosx7b47e2z"
+                                android:textColor="#757575"
+                                android:textSize="14sp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="Giulia Ferrari" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/reqac5wlfvz9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"></LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/rsp82mb3sfyq"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/ro7tad6msoom"
+                                android:textColor="#000000"
+                                android:textSize="16sp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:gravity="right"
+                                android:text="04/01/25" />
+
+                        <TextView
+                                android:id="@+id/rken2w33v8sa"
+                                android:textColor="#000000"
+                                android:textSize="16sp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:gravity="right"
+                                android:text="10:00" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/rpq1j2vzr56"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                            android:id="@+id/rmg44aofuuve"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/reservation"
+                            android:scaleType="fitXY" />
+
+                    <LinearLayout
+                            android:id="@+id/rbo5r8ke8feg"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/ryb0zt7eokf"
+                                android:textColor="#B3B3B3"
+                                android:textSize="16sp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginStart="1dp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="null" />
+
+                        <TextView
+                                android:id="@+id/rosx7b47e2z"
+                                android:textColor="#B3B3B3"
+                                android:textSize="14sp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="null" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/reqac5wlfvz9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"></LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/rsp82mb3sfyq"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/ro7tad6msoom"
+                                android:textColor="#B3B3B3"
+                                android:textSize="16sp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:gravity="right"
+                                android:text="null" />
+
+                        <TextView
+                                android:id="@+id/rken2w33v8sa"
+                                android:textColor="#B3B3B3"
+                                android:textSize="16sp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:gravity="right"
+                                android:text="null" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/rpq1j2vzr56"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                            android:id="@+id/ri2asjo2elcp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/reservation"
+                            android:scaleType="fitXY" />
+
+                    <LinearLayout
+                            android:id="@+id/rbo5r8ke8feg"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/ryb0zt7eokf"
+                                android:textColor="#B3B3B3"
+                                android:textSize="16sp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginStart="1dp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="null" />
+
+                        <TextView
+                                android:id="@+id/rosx7b47e2z"
+                                android:textColor="#B3B3B3"
+                                android:textSize="14sp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="null" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/reqac5wlfvz9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"></LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/rsp82mb3sfyq"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/ro7tad6msoom"
+                                android:textColor="#B3B3B3"
+                                android:textSize="16sp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:gravity="right"
+                                android:text="null" />
+
+                        <TextView
+                                android:id="@+id/rken2w33v8sa"
+                                android:textColor="#B3B3B3"
+                                android:textSize="16sp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:gravity="right"
+                                android:text="null" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/rvjuojotqbg"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#D9D9D9"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:orientation="vertical"></LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/r02ekpvb13265"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="44dp"
+                        android:layout_marginEnd="57dp"
+                        android:orientation="horizontal">
+
+                    <LinearLayout
+                            android:id="@+id/rzik0stbzpgc"
+                            android:layout_width="32dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:background="@drawable/button_style1"
+                            android:paddingVertical="10dp"
+                            android:layout_marginEnd="22dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/rjxwa2zzfs2n"
+                                android:textColor="#F5F5F5"
+                                android:textSize="16sp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="1" />
+                    </LinearLayout>
+
+                    <TextView
+                            android:id="@+id/r8xj7nmqy2h"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="2" />
+
+                    <LinearLayout
+                            android:id="@+id/ru2ohaqka6r"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"></LinearLayout>
+
+                    <TextView
+                            android:id="@+id/rpclszicitl"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="3" />
+
+                    <TextView
+                            android:id="@+id/rqo8vwmugq4"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="39dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="..." />
+
+                    <TextView
+                            android:id="@+id/rbnr71svb74f"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="35dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="67" />
+
+                    <TextView
+                            android:id="@+id/rvufx740teh"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="68" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+    </ScrollView>
+</LinearLayout>
