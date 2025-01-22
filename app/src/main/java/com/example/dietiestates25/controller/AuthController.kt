@@ -17,7 +17,7 @@ import com.example.dietiestates25.view.SearchActivity
 
 class AuthController(private val context: Context){
 
-    fun signUpWithAmplify(email: String, password: String, role: String, errorLabel: TextView){
+    fun signUpWithAmplify(email: String, password: String, role: String, errorLabel: TextView, activity: AppCompatActivity){
         val attributes = listOf(
             AuthUserAttribute(AuthUserAttributeKey.email(), email),
             AuthUserAttribute(AuthUserAttributeKey.custom("role"), role)
@@ -32,7 +32,7 @@ class AuthController(private val context: Context){
             password,
             options,
             {
-                loginWithAmplify(email, password, errorLabel)
+                loginWithAmplify(email, password, errorLabel, activity)
                 errorLabel.visibility = TextView.INVISIBLE
                 Log.i("Amplify", "Sign up succeeded")
             },
@@ -43,12 +43,12 @@ class AuthController(private val context: Context){
         )
     }
 
-    fun loginWithAmplify(email: String, password: String, erroreLabel: TextView){
+    fun loginWithAmplify(email: String, password: String, erroreLabel: TextView, activity: AppCompatActivity){
         Amplify.Auth.signIn(
             email,
             password,
             { result -> if (result.isSignedIn) {
-                fetchUserRole()
+                fetchUserRole(activity)
                 erroreLabel.visibility = TextView.INVISIBLE
                 Log.i("AuthQuickstart", result.toString())
             }},
@@ -66,11 +66,11 @@ class AuthController(private val context: Context){
         activity.startActivity(intent)
     }
 
-    fun handleRedirection(intent: Intent?) {
+    fun handleRedirection(intent: Intent?, activity: AppCompatActivity) {
         intent?.data?.let { uri ->
             if (uri.scheme == "myapp" && uri.host == "callback") {
                 Amplify.Auth.handleWebUISignInResponse(intent)
-                fetchUserRole()
+                fetchUserRole(activity)
             }
         }
     }
@@ -115,10 +115,6 @@ class AuthController(private val context: Context){
         )
     }
 
-    fun areValid(email: String, password: String): Boolean {
-        return email.isNotEmpty() && password.isNotEmpty()
-    }
-
     private fun getToken() {
         Amplify.Auth.fetchAuthSession(
             { session -> if (session.isSignedIn) {
@@ -129,12 +125,12 @@ class AuthController(private val context: Context){
         )
     }
 
-    private fun fetchUserRole() {
+    private fun fetchUserRole(activity: AppCompatActivity) {
         Amplify.Auth.fetchUserAttributes(
             { attributes ->
                 val role = attributes.firstOrNull { it.key.keyString == "custom:role" }?.value
                 AuthManager.getInstance().role = role
-                goToHome(role)
+                goToHome(activity, role)
 
                 Log.i("AuthQuickstart", "User role: $role")
             },
@@ -142,21 +138,30 @@ class AuthController(private val context: Context){
         )
     }
 
-    private fun goToHome(role: String?){
+    fun navigateTo(actualActivity: AppCompatActivity, nextActivity: AppCompatActivity){
+        val intent = Intent(actualActivity, nextActivity::class.java)
+        actualActivity.startActivity(intent)
+    }
+
+    fun areValid(email: String, password: String): Boolean {
+        return email.isNotEmpty() && password.isNotEmpty()
+    }
+
+    private fun goToHome(activity: AppCompatActivity, role: String?){
         if (role == "Cliente" || role == null){
-            goToHomeClienti()
+            goToHomeClienti(activity)
         } else {
-            goToHomeAgenti()
+            goToHomeAgenti(activity)
         }
     }
 
-    private fun goToHomeClienti(){
-        val intent = Intent(context, HomeClienteActivity::class.java)
-        context.startActivity(intent)
+    private fun goToHomeClienti(activity: AppCompatActivity){
+        navigateTo(activity, HomeClienteActivity())
+        activity.finish()
     }
 
-    private fun goToHomeAgenti() {
-        val intent = Intent(context, SearchActivity::class.java) //TODO: non creata ancora
-        context.startActivity(intent)
+    private fun goToHomeAgenti(activity: AppCompatActivity) {
+        navigateTo(activity, SearchActivity())
+        activity.finish()
     }
 }

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.dietiestates25.R
 import com.example.dietiestates25.controller.AuthController
 
+
 class MainActivity : AppCompatActivity() {
     private lateinit var authController: AuthController
 
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleIntent(intent: Intent?) {
-        authController.handleRedirection(intent)
+        authController.handleRedirection(intent, this)
     }
 
     private fun login(errorLabel: TextView) {
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.passwordHintTextView).text.toString()
 
         if (authController.areValid(email, password)){
-            authController.loginWithAmplify(email, password, errorLabel)
+            authController.loginWithAmplify(email, password, errorLabel, this)
         }
         else {
             errorLabel.visibility = TextView.VISIBLE
@@ -63,7 +64,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToRegister() {
-        val intent = Intent(this, RegisterActivity::class.java)
-        startActivity(intent)
+        authController.navigateTo(this, RegisterActivity())
     }
 }

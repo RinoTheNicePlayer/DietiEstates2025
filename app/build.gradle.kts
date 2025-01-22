@@ -1,8 +1,17 @@
+import com.android.build.api.variant.BuildConfigField
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     kotlin("plugin.serialization") version "2.1.0"
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+}
+
+val localProp = Properties()
+val file = file("local.properties")
+if (file.exists() && file.isFile){
+    file.inputStream().use { localProp.load(it) }
 }
 
 android {
@@ -26,6 +35,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            BuildConfigField("String", "MAPS_API_KEY", localProp.getProperty("MAPS_API_KEY"))
         }
     }
     compileOptions {
@@ -35,9 +45,17 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures{
+        buildConfig = true
+    }
+}
+
+secrets {
+    propertiesFileName = "local.properties"
 }
 
 dependencies {
+    implementation(libs.places)
     implementation(libs.playServicesMaps)
     implementation(libs.aws.storage.s3)
     implementation(libs.aws.auth.cognito)
