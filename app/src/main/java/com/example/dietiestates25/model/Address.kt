@@ -3,8 +3,8 @@ package com.example.dietiestates25.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class User(
-    val email: String,
-    val password: String,
-    val group: String
+data class Address (
+    val via: String,
+    val comune: String,
+    val cap: String
 )

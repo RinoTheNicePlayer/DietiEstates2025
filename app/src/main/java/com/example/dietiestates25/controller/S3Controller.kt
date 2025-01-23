@@ -6,19 +6,26 @@ import android.util.Log
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.storage.StoragePath
 import java.io.File
+import java.util.UUID
 
 class S3Controller(private val context: Context) {
-    fun uploadInputStream(uri: Uri) {
+    //uniquePath è da salvare
+    fun uploadInputStream(uri: Uri): String? {
         val stream = context.contentResolver.openInputStream(uri)
+        val uniquePath = "public/${UUID.randomUUID()}.jpg"
 
         if (stream != null) {
             Amplify.Storage.uploadInputStream(
-                StoragePath.fromString("public/example"),
+                StoragePath.fromString(uniquePath),
                 stream,
                 { Log.i("MyAmplifyApp", "Successfully uploaded: ${it.path}") },
                 { Log.e("MyAmplifyApp", "Upload failed", it) }
             )
+
+            return uniquePath
         }
+
+        return null
     }
 
     fun downloadToFile() {
@@ -32,9 +39,9 @@ class S3Controller(private val context: Context) {
         )
     }
 
-    fun getUrlFromStoragePath() {
+    fun getUrlFromStoragePath(path: String) {
         Amplify.Storage.getUrl(
-            StoragePath.fromString("public/example"),
+            StoragePath.fromString(path),
             { Log.i("MyAmplifyApp", "Successfully generated: ${it.url}") },
             { Log.e("MyAmplifyApp", "URL generation failure", it) }
         )

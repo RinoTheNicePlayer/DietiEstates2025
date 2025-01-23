@@ -26,11 +26,13 @@ class CreatePropertyActivity: AppCompatActivity() {
                     if (it.clipData != null) {
                         for (i in 0 until it.clipData!!.itemCount) {
                             val imageUri = it.clipData!!.getItemAt(i).uri
-                            s3Controller.uploadInputStream(imageUri)
+                            val uniquePath = s3Controller.uploadInputStream(imageUri)
+                            uniquePath?.let { path -> sendToDatabase(path) } /// TODO: Inviare quando prema crea
                         }
                     } else if (it.data != null) {
                         val imageUri = it.data!!
-                        s3Controller.uploadInputStream(imageUri)
+                        val uniquePath = s3Controller.uploadInputStream(imageUri)
+                        uniquePath?.let { path -> sendToDatabase(path) } /// TODO: Inviare quando prema crea
                     }
                 }
             }

@@ -1,11 +1,15 @@
 package com.example.dietiestates25.view
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dietiestates25.controller.HomeClienteController
 import com.example.dietiestates25.R
+import com.example.dietiestates25.model.Address
+import com.google.android.gms.common.api.Status
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 
 class HomeClienteActivity: AppCompatActivity() {
     private lateinit var homeClienteController: HomeClienteController
@@ -13,17 +17,50 @@ class HomeClienteActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        homeClienteController = HomeClienteController()
+        homeClienteController = HomeClienteController(this)
+        initPlace()
 
-        val searchButton = findViewById<LinearLayout>(R.id.searchButton)
+        //val searchButton = findViewById<LinearLayout>(R.id.searchButton)
+        val autocompleteFragment =
+            supportFragmentManager.findFragmentById(R.id.autocomplete_fragment)
+                    as AutocompleteSupportFragment
 
-        searchButton.setOnClickListener {
-            goToSearch()
-        }
+        setAutoCompleteLimit(autocompleteFragment)
+
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+                // Get info about the selected place and search.
+                searchImmobile(takePlaceAddress(place))
+            }
+
+            override fun onError(status: Status) {
+                Log.e("no indirizzo selezionato", "An error occurred: $status")
+            }
+        })
+
+//        searchButton.setOnClickListener {
+//            goToSearch()
+//        }
     }
 
-    private fun goToSearch() {
-        val intent = Intent(this, SearchActivity::class.java)
-        startActivity(intent)
+    private fun initPlace() {
+        homeClienteController.initPlace(this)
+    }
+
+    private fun setAutoCompleteLimit(autocompleteFragment: AutocompleteSupportFragment) {
+        homeClienteController.setLimitAutoComplete(autocompleteFragment)
+    }
+
+    private fun searchImmobile(address: Address) {
+        homeClienteController.searchImmobileFromAddress(address)
+    }
+
+    private fun takePlaceAddress(place: Place): Address {
+        val cityName = place.addressComponents?.asList()?.find { it.types.contains("locality") }?.name ?: ""
+        val streetName = place.addressComponents?.asList()?.find { it.types.contains("route") }?.name ?: ""
+        val cap = place.addressComponents?.asList()?.find { it.types.contains("postal_code") }?.name ?: ""
+
+        return Address(streetName, cityName, cap)
     }
 }
