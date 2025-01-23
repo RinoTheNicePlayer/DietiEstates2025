@@ -19,6 +19,8 @@ class CreatePropertyActivity: AppCompatActivity() {
         setContentView(R.layout.activity_create_property)
         s3Controller = S3Controller(this)
 
+        val uploadButton = findViewById<Button>(R.id.uploadButton)
+
         pickImagesLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
@@ -37,8 +39,6 @@ class CreatePropertyActivity: AppCompatActivity() {
                 }
             }
         }
-
-        val uploadButton = findViewById<Button>(R.id.uploadButton)
 
         uploadButton.setOnClickListener {
             pickImagesFromGallery()
