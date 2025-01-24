@@ -5,12 +5,12 @@
         android:layout_height="match_parent">
 
     <ScrollView
-            android:id="@+id/ruksj8oh3c9"
+            android:id="@+id/scroll_view_reservation_sent"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="#FFFFFF"
-            android:paddingTop="89dp">
+            android:paddingTop="88dp">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -18,60 +18,90 @@
                 android:orientation="vertical">
 
             <TextView
-                    android:id="@+id/rvg9gp6wkgn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="17dp"
+                    android:id="@+id/reservation_sent_title"
+                    android:textColor="#32ADE6"
+                    android:textSize="32sp"
+                    android:layout_marginBottom="18dp"
                     android:layout_marginHorizontal="85dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
-                    android:text="PRENOTAZIONE EFFETTUATA!"
                     android:gravity="center"
-                    android:textColor="#94D82D"
-                    android:textSize="32sp" />
+                    android:text="PRENOTAZIONE EFFETTUATA!" />
 
             <ImageView
-                    android:id="@+id/rj4d6mtwfl1f"
+                    android:id="@+id/verified_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginBottom="32dp"
-                    android:layout_marginHorizontal="156dp"
+                    android:layout_height="144dp"
+                    android:layout_marginBottom="47dp"
+                    android:layout_marginHorizontal="134dp"
                     android:src="@drawable/verified"
                     android:scaleType="fitXY" />
 
             <TextView
-                    android:id="@+id/rhlyfywbrb8k"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
+                    android:id="@+id/summary_label"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="36dp"
                     android:layout_marginStart="25dp"
-                    android:text="Riepilogo:"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Riepilogo:" />
 
-            <TextView
-                    android:id="@+id/rv1rbcwjdgjn"
+            <LinearLayout
+                    android:id="@+id/reservation_card_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="80dp"
-                    android:layout_marginHorizontal="25dp"
-                    android:layout_weight="1"
-                    android:text="Indirizzo: Affiliato Tecnocasa Maremi S.R.L. - Via Vincenzo Merolla, 80, 80016 Marano di Napoli (NA) Data e ora: 02/12/2024, ore 9:00"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
+                    android:background="@drawable/card"
+                    android:paddingVertical="45dp"
+                    android:layout_marginBottom="64dp"
+                    android:layout_marginHorizontal="24dp"
+                    android:elevation="3dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:id="@+id/address_value"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Indirizzo" />
+
+                <TextView
+                        android:id="@+id/date_value"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="33dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="gg/mm/aaaa" />
+
+                <TextView
+                        android:id="@+id/time_value"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="00:00" />
+            </LinearLayout>
 
             <TextView
-                    android:id="@+id/rte5c8ejeyej"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/feedback_message"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
                     android:layout_marginHorizontal="95dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
-                    android:text="Riceverai un riscontro a breve"
                     android:gravity="center"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
-
+                    android:text="Riceverai un riscontro a breve" />
         </LinearLayout>
-
     </ScrollView>
-
 </LinearLayout>

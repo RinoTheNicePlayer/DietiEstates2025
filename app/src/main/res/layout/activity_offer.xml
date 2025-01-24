@@ -5,12 +5,12 @@
         android:layout_height="match_parent">
 
     <ScrollView
-            android:id="@+id/rctqmaf0ur3"
+            android:id="@+id/scroll_view_offer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="#FFFFFF"
-            android:paddingTop="88dp">
+            android:paddingTop="87dp">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -18,119 +18,104 @@
                 android:orientation="vertical">
 
             <TextView
-                    android:id="@+id/r402dghjn15y"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="50dp"
-                    android:layout_marginHorizontal="108dp"
-                    android:layout_weight="1"
-                    android:text="Fai un’offerta"
-                    android:gravity="center"
+                    android:id="@+id/offer_title"
                     android:textColor="#000000"
-                    android:textSize="32sp" />
+                    android:textSize="32sp"
+                    android:layout_marginBottom="11dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Fai un’offerta" />
 
             <LinearLayout
-                    android:id="@+id/rtqmgvochzdf"
+                    android:id="@+id/property_section"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="46dp"
-                    android:layout_marginHorizontal="24dp">
+                    android:layout_marginBottom="47dp"
+                    android:layout_marginEnd="36dp"
+                    android:orientation="horizontal">
+
+                <LinearLayout
+                        android:id="@+id/property_divider"
+                        android:layout_width="1dp"
+                        android:layout_height="77dp"
+                        android:background="#D9D9D9"
+                        android:layout_marginEnd="23dp"
+                        android:orientation="vertical"></LinearLayout>
 
                 <ImageView
-                        android:id="@+id/rnmagd1rmlrn"
+                        android:id="@+id/property_image"
                         android:layout_width="120dp"
                         android:layout_height="80dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginEnd="22dp"
                         android:src="@drawable/image2"
                         android:scaleType="fitXY" />
 
                 <LinearLayout
-                        android:id="@+id/rs0cjb4da79"
+                        android:id="@+id/property_info_section"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical" />
-
-                <LinearLayout
-                        android:id="@+id/rv8dsg5q6h4n"
-                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="41dp"
                         android:orientation="vertical">
 
                     <TextView
-                            android:id="@+id/rb5r1zpkbkff"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="6dp"
-                            android:layout_weight="1"
-                            android:text="Appartamento - Via Napoli 12, Calvizzano, Napoli"
+                            android:id="@+id/property_address"
                             android:textColor="#000000"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:layout_marginBottom="6dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="186dp"
+                            android:text="Appartamento - Via Napoli 12, Calvizzano, Napoli" />
 
                     <TextView
-                            android:id="@+id/r9fp6hdakiv8"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Prezzo immobile: € 120.000"
+                            android:id="@+id/property_price"
                             android:textColor="#757575"
-                            android:textSize="16sp" />
-
+                            android:textSize="16sp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Prezzo immobile: € 120.000" />
                 </LinearLayout>
-
             </LinearLayout>
 
             <EditText
-                    android:id="@+id/rzup91ojejyg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Offerta"
+                    android:id="@+id/offer_input_field"
+                    android:textColor="#B3B3B3"
+                    android:textSize="16sp"
                     android:layout_marginBottom="20dp"
                     android:layout_marginHorizontal="24dp"
-                    android:background="@drawable/text_field_style"
-                    android:hint="Offerta"
-                    android:inputType="text"
-                    android:paddingVertical="14dp"
-                    android:paddingHorizontal="17dp"
-                    android:textColor="#B3B3B3"
-                    android:textSize="16sp" />
-
-            <LinearLayout
-                    android:id="@+id/rc6emblp7yz"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:background="@drawable/text_field_style"
+                    android:paddingVertical="13dp"
+                    android:paddingHorizontal="16dp" />
+
+            <LinearLayout
+                    android:id="@+id/offer_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:background="@drawable/button_style1"
                     android:paddingVertical="14dp"
-                    android:layout_marginBottom="24dp"
                     android:layout_marginHorizontal="24dp"
                     android:clickable="true"
-                    android:focusable="true">
+                    android:focusable="true"
+                    android:orientation="vertical">
 
                 <TextView
-                        android:id="@+id/r3dfm4ns4k8q"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Invia"
+                        android:id="@+id/offer_button_text"
                         android:textColor="#FFFFFF"
-                        android:textSize="16sp" />
-
+                        android:textSize="16sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Invia" />
             </LinearLayout>
-
-            <TextView
-                    android:id="@+id/rdm17s4agfcm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="107dp"
-                    android:layout_weight="1"
-                    android:text="3 offerte rimaste per oggi."
-                    android:gravity="center"
-                    android:textColor="#757575"
-                    android:textSize="16sp" />
-
         </LinearLayout>
-
     </ScrollView>
-
 </LinearLayout>
