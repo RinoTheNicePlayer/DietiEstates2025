@@ -93,8 +93,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_field_style"
-                    android:paddingVertical="13dp"
-                    android:paddingHorizontal="16dp" />
+                    android:paddingVertical="14dp"
+                    android:paddingHorizontal="18dp" />
 
             <LinearLayout
                     android:id="@+id/offer_button"

@@ -1,32 +1,83 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:background="#FFFFFF"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     <ScrollView
-            android:id="@+id/ry695qw2x45j"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:id="@+id/scroll_view_property"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="#FFFFFF"
-            android:paddingTop="52dp">
+            android:paddingTop="51dp">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:clipToPadding="false"
                 android:orientation="vertical">
 
             <ImageView
-                    android:id="@+id/rf753wk8m1e"
+                    android:id="@+id/property_map"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_height="243dp"
+                    android:layout_marginBottom="18dp"
+                    android:src="@drawable/google_maps"
+                    android:scaleType="fitXY" />
+
+            <LinearLayout
+                    android:id="@+id/location_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="212dp"
+                    android:orientation="horizontal">
+
+                <ImageView
+                        android:id="@+id/location_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="7dp"
+                        android:src="@drawable/location"
+                        android:scaleType="fitXY" />
+
+                <TextView
+                        android:id="@+id/location_value"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="Vicino a una scuola" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/divider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#D9D9D9"
+                    android:layout_marginBottom="27dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:orientation="vertical"></LinearLayout>
+
+            <ImageView
+                    android:id="@+id/property_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="243dp"
+                    android:layout_marginBottom="18dp"
                     android:src="@drawable/image1"
                     android:scaleType="fitXY" />
 
             <LinearLayout
-                    android:id="@+id/raj2fbq2shrq"
+                    android:id="@+id/sale_rent_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -36,7 +87,7 @@
                     android:orientation="horizontal">
 
                 <ImageView
-                        android:id="@+id/rkadgeqgxax"
+                        android:id="@+id/sale_rent_icon"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginEnd="19dp"
@@ -44,7 +95,7 @@
                         android:scaleType="fitXY" />
 
                 <TextView
-                        android:id="@+id/rcn6unzgflp7"
+                        android:id="@+id/sale_rent_value"
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:layout_height="wrap_content"
@@ -54,7 +105,7 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/rt0o425cut2g"
+                    android:id="@+id/address_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -64,7 +115,7 @@
                     android:orientation="horizontal">
 
                 <ImageView
-                        android:id="@+id/r5typ4psi9ou"
+                        android:id="@+id/address_icon"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/map"
@@ -76,7 +127,7 @@
                         android:layout_weight="1" />
 
                 <TextView
-                        android:id="@+id/r68rbc4imfw2"
+                        android:id="@+id/address_value"
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:layout_height="wrap_content"
@@ -85,7 +136,7 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/rg9ddrc24tqj"
+                    android:id="@+id/price_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -95,7 +146,7 @@
                     android:orientation="horizontal">
 
                 <ImageView
-                        android:id="@+id/rewcwonrd7eq"
+                        android:id="@+id/price_icon"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginEnd="18dp"
@@ -103,7 +154,7 @@
                         android:scaleType="fitXY" />
 
                 <TextView
-                        android:id="@+id/r4h81cim7szg"
+                        android:id="@+id/price_value"
                         android:textColor="#009951"
                         android:textSize="20sp"
                         android:layout_height="wrap_content"
@@ -113,7 +164,7 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/rfz9azmqp93"
+                    android:id="@+id/details_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -122,7 +173,7 @@
                     android:orientation="horizontal">
 
                 <ImageView
-                        android:id="@+id/rse1hnjyibxc"
+                        android:id="@+id/rooms_icon"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="9dp"
@@ -130,7 +181,7 @@
                         android:scaleType="fitXY" />
 
                 <TextView
-                        android:id="@+id/r2cddnzsypfn"
+                        android:id="@+id/rooms_value"
                         android:textColor="#000000"
                         android:textSize="16sp"
                         android:layout_marginEnd="18dp"
@@ -139,7 +190,7 @@
                         android:text="5" />
 
                 <ImageView
-                        android:id="@+id/rnsu4y84vdls"
+                        android:id="@+id/size_icon"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="7dp"
@@ -147,7 +198,7 @@
                         android:scaleType="fitXY" />
 
                 <TextView
-                        android:id="@+id/rz2idhx2kchf"
+                        android:id="@+id/size_value"
                         android:textColor="#000000"
                         android:textSize="16sp"
                         android:layout_marginEnd="13dp"
@@ -156,7 +207,7 @@
                         android:text="60 m²" />
 
                 <ImageView
-                        android:id="@+id/rb6z2v3oxdlo"
+                        android:id="@+id/bathrooms_icon"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="7dp"
@@ -164,7 +215,7 @@
                         android:scaleType="fitXY" />
 
                 <TextView
-                        android:id="@+id/rojoniy349f"
+                        android:id="@+id/bathrooms_value"
                         android:textColor="#000000"
                         android:textSize="16sp"
                         android:layout_height="wrap_content"
@@ -172,14 +223,14 @@
                         android:text="1" />
 
                 <LinearLayout
-                        android:id="@+id/rf37o8x8g2hj"
+                        android:id="@+id/container"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical"></LinearLayout>
 
                 <ImageView
-                        android:id="@+id/rw9wd6n0u9fq"
+                        android:id="@+id/floor_icon"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="8dp"
@@ -187,7 +238,7 @@
                         android:scaleType="fitXY" />
 
                 <TextView
-                        android:id="@+id/r6rfr4w1ivbs"
+                        android:id="@+id/floor_value"
                         android:textColor="#000000"
                         android:textSize="16sp"
                         android:layout_marginEnd="19dp"
@@ -196,7 +247,7 @@
                         android:text="2" />
 
                 <ImageView
-                        android:id="@+id/r0wnback4pcw"
+                        android:id="@+id/elevator_icon"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="7dp"
@@ -204,7 +255,7 @@
                         android:scaleType="fitXY" />
 
                 <TextView
-                        android:id="@+id/rjmsga7yvyub"
+                        android:id="@+id/elevator_value"
                         android:textColor="#000000"
                         android:textSize="16sp"
                         android:layout_marginEnd="15dp"
@@ -213,7 +264,7 @@
                         android:text="Si" />
 
                 <ImageView
-                        android:id="@+id/rie522xhl0fk"
+                        android:id="@+id/balcony_icon"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="7dp"
@@ -221,7 +272,7 @@
                         android:scaleType="fitXY" />
 
                 <TextView
-                        android:id="@+id/ra0fppz3v36"
+                        android:id="@+id/balcony_value"
                         android:textColor="#000000"
                         android:textSize="16sp"
                         android:layout_height="wrap_content"
@@ -230,7 +281,7 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/rzqu2g7kyrjd"
+                    android:id="@+id/divider2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#D9D9D9"
@@ -239,7 +290,7 @@
                     android:orientation="vertical"></LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/rtgnduqzbaso"
+                    android:id="@+id/actions_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -248,7 +299,7 @@
                     android:orientation="horizontal">
 
                 <LinearLayout
-                        android:id="@+id/rbpbo3rvpgnq"
+                        android:id="@+id/offer_button"
                         android:layout_width="170dp"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
@@ -259,7 +310,7 @@
                         android:orientation="vertical">
 
                     <TextView
-                            android:id="@+id/rfsubaee9l4u"
+                            android:id="@+id/offer_button_text"
                             android:textColor="#FFFFFF"
                             android:textSize="16sp"
                             android:layout_height="wrap_content"
@@ -273,7 +324,7 @@
                         android:layout_weight="1" />
 
                 <LinearLayout
-                        android:id="@+id/rhrybzsllcyt"
+                        android:id="@+id/reservation_button"
                         android:layout_width="170dp"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
@@ -284,18 +335,17 @@
                         android:orientation="vertical">
 
                     <TextView
-                            android:id="@+id/r3rrrzckejzv"
+                            android:id="@+id/reservation_button_text"
                             android:textColor="#FFFFFF"
                             android:textSize="16sp"
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:text="Prenota una visita" />
                 </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/rus9t8d5kixl"
+                    android:id="@+id/divider3"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#D9D9D9"
@@ -304,7 +354,7 @@
                     android:orientation="vertical"></LinearLayout>
 
             <TextView
-                    android:id="@+id/rnjpn4w48bcj"
+                    android:id="@+id/description_title_label"
                     android:textColor="#000000"
                     android:textSize="20sp"
                     android:layout_marginBottom="25dp"
@@ -314,7 +364,7 @@
                     android:text="Descrizione" />
 
             <TextView
-                    android:id="@+id/r7on8n0pwmz"
+                    android:id="@+id/description_value"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     android:layout_marginStart="25dp"
@@ -322,7 +372,5 @@
                     android:layout_width="281dp"
                     android:text="APPARTAMENTO IN VIA NAPOLI Proponiamo in vendita una pregevole unità immobiliare situata..." />
         </LinearLayout>
-
     </ScrollView>
-
 </LinearLayout>

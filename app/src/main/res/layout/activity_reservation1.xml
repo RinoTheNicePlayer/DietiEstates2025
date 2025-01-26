@@ -64,8 +64,8 @@
                         android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/text_field_style"
-                        android:paddingVertical="13dp"
-                        android:paddingHorizontal="16dp" />
+                        android:paddingVertical="14dp"
+                        android:paddingHorizontal="18dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -92,7 +92,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:background="@drawable/text_field_style"
-                        android:paddingHorizontal="16dp"
+                        android:paddingHorizontal="18dp"
                         android:orientation="horizontal">
 
                     <EditText
@@ -105,7 +105,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:paddingVertical="12dp" />
+                            android:paddingVertical="14dp" />
 
                     <ImageView
                             android:id="@+id/time_picker_arrow"

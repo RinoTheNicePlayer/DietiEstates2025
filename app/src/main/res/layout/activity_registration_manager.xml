@@ -5,7 +5,7 @@
         android:layout_height="match_parent">
 
     <ScrollView
-            android:id="@+id/scroll_view_registration"
+            android:id="@+id/scroll_view_registration_manager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -35,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Registrati" />
+                    android:text="Registra Gestore" />
 
             <LinearLayout
                     android:id="@+id/email_input_container"
@@ -62,7 +62,7 @@
                         android:textSize="16sp"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="Inserisci la tua email" />
+                        android:text="Inserisci una email" />
             </LinearLayout>
 
             <LinearLayout
@@ -99,7 +99,7 @@
                         android:textSize="16sp"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="Inserisci la tua password" />
+                        android:text="Inserisci una password" />
             </LinearLayout>
 
             <LinearLayout
@@ -129,7 +129,7 @@
                         android:textSize="16sp"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="Registrati" />
+                        android:text="Registra" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
