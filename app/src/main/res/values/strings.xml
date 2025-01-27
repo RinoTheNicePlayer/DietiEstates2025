@@ -1,5 +1,20 @@
 <resources>
     <string name="app_name">DietiEstates25</string>
     <string name="server_client_id">178716549373-h3n34desu00iqfn92li69efsuqmm41pq.apps.googleusercontent.com</string>
-    <string name="domain_link">https://dietiestates2534865b44-34865b44-dev.auth.eu-north-1.amazoncognito.com/login?client_id=3461f54knkvjeeisce9ddp27iu&amp;response_type=code&amp;scope=aws.cognito.signin.user.admin+email+openid+phone+profile&amp;redirect_uri=myapp://callback/</string>
+    <string name="domain_link">https://dietiestates2534865b44–34865b44-dev.auth.eu-north-1.amazoncognito.com/login?client_id=3461f54knkvjeeisce9ddp27iu&amp;response_type=code&amp;scope=aws.cognito.signin.user.admin+email+openid+phone+profile&amp;redirect_uri=myapp://callback/</string>
+    <string name="image_profile">image_profile</string>
+    <string name="accedi">Accedi</string>
+    <string name="email">Email</string>
+    <string name="inserisci_la_tua_email">Inserisci la tua email</string>
+    <string name="password">Password</string>
+    <string name="inserisci_la_tua_password">Inserisci la tua password</string>
+    <string name="email_o_password_non_corretti">Email o Password non corretti</string>
+    <string name="oppure">oppure</string>
+    <string name="accedi_con_google_o_facebook">Accedi con Google o Facebook</string>
+    <string name="non_hai_un_account_registrati">Non hai un account? Registrati</string>
+    <string name="social_logo_images">social_logo_images</string>
+    <string name="pagina_di_login">Pagina di login</string>
+    <string name="registrati">Registrati</string>
+    <string name="pagina_di_registrazione">Pagina di registrazione</string>
+
 </resources>

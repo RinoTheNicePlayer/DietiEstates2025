@@ -13,6 +13,7 @@
 
         <ImageView
                 android:id="@+id/logoImageView"
+                android:contentDescription="@string/image_profile"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginTop="55dp"
@@ -26,7 +27,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:text="Registrati"
+                android:text="@string/registrati"
+                android:contentDescription="@string/pagina_di_registrazione"
                 android:textColor="#000000"
                 android:textSize="32sp"
                 android:layout_gravity="center" />
@@ -48,7 +50,7 @@
                     android:layout_marginBottom="6dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Email" />
+                    android:text="@string/email" />
 
             <EditText
                     android:id="@+id/email_hint"
@@ -56,7 +58,7 @@
                     android:textSize="16sp"
                     android:layout_height="48dp"
                     android:layout_width="wrap_content"
-                    android:hint="Inserisci la tua email"
+                    android:hint="@string/inserisci_la_tua_email"
                     android:inputType="textEmailAddress"
                     android:autofillHints="emailAddress"/>
         </LinearLayout>
@@ -88,13 +90,13 @@
                     android:layout_marginBottom="6dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Password" />
+                    android:text="@string/password" />
 
             <EditText
                     android:id="@+id/passwordHintTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
-                    android:hint="Inserisci la tua password"
+                    android:hint="@string/inserisci_la_tua_password"
                     android:inputType="textPassword"
                     android:autofillHints="password"
                     android:textColor="#000000"
@@ -130,7 +132,7 @@
                     android:textSize="16sp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Registrati" />
+                    android:text="@string/registrati" />
         </LinearLayout>
 
         <TextView
@@ -140,7 +142,7 @@
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="35dp"
                 android:layout_marginTop="20dp"
-                android:text="Email o Password non corretti"
+                android:text="@string/email_o_password_non_corretti"
                 android:textColor="#E91E63"
                 android:textSize="20sp"
                 android:visibility="invisible" />
