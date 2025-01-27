@@ -27,7 +27,6 @@ class HomeClienteActivity: AppCompatActivity() {
 
         setAutoCompleteLimit(autocompleteFragment)
 
-        // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 // Get info about the selected place and search.
@@ -38,10 +37,6 @@ class HomeClienteActivity: AppCompatActivity() {
                 Log.e("no indirizzo selezionato", "An error occurred: $status")
             }
         })
-
-//        searchButton.setOnClickListener {
-//            goToSearch()
-//        }
     }
 
     private fun initPlace() {

@@ -42,11 +42,11 @@ class HomeClienteController(private val context: Context) {
                 LatLng(47.092146, 18.513410) // Nord-est dell'Italia
             )
         )
-
         autocompleteFragment.setCountries("IT")
         autocompleteFragment.setTypesFilter(listOf(PlaceTypes.CITIES, PlaceTypes.ADDRESS))
     }
 
+    /// TODO: gestire response e andare nella schermata della lista di immobili, quindi passare il response alla prossima schermata
     fun searchImmobileFromAddress(address: Address) {
         val client = OkHttpClient()
         val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()

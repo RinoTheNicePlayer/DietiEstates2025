@@ -9,11 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
+import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult
 import com.amplifyframework.auth.options.AuthSignUpOptions
 import com.amplifyframework.core.Amplify
 import com.example.dietiestates25.R
 import com.example.dietiestates25.view.HomeClienteActivity
-import com.example.dietiestates25.view.SearchActivity
+import com.example.dietiestates25.view.MainActivity
 
 class AuthController(private val context: Context){
 
@@ -115,6 +116,39 @@ class AuthController(private val context: Context){
         )
     }
 
+    fun signOut(activity: AppCompatActivity) {
+        Amplify.Auth.signOut { signOutResult ->
+            when(signOutResult) {
+                is AWSCognitoAuthSignOutResult.CompleteSignOut -> {
+                    // Sign Out completed fully and without errors.
+                    Log.i("AuthQuickStart", "Signed out successfully")
+                    navigateTo(activity, MainActivity())
+                    activity.finish()
+                }
+                is AWSCognitoAuthSignOutResult.PartialSignOut -> {
+                    // Sign Out completed with some errors. User is signed out of the device.
+                    signOutResult.hostedUIError?.let {
+                        Log.e("AuthQuickStart", "HostedUI Error", it.exception)
+                        // Optional: Re-launch it.url in a Custom tab to clear Cognito web session.
+
+                    }
+                    signOutResult.globalSignOutError?.let {
+                        Log.e("AuthQuickStart", "GlobalSignOut Error", it.exception)
+                        // Optional: Use escape hatch to retry revocation of it.accessToken.
+                    }
+                    signOutResult.revokeTokenError?.let {
+                        Log.e("AuthQuickStart", "RevokeToken Error", it.exception)
+                        // Optional: Use escape hatch to retry revocation of it.refreshToken.
+                    }
+                }
+                is AWSCognitoAuthSignOutResult.FailedSignOut -> {
+                    // Sign Out failed with an exception, leaving the user signed in.
+                    Log.e("AuthQuickStart", "Sign out Failed", signOutResult.exception)
+                }
+            }
+        }
+    }
+
     private fun getToken() {
         Amplify.Auth.fetchAuthSession(
             { session -> if (session.isSignedIn) {
@@ -161,7 +195,7 @@ class AuthController(private val context: Context){
     }
 
     private fun goToHomeAgenti(activity: AppCompatActivity) {
-        navigateTo(activity, SearchActivity())
+        //navigateTo(activity, SearchActivity()) // TODO: fare home agenti
         activity.finish()
     }
 }

@@ -19,7 +19,7 @@ class RegisterActivity : AppCompatActivity() {
         controller = AuthController(this)
 
 
-        val registerButton = findViewById<LinearLayout>(R.id.createButtonContainer)
+        val registerButton = findViewById<LinearLayout>(R.id.register_button)
 
         registerButton.setOnClickListener {
             signUp()
@@ -27,7 +27,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun signUp(){
-        val email = findViewById<EditText>(R.id.emailHintTextView).text.toString()
+        val email = findViewById<EditText>(R.id.email_hint).text.toString()
         val password = findViewById<EditText>(R.id.passwordHintTextView).text.toString()
         val errorLabel = findViewById<TextView>(R.id.errore)
 

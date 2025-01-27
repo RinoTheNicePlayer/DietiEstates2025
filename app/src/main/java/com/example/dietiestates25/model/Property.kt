@@ -9,7 +9,7 @@ data class Property(
     val nBathroom: Int,
     val nRoom: Int,
     val type: String,
-    val energeticClass: String, /// TODO: fare enum
+    val energeticClass: EnergeticClassType,
     val floor: Int,
     val hasElevator: Boolean,
     val hasBalcone: Boolean,

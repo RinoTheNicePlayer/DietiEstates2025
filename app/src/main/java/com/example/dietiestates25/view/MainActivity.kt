@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         val loginButton = findViewById<LinearLayout>(R.id.loginButtonContainer)
         val registerLink = findViewById<TextView>(R.id.registerTextView)
-        val externalLogin = findViewById<LinearLayout>(R.id.googleLoginContainer)
+        val externalLogin = findViewById<LinearLayout>(R.id.social_login_container)
 
         val errorLabel = findViewById<TextView>(R.id.erroreLabel)
 
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun login(errorLabel: TextView) {
-        val email = findViewById<EditText>(R.id.emailHintTextView).text.toString()
+        val email = findViewById<EditText>(R.id.email_hint).text.toString()
         val password = findViewById<EditText>(R.id.passwordHintTextView).text.toString()
 
         if (authController.areValid(email, password)){
