@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="NavbarStates">
+        <attr name="homeNavbarState" format="reference" />
+        <attr name="summaryNavbarState" format="reference" />
+        <attr name="profileNavbarState" format="reference" />
+    </declare-styleable>
+</resources>
