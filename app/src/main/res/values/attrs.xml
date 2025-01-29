@@ -1,7 +1,16 @@
 <resources>
-    <declare-styleable name="NavbarStates">
+    <!-- Navbar per Customer -->
+    <declare-styleable name="CustomerNavbarStates">
         <attr name="homeNavbarState" format="reference" />
         <attr name="summaryNavbarState" format="reference" />
+        <attr name="profileNavbarState" format="reference" />
+    </declare-styleable>
+
+    <!-- Navbar per Admin -->
+    <declare-styleable name="AdminNavbarStates">
+        <attr name="homeNavbarState" format="reference" />
+        <attr name="offersNavbarState" format="reference" />
+        <attr name="reservationsNavbarState" format="reference" />
         <attr name="profileNavbarState" format="reference" />
     </declare-styleable>
 </resources>
