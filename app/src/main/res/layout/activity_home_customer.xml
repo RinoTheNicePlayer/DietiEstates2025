@@ -76,7 +76,7 @@
                     android:src="@drawable/slogan"
                     android:scaleType="fitXY" />
 
-            <include layout="@layout/navbar_customer" />
+            <include layout="@layout/activity_navbar_customer" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
