@@ -27,5 +27,8 @@
     <string name="cliente">Cliente</string>
     <string name="e_mail">E-mail:</string>
     <string name="esci">Esci</string>
+    <string name="modifica_password">Modifica Password</string>
+    <string name="registra_gestore">Registra Gestore</string>
+    <string name="registra_a_immobiliare">Registra A. immobiliare</string>
 
 </resources>

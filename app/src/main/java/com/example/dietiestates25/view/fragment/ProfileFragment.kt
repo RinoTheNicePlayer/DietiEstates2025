@@ -1,7 +1,11 @@
-package com.example.dietiestates25.view.activity
+package com.example.dietiestates25.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -9,22 +13,31 @@ import com.example.dietiestates25.R
 import com.example.dietiestates25.controller.AuthController
 import com.example.dietiestates25.controller.AuthManager
 
-class ProfileActivity: AppCompatActivity() {
+/**
+ * A simple [Fragment] subclass.
+ * Use the [ProfileFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class ProfileFragment : Fragment() {
     private lateinit var authController: AuthController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_profile)
-        authController = AuthController(this)
+        authController = AuthController(requireActivity())
+    }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
         val role = AuthManager.getInstance().role
-
-        /*
-        val roleLabel = findViewById<TextView>(R.id.roleLabel)
-        val updatePasswordButton = findViewById<LinearLayout>(R.id.updatePasswordContainer)
-        val registerGestoreButton = findViewById<LinearLayout>(R.id.registerGestoreContainer)
-        val registerAgenteButton = findViewById<LinearLayout>(R.id.registerAgenteContainer)
-        val signOutButton = findViewById<LinearLayout>(R.id.logOutContainer)
+        val roleLabel = view.findViewById<TextView>(R.id.role_label)
+        val updatePasswordButton = view.findViewById<LinearLayout>(R.id.change_password_button)
+        val registerGestoreButton = view.findViewById<LinearLayout>(R.id.register_manager_button)
+        val registerAgenteButton = view.findViewById<LinearLayout>(R.id.register_agent_button)
+        val signOutButton = view.findViewById<LinearLayout>(R.id.logout_button)
 
         roleLabel.text = role
 
@@ -46,7 +59,7 @@ class ProfileActivity: AppCompatActivity() {
             // deve andare in schermata registrazione agente
         }
 
-         */
+        return view
     }
 
     private fun orderVisibilityButtonForRole(
@@ -74,7 +87,7 @@ class ProfileActivity: AppCompatActivity() {
     }
 
     private fun navigateTo(nextActivity: AppCompatActivity) {
-        val intent = Intent(this, nextActivity::class.java)
+        val intent = Intent(requireContext(), nextActivity::class.java)
         startActivity(intent)
     }
 }

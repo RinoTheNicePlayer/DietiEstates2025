@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.dietiestates25.R
 import com.example.dietiestates25.view.fragment.HomeCustomerFragment
-import com.example.dietiestates25.view.fragment.ProfileCustomerFragment
+import com.example.dietiestates25.view.fragment.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeCustomerActivity: AppCompatActivity() {
@@ -26,7 +26,7 @@ class HomeCustomerActivity: AppCompatActivity() {
                     // go to
                 }
                 R.id.nav_profile -> {
-                    replaceFragment(ProfileCustomerFragment())
+                    replaceFragment(ProfileFragment())
                 }
             }
             true

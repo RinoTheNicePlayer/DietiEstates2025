@@ -6,6 +6,7 @@ import android.net.Uri
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
@@ -116,14 +117,13 @@ class AuthController(private val context: Context){
         )
     }
 
-    fun signOut(activity: AppCompatActivity) {
+    fun signOut(fragment: Fragment) {
         Amplify.Auth.signOut { signOutResult ->
             when(signOutResult) {
                 is AWSCognitoAuthSignOutResult.CompleteSignOut -> {
                     // Sign Out completed fully and without errors.
                     Log.i("AuthQuickStart", "Signed out successfully")
-                    navigateTo(activity, MainActivity())
-                    activity.finish()
+                    comeBackToLogin(fragment)
                 }
                 is AWSCognitoAuthSignOutResult.PartialSignOut -> {
                     // Sign Out completed with some errors. User is signed out of the device.
@@ -197,5 +197,11 @@ class AuthController(private val context: Context){
     private fun goToHomeAgenti(activity: AppCompatActivity) {
         //navigateTo(activity, SearchActivity()) // TODO: fare home agenti
         activity.finish()
+    }
+
+    private fun comeBackToLogin(fragment: Fragment){
+        val intent = Intent(fragment.requireContext(), MainActivity::class.java)
+        fragment.startActivity(intent)
+        fragment.requireActivity().finish()
     }
 }
