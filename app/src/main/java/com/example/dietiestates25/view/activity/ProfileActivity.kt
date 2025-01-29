@@ -1,4 +1,4 @@
-package com.example.dietiestates25.view
+package com.example.dietiestates25.view.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,11 +14,12 @@ class ProfileActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        //setContentView(R.layout.activity_profile)
         authController = AuthController(this)
 
         val role = AuthManager.getInstance().role
 
+        /*
         val roleLabel = findViewById<TextView>(R.id.roleLabel)
         val updatePasswordButton = findViewById<LinearLayout>(R.id.updatePasswordContainer)
         val registerGestoreButton = findViewById<LinearLayout>(R.id.registerGestoreContainer)
@@ -44,6 +45,8 @@ class ProfileActivity: AppCompatActivity() {
         registerAgenteButton.setOnClickListener {
             // deve andare in schermata registrazione agente
         }
+
+         */
     }
 
     private fun orderVisibilityButtonForRole(

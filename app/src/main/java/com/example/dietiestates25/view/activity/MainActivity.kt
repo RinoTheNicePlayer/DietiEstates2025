@@ -1,4 +1,4 @@
-package com.example.dietiestates25.view
+package com.example.dietiestates25.view.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         val registerLink = findViewById<TextView>(R.id.registerTextView)
         val externalLogin = findViewById<LinearLayout>(R.id.social_login_container)
 
-        val errorLabel = findViewById<TextView>(R.id.erroreLabel)
+        val errorLabel = findViewById<TextView>(R.id.errorLabel)
 
         loginButton.setOnClickListener{
             login(errorLabel)
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun login(errorLabel: TextView) {
         val email = findViewById<EditText>(R.id.email_hint).text.toString()
-        val password = findViewById<EditText>(R.id.passwordHintTextView).text.toString()
+        val password = findViewById<EditText>(R.id.password_hint).text.toString()
 
         if (authController.areValid(email, password)){
             authController.loginWithAmplify(email, password, errorLabel, this)

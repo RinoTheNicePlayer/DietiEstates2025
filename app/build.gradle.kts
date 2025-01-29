@@ -39,6 +39,7 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
@@ -47,6 +48,7 @@ android {
     }
     buildFeatures{
         buildConfig = true
+        viewBinding = true
     }
 }
 
@@ -55,6 +57,7 @@ secrets {
 }
 
 dependencies {
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
     implementation(libs.places)
     implementation(libs.playServicesMaps)
     implementation(libs.aws.storage.s3)

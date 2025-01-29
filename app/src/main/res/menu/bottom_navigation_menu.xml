@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home"
+            android:icon="@drawable/home_navbar"
             android:title="Home" />
 
     <item
-            android:id="@+id/nav_search"
-            android:icon="@drawable/ic_search"
-            android:title="Search" />
+            android:id="@+id/nav_riepilogo"
+            android:icon="@drawable/summary_navbar"
+            android:title="Riepilogo" />
 
     <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_profile"
-            android:title="Profile" />
-
+            android:icon="@drawable/profile_navbar"
+            android:title="Profilo" />
 </menu>

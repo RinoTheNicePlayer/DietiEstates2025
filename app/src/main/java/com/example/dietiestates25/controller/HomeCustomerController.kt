@@ -2,7 +2,7 @@ package com.example.dietiestates25.controller
 
 import android.content.Context
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.dietiestates25.model.Address
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
@@ -17,12 +17,12 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 
-class HomeClienteController(private val context: Context) {
-    fun initPlace(activity: AppCompatActivity) {
+class HomeCustomerController(private val context: Context) {
+    fun initPlace(fragment: Fragment) {
         val apiKey = BuildConfig.MAPS_API_KEY
         if (apiKey.isEmpty()) {
             Log.e("Places test", "No api key")
-            activity.finish()
+            fragment.requireActivity().finish()
             return
         }
 
@@ -33,7 +33,10 @@ class HomeClienteController(private val context: Context) {
 
     fun setLimitAutoComplete(autocompleteFragment: AutocompleteSupportFragment) {
         // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.ADDRESS_COMPONENTS))
+        autocompleteFragment.setPlaceFields(
+            listOf(
+                Place.Field.ID, Place.Field.ADDRESS_COMPONENTS)
+        )
 
         // Limit the autocomplete
         autocompleteFragment.setLocationBias(

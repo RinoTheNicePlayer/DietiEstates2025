@@ -1,15 +1,18 @@
-<ScrollView
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
     <LinearLayout
-            android:id="@+id/scroll_view_registration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
                 android:id="@+id/logoImageView"
@@ -60,18 +63,17 @@
                     android:layout_width="wrap_content"
                     android:hint="@string/inserisci_la_tua_email"
                     android:inputType="textEmailAddress"
-                    android:autofillHints="emailAddress"/>
+                    android:autofillHints="emailAddress" />
         </LinearLayout>
 
-            <LinearLayout
-                    android:id="@+id/divider_email_registration"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#49454F"
-                    android:layout_marginBottom="33dp"
-                    android:layout_marginHorizontal="24dp"
-                    android:orientation="vertical">
-            </LinearLayout>
+        <LinearLayout
+                android:id="@+id/divider_email_registration"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#49454F"
+                android:layout_marginBottom="33dp"
+                android:layout_marginHorizontal="24dp"
+                android:orientation="vertical"></LinearLayout>
 
         <LinearLayout
                 android:id="@+id/password_input_container"
@@ -93,25 +95,25 @@
                     android:text="@string/password" />
 
             <EditText
-                    android:id="@+id/passwordHintTextView"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/password_hint"
+                    android:textColor="#1D1B20"
+                    android:textSize="16sp"
                     android:layout_height="48dp"
+                    android:layout_width="wrap_content"
                     android:hint="@string/inserisci_la_tua_password"
                     android:inputType="textPassword"
                     android:autofillHints="password"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:fontFamily="" />
         </LinearLayout>
 
         <LinearLayout
-                    android:id="@+id/divider_password_registration"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#49454F"
-                    android:layout_marginBottom="34dp"
-                    android:layout_marginHorizontal="24dp"
-                    android:orientation="vertical">
-        </LinearLayout>
+                android:id="@+id/divider_password_registration"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#49454F"
+                android:layout_marginBottom="34dp"
+                android:layout_marginHorizontal="24dp"
+                android:orientation="vertical"></LinearLayout>
 
         <LinearLayout
                 android:id="@+id/register_button"
@@ -136,7 +138,7 @@
         </LinearLayout>
 
         <TextView
-                android:id="@+id/errore"
+                android:id="@+id/errorLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -147,4 +149,4 @@
                 android:textSize="20sp"
                 android:visibility="invisible" />
     </LinearLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

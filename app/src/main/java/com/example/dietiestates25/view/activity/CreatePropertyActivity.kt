@@ -1,4 +1,4 @@
-package com.example.dietiestates25.view
+package com.example.dietiestates25.view.activity
 
 import android.app.Activity
 import android.content.Intent
@@ -19,6 +19,7 @@ class CreatePropertyActivity: AppCompatActivity() {
         setContentView(R.layout.activity_create_property)
         s3Controller = S3Controller(this)
 
+        /*
         val uploadButton = findViewById<Button>(R.id.uploadButton)
 
         pickImagesLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -43,6 +44,8 @@ class CreatePropertyActivity: AppCompatActivity() {
         uploadButton.setOnClickListener {
             pickImagesFromGallery()
         }
+
+         */
     }
 
     private fun pickImagesFromGallery() {

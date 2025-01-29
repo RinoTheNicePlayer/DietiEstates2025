@@ -24,7 +24,7 @@
                 android:name="com.google.android.geo.API_KEY"
                 android:value="${MAPS_API_KEY}" />
 
-        <activity android:name=".view.MainActivity" android:exported="true">
+        <activity android:name=".view.activity.MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -37,21 +37,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.RegisterActivity" android:exported="true" />
-        <activity android:name=".view.HomeClienteActivity" android:exported="true" />
-
-        <activity
-                android:name=".view.HomeCustomerActivity"
-                android:theme="@style/Theme.MyApp.Home"
-                android:exported="true" />
-        <activity
-                android:name=".view.SummaryCustomerActivity"
-                android:theme="@style/Theme.MyApp.Summary"
-                android:exported="true" />
-        <activity
-                android:name=".view.ProfileCustomerActivity"
-                android:theme="@style/Theme.MyApp.Profile"
-                android:exported="true" />
+        <activity android:name=".view.activity.RegisterActivity" android:exported="true" />
+        <activity android:name=".view.activity.HomeCustomerActivity" android:exported="true" />
 
     </application>
 </manifest>

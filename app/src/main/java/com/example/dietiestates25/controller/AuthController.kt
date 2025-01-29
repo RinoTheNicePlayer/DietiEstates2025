@@ -13,8 +13,8 @@ import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult
 import com.amplifyframework.auth.options.AuthSignUpOptions
 import com.amplifyframework.core.Amplify
 import com.example.dietiestates25.R
-import com.example.dietiestates25.view.HomeClienteActivity
-import com.example.dietiestates25.view.MainActivity
+import com.example.dietiestates25.view.activity.HomeCustomerActivity
+import com.example.dietiestates25.view.activity.MainActivity
 
 class AuthController(private val context: Context){
 
@@ -190,7 +190,7 @@ class AuthController(private val context: Context){
     }
 
     private fun goToHomeClienti(activity: AppCompatActivity){
-        navigateTo(activity, HomeClienteActivity())
+        navigateTo(activity, HomeCustomerActivity())
         activity.finish()
     }
 
