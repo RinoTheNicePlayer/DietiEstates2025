@@ -30,5 +30,12 @@
     <string name="modifica_password">Modifica Password</string>
     <string name="registra_gestore">Registra Gestore</string>
     <string name="registra_a_immobiliare">Registra A. immobiliare</string>
+    <string name="pagina_di_change_password">pagina_di_change_password</string>
+    <string name="vecchia_password">Vecchia Password</string>
+    <string name="inserisci_la_tua_vecchia_password">Inserisci la tua vecchia password</string>
+    <string name="nuova_password">Nuova Password</string>
+    <string name="inserisci_la_tua_nuova_password">Inserisci la tua nuova password</string>
+    <string name="modifica">Modifica</string>
+    <string name="password_non_corretta_o_invalida">Password non corretta o invalida</string>
 
 </resources>

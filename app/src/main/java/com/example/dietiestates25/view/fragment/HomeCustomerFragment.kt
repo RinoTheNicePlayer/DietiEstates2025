@@ -15,11 +15,6 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeCustomerFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeCustomerFragment : Fragment() {
     private lateinit var homeCustomerController: HomeCustomerController
 

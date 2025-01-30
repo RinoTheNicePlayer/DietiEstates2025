@@ -1,6 +1,7 @@
 package com.example.dietiestates25.view.activity
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.dietiestates25.R
@@ -13,6 +14,8 @@ class HomeCustomerActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_customer)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         replaceFragment(HomeCustomerFragment())
         val bottomNavBar = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
@@ -30,6 +33,16 @@ class HomeCustomerActivity: AppCompatActivity() {
                 }
             }
             true
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

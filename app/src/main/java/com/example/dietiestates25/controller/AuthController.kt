@@ -102,13 +102,14 @@ class AuthController(private val context: Context){
         )
     }
 
-    fun updatePassword(oldPassword: String, newPassword: String, errorLabel: TextView) {
+    fun updatePassword(oldPassword: String, newPassword: String, errorLabel: TextView, onSuccess: () -> Unit) {
         Amplify.Auth.updatePassword(
             oldPassword,
             newPassword,
             {
                 errorLabel.visibility = TextView.INVISIBLE
                 Log.i("Amplify", "Password updated successfully")
+                onSuccess()
             },
             { error ->
                 errorLabel.visibility = TextView.VISIBLE
@@ -147,6 +148,20 @@ class AuthController(private val context: Context){
                 }
             }
         }
+    }
+
+    fun fetchUserMail(callback: (String?) -> Unit) {
+        Amplify.Auth.fetchUserAttributes(
+            { attributes ->
+                val email = attributes.firstOrNull { it.key == AuthUserAttributeKey.email() }?.value
+                Log.i("AuthQuickstart", "User email: $email")
+                callback(email)
+            },
+            { error ->
+                Log.e("Auth", "Failed to fetch user attributes", error)
+                callback(null)
+            }
+        )
     }
 
     private fun getToken() {

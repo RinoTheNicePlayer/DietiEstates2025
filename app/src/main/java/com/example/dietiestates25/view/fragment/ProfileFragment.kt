@@ -1,6 +1,5 @@
 package com.example.dietiestates25.view.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,16 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import com.example.dietiestates25.R
 import com.example.dietiestates25.controller.AuthController
 import com.example.dietiestates25.controller.AuthManager
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
     private lateinit var authController: AuthController
 
@@ -33,6 +26,7 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         val role = AuthManager.getInstance().role
+        val emailUser = view.findViewById<TextView>(R.id.email_value)
         val roleLabel = view.findViewById<TextView>(R.id.role_label)
         val updatePasswordButton = view.findViewById<LinearLayout>(R.id.change_password_button)
         val registerGestoreButton = view.findViewById<LinearLayout>(R.id.register_manager_button)
@@ -40,7 +34,7 @@ class ProfileFragment : Fragment() {
         val signOutButton = view.findViewById<LinearLayout>(R.id.logout_button)
 
         roleLabel.text = role
-
+        fetchUserMail(emailUser)
         orderVisibilityButtonForRole(role, updatePasswordButton, registerGestoreButton, registerAgenteButton)
 
         signOutButton.setOnClickListener {
@@ -48,7 +42,7 @@ class ProfileFragment : Fragment() {
         }
 
         updatePasswordButton.setOnClickListener {
-            // deve andare in schermata aggiorna password
+            navigateTo(UpdatePasswordFragment())
         }
 
         registerGestoreButton.setOnClickListener {
@@ -86,8 +80,18 @@ class ProfileFragment : Fragment() {
         authController.signOut(this)
     }
 
-    private fun navigateTo(nextActivity: AppCompatActivity) {
-        val intent = Intent(requireContext(), nextActivity::class.java)
-        startActivity(intent)
+    private fun fetchUserMail(emailUser: TextView) {
+        authController.fetchUserMail { email ->
+            if (email != null) {
+                emailUser.text = email
+            }
+        }
+    }
+
+    private fun navigateTo(fragment: Fragment) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_layout_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
