@@ -11,7 +11,7 @@ import android.widget.TextView
 import com.example.dietiestates25.R
 import com.example.dietiestates25.controller.AuthController
 
-class UpdatePasswordFragment : Fragment() {
+class RegistrationAgentFragment : Fragment() {
     private lateinit var authController: AuthController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,18 +24,17 @@ class UpdatePasswordFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_update_password, container, false)
-        val oldPassword = view.findViewById<EditText>(R.id.old_password_hint).text.toString()
-        val newPassword = view.findViewById<EditText>(R.id.new_password_hint).text.toString()
-        val changePasswordButton = view.findViewById<LinearLayout>(R.id.change_password_button)
-        val errorLabel = view.findViewById<TextView>(R.id.errorPasswordLabel)
+        val view = inflater.inflate(R.layout.fragment_registration_agent, container, false)
+        val email = view.findViewById<EditText>(R.id.email_agente_hint).text.toString()
+        val password = view.findViewById<EditText>(R.id.password_agente_hint).text.toString()
+        val registerAgentButton = view.findViewById<LinearLayout>(R.id.register_agent_button)
+        val errorLabel = view.findViewById<TextView>(R.id.errorAgentLabel)
 
-        changePasswordButton.setOnClickListener {
-            if (areValid(oldPassword, newPassword)) {
-                updatePassword(oldPassword, newPassword, errorLabel)
+        registerAgentButton.setOnClickListener {
+            if (areValid(email, password)) {
+                registerAgent(email, password, errorLabel)
                 errorLabel.visibility = View.INVISIBLE
-            }
-            else {
+            } else {
                 errorLabel.visibility = View.VISIBLE
             }
         }
@@ -43,14 +42,14 @@ class UpdatePasswordFragment : Fragment() {
         return view
     }
 
-    private fun areValid(oldPassword: String, newPassword: String): Boolean {
-        return oldPassword.isNotEmpty() && newPassword.isNotEmpty()
-    }
-
-    private fun updatePassword(oldPassword: String, newPassword: String, errorLabel: TextView) {
-        authController.updatePassword(oldPassword, newPassword, errorLabel) {
+    private fun registerAgent(email: String, password: String, errorLabel: TextView) {
+        authController.signUpGestoreOrAgente(email, password, "AgenteImmobiliare", errorLabel) {
             goBack()
         }
+    }
+
+    private fun areValid(email: String, password: String): Boolean {
+        return email.isNotEmpty() && password.isNotEmpty()
     }
 
     private fun goBack() {

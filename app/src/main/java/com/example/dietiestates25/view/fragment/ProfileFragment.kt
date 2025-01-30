@@ -46,11 +46,11 @@ class ProfileFragment : Fragment() {
         }
 
         registerGestoreButton.setOnClickListener {
-            // deve andare in schermata registrazione gestore
+            navigateTo(RegistrationManagerFragment())
         }
 
         registerAgenteButton.setOnClickListener {
-            // deve andare in schermata registrazione agente
+            navigateTo(RegistrationAgentFragment())
         }
 
         return view

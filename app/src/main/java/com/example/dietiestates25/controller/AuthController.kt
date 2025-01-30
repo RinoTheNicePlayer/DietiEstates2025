@@ -77,7 +77,7 @@ class AuthController(private val context: Context){
         }
     }
 
-    fun signUpGestoreOrAgente(email: String, password: String, role: String, errorLabel: TextView){
+    fun signUpGestoreOrAgente(email: String, password: String, role: String, errorLabel: TextView, onSuccess: () -> Unit){
         val attributes = listOf(
             AuthUserAttribute(AuthUserAttributeKey.email(), email),
             AuthUserAttribute(AuthUserAttributeKey.custom("role"), role)
@@ -94,6 +94,7 @@ class AuthController(private val context: Context){
             {
                 errorLabel.visibility = TextView.INVISIBLE
                 Log.i("Amplify", "Sign up succeeded")
+                onSuccess()
             },
             {
                 errorLabel.visibility = TextView.VISIBLE

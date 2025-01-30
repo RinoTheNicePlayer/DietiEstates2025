@@ -37,5 +37,6 @@
     <string name="inserisci_la_tua_nuova_password">Inserisci la tua nuova password</string>
     <string name="modifica">Modifica</string>
     <string name="password_non_corretta_o_invalida">Password non corretta o invalida</string>
+    <string name="registra">Registra</string>
 
 </resources>
