@@ -15,7 +15,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
-                android:id="@+id/logoImageView"
+                android:id="@+id/account_image"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginTop="55dp"
@@ -26,7 +26,7 @@
                 android:layout_gravity="center" />
 
         <TextView
-                android:id="@+id/titleTextView"
+                android:id="@+id/login_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -117,7 +117,7 @@
                 android:orientation="vertical" />
 
         <LinearLayout
-                android:id="@+id/loginButtonContainer"
+                android:id="@+id/access_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -145,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="35dp"
                 android:layout_marginBottom="15dp"
-                android:id="@+id/errorLabel"
+                android:id="@+id/error_label"
                 android:textSize="20sp"
                 android:textColor="#E91E63"
                 android:visibility="invisible"

@@ -15,7 +15,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
-                android:id="@+id/logoImageView"
+                android:id="@+id/account_image"
                 android:contentDescription="@string/image_profile"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
@@ -138,7 +138,7 @@
         </LinearLayout>
 
         <TextView
-                android:id="@+id/errorLabel"
+                android:id="@+id/error_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
