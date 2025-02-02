@@ -18,11 +18,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         authController = AuthController(this)
 
-        val loginButton = findViewById<LinearLayout>(R.id.loginButtonContainer)
+        val loginButton = findViewById<LinearLayout>(R.id.access_button)
         val registerLink = findViewById<TextView>(R.id.registerTextView)
         val externalLogin = findViewById<LinearLayout>(R.id.social_login_container)
 
-        val errorLabel = findViewById<TextView>(R.id.errorLabel)
+        val errorLabel = findViewById<TextView>(R.id.error_label)
 
         loginButton.setOnClickListener{
             login(errorLabel)

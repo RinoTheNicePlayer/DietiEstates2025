@@ -29,7 +29,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun signUp(){
         val email = findViewById<EditText>(R.id.email_hint).text.toString()
         val password = findViewById<EditText>(R.id.password_hint).text.toString()
-        val errorLabel = findViewById<TextView>(R.id.errorLabel)
+        val errorLabel = findViewById<TextView>(R.id.error_label)
 
         if (controller.areValid(email, password)) {
             controller.signUpWithAmplify(email, password, "Cliente", errorLabel, this)

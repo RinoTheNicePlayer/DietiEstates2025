@@ -28,7 +28,7 @@ class RegistrationManagerFragment : Fragment() {
         val email = view.findViewById<EditText>(R.id.email_gestore_hint).text.toString()
         val password = view.findViewById<EditText>(R.id.password_gestore_hint).text.toString()
         val registerManagerButton = view.findViewById<LinearLayout>(R.id.register_manager_button)
-        val errorLabel = view.findViewById<TextView>(R.id.errorGestoreLabel)
+        val errorLabel = view.findViewById<TextView>(R.id.error_manager_label)
 
         registerManagerButton.setOnClickListener {
             if (areValid(email, password)) {

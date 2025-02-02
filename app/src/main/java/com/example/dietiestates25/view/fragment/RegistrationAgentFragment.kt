@@ -28,7 +28,7 @@ class RegistrationAgentFragment : Fragment() {
         val email = view.findViewById<EditText>(R.id.email_agente_hint).text.toString()
         val password = view.findViewById<EditText>(R.id.password_agente_hint).text.toString()
         val registerAgentButton = view.findViewById<LinearLayout>(R.id.register_agent_button)
-        val errorLabel = view.findViewById<TextView>(R.id.errorAgentLabel)
+        val errorLabel = view.findViewById<TextView>(R.id.error_agent_label)
 
         registerAgentButton.setOnClickListener {
             if (areValid(email, password)) {
