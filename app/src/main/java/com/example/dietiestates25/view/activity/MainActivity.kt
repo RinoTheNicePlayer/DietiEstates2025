@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         authController = AuthController(this)
 
+        goToHomeIfLogged()
+
         val loginButton = findViewById<LinearLayout>(R.id.access_button)
         val registerLink = findViewById<TextView>(R.id.registerTextView)
         val externalLogin = findViewById<LinearLayout>(R.id.social_login_container)
@@ -45,6 +47,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleIntent(intent: Intent?) {
         authController.handleRedirection(intent, this)
+    }
+
+    private fun goToHomeIfLogged() {
+        authController.userIsSignedIn(this)
     }
 
     private fun login(errorLabel: TextView) {

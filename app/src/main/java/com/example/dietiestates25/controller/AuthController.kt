@@ -14,6 +14,7 @@ import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult
 import com.amplifyframework.auth.options.AuthSignUpOptions
 import com.amplifyframework.core.Amplify
 import com.example.dietiestates25.R
+import com.example.dietiestates25.view.activity.HomeAgentActivity
 import com.example.dietiestates25.view.activity.HomeCustomerActivity
 import com.example.dietiestates25.view.activity.MainActivity
 
@@ -34,12 +35,16 @@ class AuthController(private val context: Context){
             password,
             options,
             {
-                loginWithAmplify(email, password, errorLabel, activity)
-                errorLabel.visibility = TextView.INVISIBLE
+                activity.runOnUiThread {
+                    loginWithAmplify(email, password, errorLabel, activity)
+                    errorLabel.visibility = TextView.INVISIBLE
+                }
                 Log.i("Amplify", "Sign up succeeded")
             },
             {
-                errorLabel.visibility = TextView.VISIBLE
+                activity.runOnUiThread {
+                    errorLabel.visibility = TextView.VISIBLE
+                }
                 Log.e("Amplify", "Sign up failed", it)
             }
         )
@@ -50,12 +55,16 @@ class AuthController(private val context: Context){
             email,
             password,
             { result -> if (result.isSignedIn) {
-                fetchUserRole(activity)
-                erroreLabel.visibility = TextView.INVISIBLE
+                activity.runOnUiThread {
+                    fetchUserRole(activity)
+                    erroreLabel.visibility = TextView.INVISIBLE
+                }
                 Log.i("AuthQuickstart", result.toString())
             }},
             { error ->
-                erroreLabel.visibility = TextView.VISIBLE
+                activity.runOnUiThread{
+                    erroreLabel.visibility = TextView.VISIBLE
+                }
                 Log.e("AuthQuickstart", error.toString())
             }
         )
@@ -119,6 +128,17 @@ class AuthController(private val context: Context){
         )
     }
 
+    fun userIsSignedIn(activity: AppCompatActivity) {
+        Amplify.Auth.fetchAuthSession(
+            { session -> if (session.isSignedIn) {
+                activity.runOnUiThread {
+                    fetchUserRole(activity)
+                }
+            }},
+            { error -> Log.e("Auth", "Failed to fetch auth session", error) }
+        )
+    }
+
     fun signOut(fragment: Fragment) {
         Amplify.Auth.signOut { signOutResult ->
             when(signOutResult) {
@@ -178,11 +198,12 @@ class AuthController(private val context: Context){
     private fun fetchUserRole(activity: AppCompatActivity) {
         Amplify.Auth.fetchUserAttributes(
             { attributes ->
-                val role = attributes.firstOrNull { it.key.keyString == "custom:role" }?.value
-                AuthManager.getInstance().role = role
-                goToHome(activity, role)
-
-                Log.i("AuthQuickstart", "User role: $role")
+                activity.runOnUiThread {
+                    val role = attributes.firstOrNull { it.key.keyString == "custom:role" }?.value
+                    AuthManager.getInstance().role = role
+                    Log.i("AuthQuickstart", "User role: $role")
+                    goToHome(activity, role)
+                }
             },
             { error -> Log.e("Auth", "Failed to fetch user attributes", error) }
         )
@@ -211,7 +232,7 @@ class AuthController(private val context: Context){
     }
 
     private fun goToHomeAgenti(activity: AppCompatActivity) {
-        //navigateTo(activity, SearchActivity()) // TODO: fare home agenti
+        navigateTo(activity, HomeAgentActivity())
         activity.finish()
     }
 

@@ -82,8 +82,10 @@ class ProfileFragment : Fragment() {
 
     private fun fetchUserMail(emailUser: TextView) {
         authController.fetchUserMail { email ->
-            if (email != null) {
-                emailUser.text = email
+            activity?.runOnUiThread{
+                if (email != null) {
+                    emailUser.text = email
+                }
             }
         }
     }
