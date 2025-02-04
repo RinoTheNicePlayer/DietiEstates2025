@@ -15,12 +15,9 @@ class HomeAgentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navbar_agent)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        // Imposta il fragment iniziale sulla home
+        // Set the initial fragment
         replaceFragment(HomeAgentFragment())
 
-        // Configura la BottomNavigationView
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation2View)
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -35,22 +32,42 @@ class HomeAgentActivity : AppCompatActivity() {
             }
             true
         }
+
+        // Add OnBackStackChangedListener to update the visibility of the up button
+        supportFragmentManager.addOnBackStackChangedListener {
+            updateUpButtonVisibility()
+        }
+        // Initial call to set the correct visibility
+        updateUpButtonVisibility()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                onBackPressedDispatcher.onBackPressed()
+                if (supportFragmentManager.backStackEntryCount > 0) {
+                    supportFragmentManager.popBackStack()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+        }
+        return true
+    }
+
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_layout_container2, fragment)
             .commit()
+    }
+
+    private fun updateUpButtonVisibility() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(supportFragmentManager.backStackEntryCount > 0)
     }
 
 }

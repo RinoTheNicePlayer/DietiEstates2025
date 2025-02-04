@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.dietiestates25.R
 import com.example.dietiestates25.controller.AuthController
 
@@ -25,6 +26,10 @@ class RegistrationManagerFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_registration_manager, container, false)
+
+        // Enable the up back button
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val email = view.findViewById<EditText>(R.id.email_gestore_hint).text.toString()
         val password = view.findViewById<EditText>(R.id.password_gestore_hint).text.toString()
         val registerManagerButton = view.findViewById<LinearLayout>(R.id.register_manager_button)

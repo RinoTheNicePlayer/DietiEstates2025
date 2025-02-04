@@ -92,7 +92,7 @@ class ProfileFragment : Fragment() {
 
     private fun navigateTo(fragment: Fragment) {
         parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_layout_container, fragment)
+            .replace(R.id.fragment_layout_container2, fragment)
             .addToBackStack(null)
             .commit()
     }
