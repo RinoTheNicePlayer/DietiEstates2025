@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DietiEstates25</string>
     <string name="server_client_id">178716549373-h3n34desu00iqfn92li69efsuqmm41pq.apps.googleusercontent.com</string>
-    <string name="domain_link">https://dietiestates2534865b44–34865b44-dev.auth.eu-north-1.amazoncognito.com/login?client_id=3461f54knkvjeeisce9ddp27iu&amp;response_type=code&amp;scope=aws.cognito.signin.user.admin+email+openid+phone+profile&amp;redirect_uri=myapp://callback/</string>
+    <string name="domain_link">https://dietiestates2534865b44-34865b44-dev.auth.eu-north-1.amazoncognito.com/login?client_id=3461f54knkvjeeisce9ddp27iu&amp;response_type=code&amp;scope=aws.cognito.signin.user.admin+email+openid+phone+profile&amp;redirect_uri=myapp://callback/</string>
     <string name="image_profile">image_profile</string>
     <string name="accedi">Accedi</string>
     <string name="email">Email</string>
