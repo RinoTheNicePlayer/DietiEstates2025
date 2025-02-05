@@ -16,7 +16,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        controller = AuthController(this)
+        controller = AuthController()
 
 
         val registerButton = findViewById<LinearLayout>(R.id.register_button)
