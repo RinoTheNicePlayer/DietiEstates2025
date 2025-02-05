@@ -9,7 +9,17 @@ import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult
 import com.amplifyframework.auth.options.AuthSignUpOptions
 import com.amplifyframework.core.Amplify
+import com.example.dietiestates25.model.RegistrationRequest
 import com.example.dietiestates25.view.activity.MainActivity
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import okhttp3.ResponseBody
+import java.io.IOException
 
 class ProfileController {
     fun signUpGestoreOrAgente(email: String, password: String, role: String, errorLabel: TextView, onSuccess: () -> Unit){
@@ -29,7 +39,7 @@ class ProfileController {
             {
                 errorLabel.visibility = TextView.INVISIBLE
                 Log.i("Amplify", "Sign up succeeded")
-                /// Todo: send to backend
+                sendRequestToBackend(email, role)
                 onSuccess()
             },
             {
@@ -37,6 +47,38 @@ class ProfileController {
                 Log.e("Amplify", "Sign up failed", it)
             }
         )
+    }
+
+    private fun sendRequestToBackend(email: String, role: String){
+        val client = OkHttpClient()
+        val url = "" /// TODO: da cambiare
+        val token = AuthManager.instance?.idToken
+
+        val json = Json.encodeToString(RegistrationRequest(email, role))
+        val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
+
+        val request = Request.Builder()
+            .url(url)
+            .addHeader("Authorization", "Bearer $token")
+            .addHeader("Content-Type", "application/json")
+            .post(requestBody)
+            .build()
+
+        client.newCall(request).enqueue(object : okhttp3.Callback {
+            override fun onFailure(call: okhttp3.Call, e: IOException) {
+                Log.e("Backend", "Failed to send data", e)
+            }
+
+            override fun onResponse(call: okhttp3.Call, response: Response) {
+                if (response.isSuccessful) {
+                    val responseBody: ResponseBody = response.body
+                    val responseMessage = responseBody.string()
+                    Log.i("Backend", "Data sent successfully: $responseMessage")
+                } else {
+                    Log.e("Backend", "Failed to send data: ${response.message}")
+                }
+            }
+        })
     }
 
     fun updatePassword(oldPassword: String, newPassword: String, errorLabel: TextView, onSuccess: () -> Unit) {
