@@ -10,14 +10,14 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dietiestates25.R
-import com.example.dietiestates25.controller.AuthController
+import com.example.dietiestates25.controller.ProfileController
 
 class RegistrationManagerFragment : Fragment() {
-    private lateinit var authController: AuthController
+    private lateinit var profileController: ProfileController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        authController = AuthController()
+        profileController = ProfileController()
     }
 
     override fun onCreateView(
@@ -50,7 +50,7 @@ class RegistrationManagerFragment : Fragment() {
     }
 
     private fun registerManager(email: String, password: String, errorLabel: TextView) {
-        authController.signUpGestoreOrAgente(email,password, "Gestore", errorLabel) {
+        profileController.signUpGestoreOrAgente(email,password, "Gestore", errorLabel) {
             goBack()
         }
     }

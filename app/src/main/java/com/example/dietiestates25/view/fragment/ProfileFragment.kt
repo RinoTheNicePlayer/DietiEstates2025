@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.dietiestates25.R
-import com.example.dietiestates25.controller.AuthController
 import com.example.dietiestates25.controller.AuthManager
+import com.example.dietiestates25.controller.ProfileController
 
 class ProfileFragment : Fragment() {
-    private lateinit var authController: AuthController
+    private lateinit var profileController: ProfileController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        authController = AuthController()
+        profileController = ProfileController()
     }
 
     override fun onCreateView(
@@ -77,11 +77,11 @@ class ProfileFragment : Fragment() {
     }
 
     private fun signOut() {
-        authController.signOut(this)
+        profileController.signOut(this)
     }
 
     private fun fetchUserMail(emailUser: TextView) {
-        authController.fetchUserMail { email ->
+        profileController.fetchUserMail { email ->
             activity?.runOnUiThread{
                 if (email != null) {
                     emailUser.text = email
