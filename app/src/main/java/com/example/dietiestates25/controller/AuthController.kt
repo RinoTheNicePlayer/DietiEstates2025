@@ -20,7 +20,7 @@ class AuthController {
     fun signUpWithAmplify(email: String, password: String, role: String, errorLabel: TextView, activity: AppCompatActivity){
         val attributes = listOf(
             AuthUserAttribute(AuthUserAttributeKey.email(), email),
-            AuthUserAttribute(AuthUserAttributeKey.custom("role"), role)
+            AuthUserAttribute(AuthUserAttributeKey.custom("custom:role"), role)
         )
 
         val options = AuthSignUpOptions.builder()
@@ -83,7 +83,7 @@ class AuthController {
     fun signUpGestoreOrAgente(email: String, password: String, role: String, errorLabel: TextView, onSuccess: () -> Unit){
         val attributes = listOf(
             AuthUserAttribute(AuthUserAttributeKey.email(), email),
-            AuthUserAttribute(AuthUserAttributeKey.custom("role"), role)
+            AuthUserAttribute(AuthUserAttributeKey.custom("custom:role"), role)
         )
 
         val options = AuthSignUpOptions.builder()
@@ -207,7 +207,7 @@ class AuthController {
     private fun setRoleToClienteIfNull(role: String?): String {
         if (role == null) {
             val roleAttribute = "Cliente"
-            val attribute = AuthUserAttribute(AuthUserAttributeKey.custom("role"), roleAttribute)
+            val attribute = AuthUserAttribute(AuthUserAttributeKey.custom("custom:role"), roleAttribute)
 
             Amplify.Auth.updateUserAttribute(
                 attribute,
