@@ -193,7 +193,8 @@ class AuthController {
         Amplify.Auth.fetchUserAttributes(
             { attributes ->
                 activity.runOnUiThread {
-                    val role = attributes.firstOrNull { it.key.keyString == "custom:role" }?.value
+                    var role = attributes.firstOrNull { it.key.keyString == "custom:role" }?.value
+                    role = setRoleToClienteIfNull(role)
                     AuthManager.getInstance().role = role
                     Log.i("AuthQuickstart", "User role: $role")
                     goToHome(activity, role)
@@ -201,6 +202,23 @@ class AuthController {
             },
             { error -> Log.e("Auth", "Failed to fetch user attributes", error) }
         )
+    }
+
+    private fun setRoleToClienteIfNull(role: String?): String {
+        if (role == null) {
+            val roleAttribute = "Cliente"
+            val attribute = AuthUserAttribute(AuthUserAttributeKey.custom("role"), roleAttribute)
+
+            Amplify.Auth.updateUserAttribute(
+                attribute,
+                { Log.i("AuthQuickstart", "User role updated") },
+                { Log.e("AuthQuickstart", "User role update failed", it) }
+            )
+
+            return roleAttribute
+        } else {
+            return role
+        }
     }
 
     fun navigateTo(actualActivity: AppCompatActivity, nextActivity: AppCompatActivity){
