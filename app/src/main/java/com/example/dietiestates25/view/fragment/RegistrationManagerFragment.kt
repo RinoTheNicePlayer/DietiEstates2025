@@ -30,12 +30,13 @@ class RegistrationManagerFragment : Fragment() {
         // Enable the up back button
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val email = view.findViewById<EditText>(R.id.email_gestore_hint).text.toString()
-        val password = view.findViewById<EditText>(R.id.password_gestore_hint).text.toString()
         val registerManagerButton = view.findViewById<LinearLayout>(R.id.register_manager_button)
         val errorLabel = view.findViewById<TextView>(R.id.error_manager_label)
 
         registerManagerButton.setOnClickListener {
+            val email = view.findViewById<EditText>(R.id.email_gestore_hint).text.toString()
+            val password = view.findViewById<EditText>(R.id.password_gestore_hint).text.toString()
+
             if (areValid(email, password)) {
                 registerManager(email, password, errorLabel)
                 errorLabel.visibility = View.INVISIBLE

@@ -30,12 +30,13 @@ class UpdatePasswordFragment : Fragment() {
         // Enable the up back button
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val oldPassword = view.findViewById<EditText>(R.id.old_password_hint).text.toString()
-        val newPassword = view.findViewById<EditText>(R.id.new_password_hint).text.toString()
         val changePasswordButton = view.findViewById<LinearLayout>(R.id.change_password_button)
         val errorLabel = view.findViewById<TextView>(R.id.errorPasswordLabel)
 
         changePasswordButton.setOnClickListener {
+            val oldPassword = view.findViewById<EditText>(R.id.old_password_hint).text.toString()
+            val newPassword = view.findViewById<EditText>(R.id.new_password_hint).text.toString()
+
             if (areValid(oldPassword, newPassword)) {
                 updatePassword(oldPassword, newPassword, errorLabel)
                 errorLabel.visibility = View.INVISIBLE

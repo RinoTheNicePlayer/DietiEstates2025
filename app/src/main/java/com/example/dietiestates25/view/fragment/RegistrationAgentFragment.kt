@@ -30,12 +30,13 @@ class RegistrationAgentFragment : Fragment() {
         // Enable the up back button
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val email = view.findViewById<EditText>(R.id.email_agente_hint).text.toString()
-        val password = view.findViewById<EditText>(R.id.password_agente_hint).text.toString()
         val registerAgentButton = view.findViewById<LinearLayout>(R.id.register_agent_button)
         val errorLabel = view.findViewById<TextView>(R.id.error_agent_label)
 
         registerAgentButton.setOnClickListener {
+            val email = view.findViewById<EditText>(R.id.email_agente_hint).text.toString()
+            val password = view.findViewById<EditText>(R.id.password_agente_hint).text.toString()
+
             if (areValid(email, password)) {
                 registerAgent(email, password, errorLabel)
                 errorLabel.visibility = View.INVISIBLE
