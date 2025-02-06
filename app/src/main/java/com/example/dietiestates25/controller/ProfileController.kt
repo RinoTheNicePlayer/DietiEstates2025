@@ -4,10 +4,8 @@ import android.content.Intent
 import android.util.Log
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult
-import com.amplifyframework.auth.options.AuthSignUpOptions
 import com.amplifyframework.core.Amplify
 import com.example.dietiestates25.model.RegistrationRequest
 import com.example.dietiestates25.view.activity.MainActivity
@@ -23,38 +21,11 @@ import java.io.IOException
 
 class ProfileController {
     fun signUpGestoreOrAgente(email: String, password: String, role: String, errorLabel: TextView, onSuccess: () -> Unit){
-        val attributes = listOf(
-            AuthUserAttribute(AuthUserAttributeKey.email(), email),
-            AuthUserAttribute(AuthUserAttributeKey.custom("custom:role"), role)
-        )
-
-        val options = AuthSignUpOptions.builder()
-            .userAttributes(attributes)
-            .build()
-
-        Amplify.Auth.signUp(
-            email,
-            password,
-            options,
-            {
-                errorLabel.visibility = TextView.INVISIBLE
-                Log.i("Amplify", "Sign up succeeded")
-                sendRequestToBackend(email, role)
-                onSuccess()
-            },
-            {
-                errorLabel.visibility = TextView.VISIBLE
-                Log.e("Amplify", "Sign up failed", it)
-            }
-        )
-    }
-
-    private fun sendRequestToBackend(email: String, role: String){
         val client = OkHttpClient()
         val url = "" /// TODO: da cambiare
         val token = AuthManager.instance?.idToken
 
-        val json = Json.encodeToString(RegistrationRequest(email, role))
+        val json = Json.encodeToString(RegistrationRequest(email, password, role))
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
 
         val request = Request.Builder()
@@ -66,6 +37,7 @@ class ProfileController {
 
         client.newCall(request).enqueue(object : okhttp3.Callback {
             override fun onFailure(call: okhttp3.Call, e: IOException) {
+                errorLabel.visibility = TextView.VISIBLE
                 Log.e("Backend", "Failed to send data", e)
             }
 
@@ -73,8 +45,11 @@ class ProfileController {
                 if (response.isSuccessful) {
                     val responseBody: ResponseBody = response.body
                     val responseMessage = responseBody.string()
+                    errorLabel.visibility = TextView.INVISIBLE
                     Log.i("Backend", "Data sent successfully: $responseMessage")
+                    onSuccess()
                 } else {
+                    errorLabel.visibility = TextView.VISIBLE
                     Log.e("Backend", "Failed to send data: ${response.message}")
                 }
             }
