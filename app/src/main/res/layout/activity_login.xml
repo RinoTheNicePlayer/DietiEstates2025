@@ -165,7 +165,6 @@
                 android:text="@string/email_o_password_non_corretti"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="35dp"
                 android:layout_marginBottom="15dp"
                 android:id="@+id/error_label"
                 android:textSize="20sp"
@@ -187,7 +186,8 @@
                     android:layout_height="1dp"
                     android:background="#CAC4D0"
                     android:layout_marginTop="2dp"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical">
+            </LinearLayout>
 
             <View
                     android:layout_width="0dp"
@@ -213,7 +213,8 @@
                     android:layout_height="1dp"
                     android:background="#CAC4D0"
                     android:layout_marginTop="1dp"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical">
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout

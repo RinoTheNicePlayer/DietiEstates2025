@@ -1,20 +1,30 @@
 package com.example.dietiestates25.view.fragment
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Spinner
+import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dietiestates25.R
+import com.example.dietiestates25.controller.S3Controller
+import com.example.dietiestates25.model.Property
 
 class CreatePropertyFragment : Fragment() {
+    private var selectedImageUri: Uri? = null
+    private lateinit var s3Controller: S3Controller
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        s3Controller = S3Controller(requireContext())
     }
 
     override fun onCreateView(
@@ -37,16 +47,67 @@ class CreatePropertyFragment : Fragment() {
         val elevatorSpinner = view.findViewById<Spinner>(R.id.elevator_spinner)
         initElevatorSpinner(elevatorSpinner)
 
-
-        /// TODO: da aggiungere
+        val addPropertyImage = view.findViewById<ImageView>(R.id.property_image)
         val createPropertiesButton = view.findViewById<LinearLayout>(R.id.create_property_button)
-        createPropertiesButton.setOnClickListener {
-            if (optionAreSelected(saleRentSpinner, balconySpinner)) {
+        val errorLabel = view.findViewById<TextView>(R.id.error_label_property)
 
+        val loadImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            selectedImageUri = uri
+            addPropertyImage.setImageURI(uri)
+        }
+
+        addPropertyImage.setOnClickListener {
+            loadImage.launch("image/*")
+        }
+
+        createPropertiesButton.setOnClickListener {
+            val address = view.findViewById<EditText>(R.id.address_input_field).text.toString()
+            val description = view.findViewById<EditText>(R.id.description_input_field).text.toString()
+            val price = view.findViewById<EditText>(R.id.price_input_field).text.toString().toDouble()
+            val nRooms = view.findViewById<EditText>(R.id.rooms_input_field).text.toString().toInt()
+            val nBathrooms = view.findViewById<EditText>(R.id.bathrooms_input_field).text.toString().toInt()
+            val floor = view.findViewById<EditText>(R.id.floors_input_field).text.toString().toInt()
+
+            if (
+                allFieldsAreValid(saleRentSpinner, balconySpinner, elevatorSpinner, address, description, price, nRooms, nBathrooms, floor)
+                ) {
+                // check latitudine e longitudine
+                val property = Property(
+                    description,
+                    saveImageToS3(addPropertyImage),
+                    price,
+                    nBathrooms,
+                    nRooms,
+                    saleRentSpinner.selectedItem.toString(),
+                    address,
+                    "0",
+                    "0",
+                    floor,
+                    elevatorSpinner.selectedItem.toString() == "Sì",
+                    balconySpinner.selectedItem.toString() == "Sì"
+                )
+
+                s3Controller.saveProperty(property) {
+                    goBack()
+                    errorLabel.visibility = View.INVISIBLE
+                }
+            }
+            else {
+                errorLabel.visibility = View.VISIBLE
             }
         }
 
         return view
+    }
+
+    private fun saveImageToS3(addPropertyImage: ImageView): String {
+        val uniquePath = if (selectedImageUri != null) {
+            s3Controller.uploadInputStream(selectedImageUri!!)
+        } else {
+            s3Controller.uploadDefaultImage(addPropertyImage)
+        }
+
+        return uniquePath
     }
 
     private fun initSaleRentSpinner(saleRentSpinner: Spinner) {
@@ -85,17 +146,35 @@ class CreatePropertyFragment : Fragment() {
         elevatorSpinner.setSelection(0, false)
     }
 
-    private fun optionAreSelected(saleRentSpinner: Spinner, balconySpinner: Spinner, elevatorSpinner: Spinner): Boolean {
+    private fun allFieldsAreValid(
+        saleRentSpinner: Spinner,
+        balconySpinner: Spinner,
+        elevatorSpinner: Spinner,
+        address: String,
+        description: String,
+        price: Double,
+        nRooms: Int,
+        nBathrooms: Int,
+        floor: Int
+    ): Boolean {
+        return optionsAreSelected(saleRentSpinner, balconySpinner, elevatorSpinner)
+                && areValid(address, description, price, nRooms, nBathrooms, floor)
+    }
+
+    private fun areValid(address: String, description: String, price: Double, nRooms: Int, nBathrooms: Int, floor: Int): Boolean {
+        return address.isNotEmpty() && description.isNotEmpty() && price > 0 && nRooms > 0 && nBathrooms > 0 && floor > 0
+    }
+
+    private fun optionsAreSelected(saleRentSpinner: Spinner, balconySpinner: Spinner, elevatorSpinner: Spinner): Boolean {
         val selectedPosition1 = saleRentSpinner.selectedItemPosition
         val selectedPosition2 = balconySpinner.selectedItemPosition
         val selectedPosition3 = elevatorSpinner.selectedItemPosition
 
-        if (selectedPosition1 == 0 || selectedPosition2 == 0 || selectedPosition3 == 0) {
-            return false // label di errore
-        } else {
-            // val selectedOption = saleRentSpinner.selectedItem.toString()
-            return true
-        }
+        return selectedPosition1 == 0 || selectedPosition2 == 0 || selectedPosition3 == 0
+    }
+
+    private fun goBack() {
+        parentFragmentManager.popBackStack()
     }
 
 }

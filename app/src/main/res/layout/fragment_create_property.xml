@@ -16,8 +16,10 @@
                 android:layout_height="250dp"
                 android:layout_marginBottom="15dp"
                 android:contentDescription="@string/image_property"
-                android:src="@drawable/image1"
-                android:scaleType="fitXY" />
+                android:src="@drawable/image4"
+                android:scaleType="fitXY"
+                android:clickable="true"
+                android:focusable="true"/>
 
         <LinearLayout
                 android:id="@+id/sale_rent_container"
@@ -223,7 +225,8 @@
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:text="@string/descrizione" />
+                    android:text="@string/descrizione"
+                    android:contentDescription="@string/box_title"/>
         </LinearLayout>
 
         <LinearLayout
@@ -376,5 +379,15 @@
             </LinearLayout>
         </LinearLayout>
 
+        <TextView
+                android:id="@+id/error_label_property"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="@string/email_o_password_non_corretti"
+                android:textColor="#E91E63"
+                android:textSize="20sp"
+                android:visibility="invisible" />
     </LinearLayout>
 </ScrollView>

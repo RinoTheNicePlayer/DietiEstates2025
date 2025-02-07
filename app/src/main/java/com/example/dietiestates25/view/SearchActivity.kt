@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
 import com.example.dietiestates25.adapter.PropertyAdapter
-import com.example.dietiestates25.model.Property
+import com.example.dietiestates25.model.PropertyTest
 
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var propertyAdapter: PropertyAdapter
-    private val propertyList = mutableListOf<Property>()
+    private val propertyTestList = mutableListOf<PropertyTest>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,15 +23,15 @@ class SearchActivity : AppCompatActivity() {
 
         loadProperties()
 
-        propertyAdapter = PropertyAdapter(propertyList)
+        propertyAdapter = PropertyAdapter(propertyTestList)
         recyclerView.adapter = propertyAdapter
     }
 
     private fun loadProperties() {
-        propertyList.apply {
-            add(Property("Immobile#1", "€100,000", ""))
-            add(Property("Immobile#2", "€150,000", ""))
-            add(Property("Immobile#3", "€200,000", ""))
+        propertyTestList.apply {
+            add(PropertyTest("Immobile#1", "€100,000", ""))
+            add(PropertyTest("Immobile#2", "€150,000", ""))
+            add(PropertyTest("Immobile#3", "€200,000", ""))
         }
     }
 }
