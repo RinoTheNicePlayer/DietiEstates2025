@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.dietiestates25.R
-import com.example.dietiestates25.controller.AuthController
 import com.example.dietiestates25.controller.AuthManager
+import com.example.dietiestates25.controller.ProfileController
 
 class ProfileFragment : Fragment() {
-    private lateinit var authController: AuthController
+    private lateinit var profileController: ProfileController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        authController = AuthController(requireActivity())
+        profileController = ProfileController()
     }
 
     override fun onCreateView(
@@ -25,7 +25,7 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        val role = AuthManager.getInstance().role
+        val role = AuthManager.instance?.role
         val emailUser = view.findViewById<TextView>(R.id.email_value)
         val roleLabel = view.findViewById<TextView>(R.id.role_label)
         val updatePasswordButton = view.findViewById<LinearLayout>(R.id.change_password_button)
@@ -35,7 +35,9 @@ class ProfileFragment : Fragment() {
 
         roleLabel.text = role
         fetchUserMail(emailUser)
-        orderVisibilityButtonForRole(role, updatePasswordButton, registerGestoreButton, registerAgenteButton)
+        if (role != null) {
+            orderVisibilityButtonForRole(role, updatePasswordButton, registerGestoreButton, registerAgenteButton)
+        }
 
         signOutButton.setOnClickListener {
             signOut()
@@ -77,20 +79,22 @@ class ProfileFragment : Fragment() {
     }
 
     private fun signOut() {
-        authController.signOut(this)
+        profileController.signOut(this)
     }
 
     private fun fetchUserMail(emailUser: TextView) {
-        authController.fetchUserMail { email ->
-            if (email != null) {
-                emailUser.text = email
+        profileController.fetchUserMail { email ->
+            activity?.runOnUiThread{
+                if (email != null) {
+                    emailUser.text = email
+                }
             }
         }
     }
 
     private fun navigateTo(fragment: Fragment) {
         parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_layout_container, fragment)
+            .replace(R.id.fragment_layout_container2, fragment)
             .addToBackStack(null)
             .commit()
     }

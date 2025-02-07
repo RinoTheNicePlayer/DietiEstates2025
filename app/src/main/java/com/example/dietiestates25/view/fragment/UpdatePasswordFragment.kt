@@ -8,15 +8,16 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.dietiestates25.R
-import com.example.dietiestates25.controller.AuthController
+import com.example.dietiestates25.controller.ProfileController
 
 class UpdatePasswordFragment : Fragment() {
-    private lateinit var authController: AuthController
+    private lateinit var profileController: ProfileController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        authController = AuthController(requireActivity())
+        profileController = ProfileController()
     }
 
     override fun onCreateView(
@@ -25,12 +26,17 @@ class UpdatePasswordFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_update_password, container, false)
-        val oldPassword = view.findViewById<EditText>(R.id.old_password_hint).text.toString()
-        val newPassword = view.findViewById<EditText>(R.id.new_password_hint).text.toString()
+
+        // Enable the up back button
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val changePasswordButton = view.findViewById<LinearLayout>(R.id.change_password_button)
         val errorLabel = view.findViewById<TextView>(R.id.errorPasswordLabel)
 
         changePasswordButton.setOnClickListener {
+            val oldPassword = view.findViewById<EditText>(R.id.old_password_hint).text.toString()
+            val newPassword = view.findViewById<EditText>(R.id.new_password_hint).text.toString()
+
             if (areValid(oldPassword, newPassword)) {
                 updatePassword(oldPassword, newPassword, errorLabel)
                 errorLabel.visibility = View.INVISIBLE
@@ -48,7 +54,7 @@ class UpdatePasswordFragment : Fragment() {
     }
 
     private fun updatePassword(oldPassword: String, newPassword: String, errorLabel: TextView) {
-        authController.updatePassword(oldPassword, newPassword, errorLabel) {
+        profileController.updatePassword(oldPassword, newPassword, errorLabel) {
             goBack()
         }
     }

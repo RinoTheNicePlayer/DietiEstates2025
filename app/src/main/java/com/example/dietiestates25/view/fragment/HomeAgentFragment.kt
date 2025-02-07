@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
 import com.example.dietiestates25.adapter.PropertyAdapter
-import com.example.dietiestates25.model.Property
+import com.example.dietiestates25.model.PropertyTest
 
 class HomeAgentFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var propertyAdapter: PropertyAdapter
-    private val propertyList = mutableListOf<Property>()
+    private val propertyTestList = mutableListOf<PropertyTest>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ class HomeAgentFragment : Fragment() {
         val createPropertyButton = view.findViewById<LinearLayout>(R.id.create_property_button)
 
         createPropertyButton.setOnClickListener {
-            // go to create property
+            navigateTo(CreatePropertyFragment())
         }
 
         // Configura il RecyclerView per gli immobili dell'agente
@@ -41,19 +41,26 @@ class HomeAgentFragment : Fragment() {
 
         loadAgentProperties()
 
-        propertyAdapter = PropertyAdapter(propertyList)
+        propertyAdapter = PropertyAdapter(propertyTestList)
         recyclerView.adapter = propertyAdapter
 
         return view
     }
 
     private fun loadAgentProperties() {
-        propertyList.apply {
-            add(Property("Appartamento 1", "€250,000", ""))
-            add(Property("Villa 2", "€500,000", ""))
-            add(Property("Loft 3", "€320,000", ""))
-            add(Property("Monolocale 4", "€150,000", ""))
-            add(Property("Attico 5", "€600,000", ""))
+        propertyTestList.apply {
+            add(PropertyTest("Appartamento 1", "€250,000", ""))
+            add(PropertyTest("Villa 2", "€500,000", ""))
+            add(PropertyTest("Loft 3", "€320,000", ""))
+            add(PropertyTest("Monolocale 4", "€150,000", ""))
+            add(PropertyTest("Attico 5", "€600,000", ""))
         }
+    }
+
+    private fun navigateTo(fragment: Fragment) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_layout_container2, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

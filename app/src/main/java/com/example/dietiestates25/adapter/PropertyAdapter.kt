@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.dietiestates25.R
-import com.example.dietiestates25.model.Property
+import com.example.dietiestates25.model.PropertyTest
 
-class PropertyAdapter(private val propertyList: List<Property>) :
+class PropertyAdapter(private val propertyTestList: List<PropertyTest>) :
     RecyclerView.Adapter<PropertyAdapter.PropertyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PropertyViewHolder {
@@ -20,7 +20,7 @@ class PropertyAdapter(private val propertyList: List<Property>) :
     }
 
     override fun onBindViewHolder(holder: PropertyViewHolder, position: Int) {
-        val property = propertyList[position]
+        val property = propertyTestList[position]
         holder.propertyName.text = property.name
         holder.propertyPrice.text = property.price
 
@@ -32,7 +32,7 @@ class PropertyAdapter(private val propertyList: List<Property>) :
         }
     }
 
-    override fun getItemCount(): Int = propertyList.size
+    override fun getItemCount(): Int = propertyTestList.size
 
     class PropertyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val propertyName: TextView = itemView.findViewById(R.id.property_name)

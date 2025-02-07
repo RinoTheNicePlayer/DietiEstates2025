@@ -1,6 +1,5 @@
 package com.example.dietiestates25.view.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -16,7 +15,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        authController = AuthController(this)
+        authController = AuthController()
+
+        goToHomeIfLogged()
 
         val loginButton = findViewById<LinearLayout>(R.id.access_button)
         val registerLink = findViewById<TextView>(R.id.registerTextView)
@@ -37,14 +38,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        setIntent(intent)
-        handleIntent(intent)
-    }
-
-    private fun handleIntent(intent: Intent?) {
-        authController.handleRedirection(intent, this)
+    private fun goToHomeIfLogged() {
+        authController.userIsSignedIn(this)
     }
 
     private fun login(errorLabel: TextView) {

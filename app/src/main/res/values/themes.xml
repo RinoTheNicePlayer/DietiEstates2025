@@ -13,22 +13,4 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-
-    <style name="Theme.MyApp.Home" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="homeNavbarState">@drawable/button_state</item>
-        <item name="summaryNavbarState">@null</item>
-        <item name="profileNavbarState">@null</item>
-    </style>
-
-    <style name="Theme.MyApp.Summary" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="homeNavbarState">@null</item>
-        <item name="summaryNavbarState">@drawable/button_state</item>
-        <item name="profileNavbarState">@null</item>
-    </style>
-
-    <style name="Theme.MyApp.Profile" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="homeNavbarState">@null</item>
-        <item name="summaryNavbarState">@null</item>
-        <item name="profileNavbarState">@drawable/button_state</item>
-    </style>
 </resources>

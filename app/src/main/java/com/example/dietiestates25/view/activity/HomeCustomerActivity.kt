@@ -15,8 +15,6 @@ class HomeCustomerActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navbar_customer)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         replaceFragment(HomeCustomerFragment())
         val bottomNavBar = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 

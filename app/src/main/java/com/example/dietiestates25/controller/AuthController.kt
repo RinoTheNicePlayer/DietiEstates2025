@@ -1,28 +1,22 @@
 package com.example.dietiestates25.controller
 
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
-import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
-import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult
 import com.amplifyframework.auth.options.AuthSignUpOptions
 import com.amplifyframework.core.Amplify
-import com.example.dietiestates25.R
+import com.example.dietiestates25.view.activity.HomeAgentActivity
 import com.example.dietiestates25.view.activity.HomeCustomerActivity
-import com.example.dietiestates25.view.activity.MainActivity
 
-class AuthController(private val context: Context){
+class AuthController {
 
     fun signUpWithAmplify(email: String, password: String, role: String, errorLabel: TextView, activity: AppCompatActivity){
         val attributes = listOf(
             AuthUserAttribute(AuthUserAttributeKey.email(), email),
-            AuthUserAttribute(AuthUserAttributeKey.custom("role"), role)
+            AuthUserAttribute(AuthUserAttributeKey.custom("custom:role"), role)
         )
 
         val options = AuthSignUpOptions.builder()
@@ -34,12 +28,16 @@ class AuthController(private val context: Context){
             password,
             options,
             {
-                loginWithAmplify(email, password, errorLabel, activity)
-                errorLabel.visibility = TextView.INVISIBLE
+                activity.runOnUiThread {
+                    loginWithAmplify(email, password, errorLabel, activity)
+                    errorLabel.visibility = TextView.INVISIBLE
+                }
                 Log.i("Amplify", "Sign up succeeded")
             },
             {
-                errorLabel.visibility = TextView.VISIBLE
+                activity.runOnUiThread {
+                    errorLabel.visibility = TextView.VISIBLE
+                }
                 Log.e("Amplify", "Sign up failed", it)
             }
         )
@@ -50,126 +48,40 @@ class AuthController(private val context: Context){
             email,
             password,
             { result -> if (result.isSignedIn) {
-                fetchUserRole(activity)
-                erroreLabel.visibility = TextView.INVISIBLE
+                activity.runOnUiThread {
+                    fetchUserRole(activity)
+                    erroreLabel.visibility = TextView.INVISIBLE
+                }
                 Log.i("AuthQuickstart", result.toString())
             }},
             { error ->
-                erroreLabel.visibility = TextView.VISIBLE
+                activity.runOnUiThread{
+                    erroreLabel.visibility = TextView.VISIBLE
+                }
                 Log.e("AuthQuickstart", error.toString())
             }
         )
     }
 
     fun loginWithThirdProviders(activity: AppCompatActivity){
-        val url = context.getString(R.string.domain_link)
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(url)
-        activity.startActivity(intent)
-    }
-
-    fun handleRedirection(intent: Intent?, activity: AppCompatActivity) {
-        intent?.data?.let { uri ->
-            if (uri.scheme == "myapp" && uri.host == "callback") {
-                Amplify.Auth.handleWebUISignInResponse(intent)
-                fetchUserRole(activity)
-            }
-        }
-    }
-
-    fun signUpGestoreOrAgente(email: String, password: String, role: String, errorLabel: TextView, onSuccess: () -> Unit){
-        val attributes = listOf(
-            AuthUserAttribute(AuthUserAttributeKey.email(), email),
-            AuthUserAttribute(AuthUserAttributeKey.custom("role"), role)
-        )
-
-        val options = AuthSignUpOptions.builder()
-            .userAttributes(attributes)
-            .build()
-
-        Amplify.Auth.signUp(
-            email,
-            password,
-            options,
+        Amplify.Auth.signInWithWebUI(
+            activity,
             {
-                errorLabel.visibility = TextView.INVISIBLE
-                Log.i("Amplify", "Sign up succeeded")
-                onSuccess()
+                Log.i("AuthQuickStart", "Signin OK = $it")
+                activity.runOnUiThread {
+                    fetchUserRole(activity)
+                }
             },
-            {
-                errorLabel.visibility = TextView.VISIBLE
-                Log.e("Amplify", "Sign up failed", it)
-            }
+            { Log.e("AuthQuickStart", "Signin failed", it) }
         )
     }
 
-    fun updatePassword(oldPassword: String, newPassword: String, errorLabel: TextView, onSuccess: () -> Unit) {
-        Amplify.Auth.updatePassword(
-            oldPassword,
-            newPassword,
-            {
-                errorLabel.visibility = TextView.INVISIBLE
-                Log.i("Amplify", "Password updated successfully")
-                onSuccess()
-            },
-            { error ->
-                errorLabel.visibility = TextView.VISIBLE
-                Log.e("Amplify", "Password update failed", error)
-            }
-        )
-    }
-
-    fun signOut(fragment: Fragment) {
-        Amplify.Auth.signOut { signOutResult ->
-            when(signOutResult) {
-                is AWSCognitoAuthSignOutResult.CompleteSignOut -> {
-                    // Sign Out completed fully and without errors.
-                    Log.i("AuthQuickStart", "Signed out successfully")
-                    comeBackToLogin(fragment)
-                }
-                is AWSCognitoAuthSignOutResult.PartialSignOut -> {
-                    // Sign Out completed with some errors. User is signed out of the device.
-                    signOutResult.hostedUIError?.let {
-                        Log.e("AuthQuickStart", "HostedUI Error", it.exception)
-                        // Optional: Re-launch it.url in a Custom tab to clear Cognito web session.
-
-                    }
-                    signOutResult.globalSignOutError?.let {
-                        Log.e("AuthQuickStart", "GlobalSignOut Error", it.exception)
-                        // Optional: Use escape hatch to retry revocation of it.accessToken.
-                    }
-                    signOutResult.revokeTokenError?.let {
-                        Log.e("AuthQuickStart", "RevokeToken Error", it.exception)
-                        // Optional: Use escape hatch to retry revocation of it.refreshToken.
-                    }
-                }
-                is AWSCognitoAuthSignOutResult.FailedSignOut -> {
-                    // Sign Out failed with an exception, leaving the user signed in.
-                    Log.e("AuthQuickStart", "Sign out Failed", signOutResult.exception)
-                }
-            }
-        }
-    }
-
-    fun fetchUserMail(callback: (String?) -> Unit) {
-        Amplify.Auth.fetchUserAttributes(
-            { attributes ->
-                val email = attributes.firstOrNull { it.key == AuthUserAttributeKey.email() }?.value
-                Log.i("AuthQuickstart", "User email: $email")
-                callback(email)
-            },
-            { error ->
-                Log.e("Auth", "Failed to fetch user attributes", error)
-                callback(null)
-            }
-        )
-    }
-
-    private fun getToken() {
+    fun userIsSignedIn(activity: AppCompatActivity) {
         Amplify.Auth.fetchAuthSession(
             { session -> if (session.isSignedIn) {
-                val idToken = (session as AWSCognitoAuthSession).userPoolTokensResult.value?.idToken
-                AuthManager.getInstance().idToken = idToken
+                activity.runOnUiThread {
+                    fetchUserRole(activity)
+                }
             }},
             { error -> Log.e("Auth", "Failed to fetch auth session", error) }
         )
@@ -178,14 +90,33 @@ class AuthController(private val context: Context){
     private fun fetchUserRole(activity: AppCompatActivity) {
         Amplify.Auth.fetchUserAttributes(
             { attributes ->
-                val role = attributes.firstOrNull { it.key.keyString == "custom:role" }?.value
-                AuthManager.getInstance().role = role
-                goToHome(activity, role)
-
-                Log.i("AuthQuickstart", "User role: $role")
+                activity.runOnUiThread {
+                    var role = attributes.firstOrNull { it.key.keyString == "custom:role" }?.value
+                    role = setRoleToClienteIfNull(role)
+                    AuthManager.instance?.role = role
+                    Log.i("AuthQuickstart", "User role: $role")
+                    goToHome(activity, role)
+                }
             },
             { error -> Log.e("Auth", "Failed to fetch user attributes", error) }
         )
+    }
+
+    private fun setRoleToClienteIfNull(role: String?): String {
+        if (role == null) {
+            val roleAttribute = "Cliente"
+            val attribute = AuthUserAttribute(AuthUserAttributeKey.custom("custom:role"), roleAttribute)
+
+            Amplify.Auth.updateUserAttribute(
+                attribute,
+                { Log.i("AuthQuickstart", "User role updated") },
+                { Log.e("AuthQuickstart", "User role update failed", it) }
+            )
+
+            return roleAttribute
+        } else {
+            return role
+        }
     }
 
     fun navigateTo(actualActivity: AppCompatActivity, nextActivity: AppCompatActivity){
@@ -211,13 +142,7 @@ class AuthController(private val context: Context){
     }
 
     private fun goToHomeAgenti(activity: AppCompatActivity) {
-        //navigateTo(activity, SearchActivity()) // TODO: fare home agenti
+        navigateTo(activity, HomeAgentActivity())
         activity.finish()
-    }
-
-    private fun comeBackToLogin(fragment: Fragment){
-        val intent = Intent(fragment.requireContext(), MainActivity::class.java)
-        fragment.startActivity(intent)
-        fragment.requireActivity().finish()
     }
 }

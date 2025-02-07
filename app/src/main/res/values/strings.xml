@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DietiEstates25</string>
     <string name="server_client_id">178716549373-h3n34desu00iqfn92li69efsuqmm41pq.apps.googleusercontent.com</string>
-    <string name="domain_link">https://dietiestates2534865b44–34865b44-dev.auth.eu-north-1.amazoncognito.com/login?client_id=3461f54knkvjeeisce9ddp27iu&amp;response_type=code&amp;scope=aws.cognito.signin.user.admin+email+openid+phone+profile&amp;redirect_uri=myapp://callback/</string>
+    <string name="domain_link">https://dietiestates2534865b44-34865b44-dev.auth.eu-north-1.amazoncognito.com/login?client_id=3461f54knkvjeeisce9ddp27iu&amp;response_type=code&amp;scope=aws.cognito.signin.user.admin+email+openid+phone+profile&amp;redirect_uri=myapp://callback/</string>
     <string name="image_profile">image_profile</string>
     <string name="accedi">Accedi</string>
     <string name="email">Email</string>
@@ -38,5 +38,34 @@
     <string name="modifica">Modifica</string>
     <string name="password_non_corretta_o_invalida">Password non corretta o invalida</string>
     <string name="registra">Registra</string>
+    <string name="image_property">image_property</string>
+    <string name="sale_image">sale_image</string>
+    <string name="address_image">address_image</string>
+    <string name="price_image">price_image</string>
+    <string name="rooms_image">rooms_image</string>
+    <string name="balcony_image">balcony_image</string>
+    <string name="indirizzo">Indirizzo</string>
+    <string name="prezzo">Prezzo</string>
+    <string name="n_stanze">N. stanze</string>
+    <string name="size_room_image">size_room_image</string>
+    <string name="misura">Misura</string>
+    <string name="descrizione">Descrizione</string>
+    <string name="crea">Crea</string>
+    <string name="bathroom_image">bathroom_image</string>
+    <string name="floor_image">floor_image</string>
+    <string name="n_bagni">N. bagni</string>
+    <string name="piano">Piano</string>
+    <string name="elevator_image">elevator_image</string>
+    <string name="box_title">box_title</string>
+    <string-array name="sale_rent_options">
+        <item>In vendita/In affitto</item>
+        <item>In vendita</item>
+        <item>In affitto</item>
+    </string-array>
+    <string-array name="balcony_options">
+        <item>Sì/No</item>
+        <item>Sì</item>
+        <item>No</item>
+    </string-array>
 
 </resources>
