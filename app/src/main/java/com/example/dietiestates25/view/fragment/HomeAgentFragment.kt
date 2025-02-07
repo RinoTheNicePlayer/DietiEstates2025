@@ -29,12 +29,6 @@ class HomeAgentFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home_agent, container, false)
 
-        val createPropertyButton = view.findViewById<LinearLayout>(R.id.create_property_button)
-
-        createPropertyButton.setOnClickListener {
-            navigateTo(CreatePropertyFragment())
-        }
-
         // Configura il RecyclerView per gli immobili dell'agente
         recyclerView = view.findViewById(R.id.recycler_view_properties)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -43,6 +37,12 @@ class HomeAgentFragment : Fragment() {
 
         propertyAdapter = PropertyAdapter(propertyTestList)
         recyclerView.adapter = propertyAdapter
+
+        val createPropertyButton = view.findViewById<LinearLayout>(R.id.create_property_button)
+
+        createPropertyButton.setOnClickListener {
+            navigateTo(CreatePropertyFragment())
+        }
 
         return view
     }

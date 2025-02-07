@@ -57,6 +57,8 @@
     <string name="piano">Piano</string>
     <string name="elevator_image">elevator_image</string>
     <string name="box_title">box_title</string>
+    <string name="offerte">Offerte:</string>
+    <string name="prenotazioni_visite">Prenotazioni visite:</string>
     <string-array name="sale_rent_options">
         <item>In vendita/In affitto</item>
         <item>In vendita</item>

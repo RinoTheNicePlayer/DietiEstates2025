@@ -1,7 +1,10 @@
-package com.example.dietiestates25.activities
+package com.example.dietiestates25.view.fragment
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
@@ -10,28 +13,36 @@ import com.example.dietiestates25.adapters.VisitedReservationsAdapter
 import com.example.dietiestates25.models.SentOffer
 import com.example.dietiestates25.models.VisitedReservation
 
-class SummaryCustomerActivity : AppCompatActivity() {
-
+class SummaryCustomerFragment : Fragment() {
     private lateinit var sentOffersAdapter: SentOffersAdapter
     private lateinit var visitedReservationsAdapter: VisitedReservationsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_summary_customer)
+    }
 
-        val sentOffersRecyclerView: RecyclerView = findViewById(R.id.sent_offers_recycler_view)
-        sentOffersRecyclerView.layoutManager = LinearLayoutManager(this)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_summary_customer, container, false)
+
+        val sentOffersRecyclerView: RecyclerView = view.findViewById(R.id.sent_offers_recycler_view)
+        sentOffersRecyclerView.layoutManager = LinearLayoutManager(context)
         sentOffersAdapter = SentOffersAdapter(emptyList())
         sentOffersRecyclerView.adapter = sentOffersAdapter
 
         val visitedReservationsRecyclerView: RecyclerView =
-            findViewById(R.id.visited_reservations_recycler_view)
-        visitedReservationsRecyclerView.layoutManager = LinearLayoutManager(this)
+            view.findViewById(R.id.visited_reservations_recycler_view)
+        visitedReservationsRecyclerView.layoutManager = LinearLayoutManager(context)
         visitedReservationsAdapter = VisitedReservationsAdapter(emptyList())
         visitedReservationsRecyclerView.adapter = visitedReservationsAdapter
 
         fetchSentOffers()
         fetchVisitedReservations()
+
+        return view
     }
 
     private fun fetchSentOffers() {
