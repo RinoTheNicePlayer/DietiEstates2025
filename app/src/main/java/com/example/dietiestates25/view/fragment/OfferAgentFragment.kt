@@ -1,13 +1,18 @@
-package com.example.dietiestates25
+package com.example.dietiestates25.view.fragment
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dietiestates25.ConfirmedOffersAdapter
+import com.example.dietiestates25.PendingOffersAdapter
+import com.example.dietiestates25.R
 import com.example.dietiestates25.model.Offer
 
-class OfferAgentActivity : AppCompatActivity() {
-
+class OfferAgentFragment : Fragment() {
     private lateinit var recyclerPendingOffers: RecyclerView
     private lateinit var recyclerConfirmedOffers: RecyclerView
     private lateinit var pendingOffersAdapter: PendingOffersAdapter
@@ -15,18 +20,27 @@ class OfferAgentActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_offer_agent)
+    }
 
-        recyclerPendingOffers = findViewById(R.id.recycler_pending_offers)
-        recyclerConfirmedOffers = findViewById(R.id.recycler_confirmed_offers)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_offer_agent, container, false)
+
+        recyclerPendingOffers = view.findViewById(R.id.recycler_pending_offers)
+        recyclerConfirmedOffers = view.findViewById(R.id.recycler_confirmed_offers)
 
         setupRecyclerViews()
         loadOffers()
+
+        return view
     }
 
     private fun setupRecyclerViews() {
-        recyclerPendingOffers.layoutManager = LinearLayoutManager(this)
-        recyclerConfirmedOffers.layoutManager = LinearLayoutManager(this)
+        recyclerPendingOffers.layoutManager = LinearLayoutManager(context)
+        recyclerConfirmedOffers.layoutManager = LinearLayoutManager(context)
 
         pendingOffersAdapter = PendingOffersAdapter(emptyList())
         confirmedOffersAdapter = ConfirmedOffersAdapter(emptyList())

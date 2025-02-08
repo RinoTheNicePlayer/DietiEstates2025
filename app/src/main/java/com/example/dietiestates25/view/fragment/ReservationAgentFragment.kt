@@ -1,7 +1,10 @@
-package com.example.dietiestates25.view.activity
+package com.example.dietiestates25.view.fragment
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
@@ -9,8 +12,7 @@ import com.example.dietiestates25.adapter.ConfirmedReservationsAdapter
 import com.example.dietiestates25.adapter.PendingReservationsAdapter
 import com.example.dietiestates25.model.Reservation
 
-class ReservationAgentActivity : AppCompatActivity() {
-
+class ReservationAgentFragment : Fragment() {
     private lateinit var pendingReservationsAdapter: PendingReservationsAdapter
     private lateinit var confirmedReservationsAdapter: ConfirmedReservationsAdapter
     private val pendingReservations = mutableListOf<Reservation>()
@@ -18,13 +20,20 @@ class ReservationAgentActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reservation_agent)
+    }
 
-        val recyclerPending = findViewById<RecyclerView>(R.id.recycler_pending_reservations)
-        val recyclerConfirmed = findViewById<RecyclerView>(R.id.recycler_confirmed_reservations)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_reservation_agent, container, false)
 
-        recyclerPending.layoutManager = LinearLayoutManager(this)
-        recyclerConfirmed.layoutManager = LinearLayoutManager(this)
+        val recyclerPending = view.findViewById<RecyclerView>(R.id.recycler_pending_reservations)
+        val recyclerConfirmed = view.findViewById<RecyclerView>(R.id.recycler_confirmed_reservations)
+
+        recyclerPending.layoutManager = LinearLayoutManager(context)
+        recyclerConfirmed.layoutManager = LinearLayoutManager(context)
 
         loadReservations()
 
@@ -33,6 +42,8 @@ class ReservationAgentActivity : AppCompatActivity() {
 
         recyclerPending.adapter = pendingReservationsAdapter
         recyclerConfirmed.adapter = confirmedReservationsAdapter
+
+        return view
     }
 
     private fun loadReservations() {

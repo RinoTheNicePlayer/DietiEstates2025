@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.dietiestates25.R
 import com.example.dietiestates25.view.fragment.HomeAgentFragment
+import com.example.dietiestates25.view.fragment.OfferAgentFragment
 import com.example.dietiestates25.view.fragment.ProfileFragment
+import com.example.dietiestates25.view.fragment.ReservationAgentFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeAgentActivity : AppCompatActivity() {
@@ -22,12 +24,8 @@ class HomeAgentActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home2 -> replaceFragment(HomeAgentFragment())
-                R.id.nav_offerte -> {
-                    // Navigazione futura per Offerte
-                }
-                R.id.nav_reservation -> {
-                    // Navigazione futura per Prenotazioni
-                }
+                R.id.nav_offerte -> replaceFragment(OfferAgentFragment())
+                R.id.nav_reservation -> replaceFragment(ReservationAgentFragment())
                 R.id.nav_profile2 -> replaceFragment(ProfileFragment())
             }
             true

@@ -21,15 +21,9 @@ class HomeCustomerActivity: AppCompatActivity() {
 
         bottomNavBar.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> {
-                    replaceFragment(HomeCustomerFragment())
-                }
-                R.id.nav_riepilogo -> {
-                    replaceFragment(SummaryCustomerFragment())
-                }
-                R.id.nav_profile -> {
-                    replaceFragment(ProfileFragment())
-                }
+                R.id.nav_home ->      replaceFragment(HomeCustomerFragment())
+                R.id.nav_riepilogo -> replaceFragment(SummaryCustomerFragment())
+                R.id.nav_profile ->   replaceFragment(ProfileFragment())
             }
             true
         }
