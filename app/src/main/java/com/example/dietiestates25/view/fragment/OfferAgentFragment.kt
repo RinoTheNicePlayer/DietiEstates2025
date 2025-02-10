@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.ConfirmedOffersAdapter
-import com.example.dietiestates25.PendingOffersAdapter
+import com.example.dietiestates25.adapter.PendingOffersAdapter
 import com.example.dietiestates25.R
 import com.example.dietiestates25.model.Offer
 

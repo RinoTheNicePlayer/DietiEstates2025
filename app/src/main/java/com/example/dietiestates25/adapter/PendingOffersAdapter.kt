@@ -1,4 +1,4 @@
-package com.example.dietiestates25
+package com.example.dietiestates25.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dietiestates25.R
 import com.example.dietiestates25.model.Offer
 
 class PendingOffersAdapter(private var offers: List<Offer>) :

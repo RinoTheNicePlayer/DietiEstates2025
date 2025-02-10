@@ -9,11 +9,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.dietiestates25.R
 import com.example.dietiestates25.controller.HomeCustomerController
-import com.example.dietiestates25.model.Address
-import com.google.android.gms.common.api.Status
-import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 
 class HomeCustomerFragment : Fragment() {
     private lateinit var homeCustomerController: HomeCustomerController
@@ -21,7 +16,6 @@ class HomeCustomerFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeCustomerController = HomeCustomerController(requireContext())
-        initPlace()
     }
 
     override fun onCreateView(
@@ -30,50 +24,26 @@ class HomeCustomerFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home_customer, container, false)
-        setupAutoComplete(view)
+
+        val searchButton = view.findViewById<LinearLayout>(R.id.search_button)
+
+        searchButton.setOnClickListener {
+            val bottomSheet = AddressBottomSheetFragment { address, callback ->
+                sendAddressToBackend(address) { isValid ->
+                    callback(isValid)  // Aggiorna la UI della bottom sheet
+                }
+            }
+
+            bottomSheet.show(parentFragmentManager, "AddressBottomSheet")
+        }
+
         return view
     }
 
-    private fun initPlace() {
-        homeCustomerController.initPlace(this)
-    }
-
-    private fun setupAutoComplete(view: View) {
-        // Initialize the AutocompleteSupportFragment.
-        val fragmentButton = view.findViewById<LinearLayout>(R.id.search_button)
-        val autocompleteFragment = AutocompleteSupportFragment()
-
-        childFragmentManager.beginTransaction()
-            .replace(fragmentButton.id, autocompleteFragment)
-            .commit()
-
-        setAutoCompleteLimit(autocompleteFragment)
-
-        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
-            override fun onPlaceSelected(place: Place) {
-                // Get info about the selected place and search.
-                searchProperty(takePlaceAddress(place))
-            }
-
-            override fun onError(status: Status) {
-                Log.e("no indirizzo selezionato", "An error occurred: $status")
-            }
-        })
-    }
-
-    private fun setAutoCompleteLimit(autocompleteFragment: AutocompleteSupportFragment) {
-        homeCustomerController.setLimitAutoComplete(autocompleteFragment)
-    }
-
-    private fun searchProperty(address: Address) {
-        homeCustomerController.searchImmobileFromAddress(address)
-    }
-
-    private fun takePlaceAddress(place: Place): Address {
-        val cityName = place.addressComponents?.asList()?.find { it.types.contains("locality") }?.name ?: ""
-        val streetName = place.addressComponents?.asList()?.find { it.types.contains("route") }?.name ?: ""
-        val cap = place.addressComponents?.asList()?.find { it.types.contains("postal_code") }?.name ?: ""
-
-        return Address(streetName, cityName, cap)
+    private fun sendAddressToBackend(address: String, callback: (Boolean) -> Unit) {
+        Log.d("HomeCustomerFragment", "Sending address to backend: $address")
+        homeCustomerController.searchPropertyFromAddress(address) { isValid ->
+            callback(isValid)
+        }
     }
 }

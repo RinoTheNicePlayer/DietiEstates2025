@@ -59,6 +59,9 @@
     <string name="box_title">box_title</string>
     <string name="offerte">Offerte:</string>
     <string name="prenotazioni_visite">Prenotazioni visite:</string>
+    <string name="inserisci_il_comune">Inserisci il comune</string>
+    <string name="conferma">Conferma</string>
+    <string name="indirizzo_non_valido">indirizzo non valido</string>
     <string-array name="sale_rent_options">
         <item>In vendita/In affitto</item>
         <item>In vendita</item>
