@@ -51,21 +51,21 @@
                 android:orientation="vertical">
 
             <TextView
-                    android:id="@+id/sent_offer_property_name"
+                    android:id="@+id/sent_offer_property_address"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     android:layout_marginBottom="10dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Nome Immobile" />
+                    android:text="Indirizzo Immobile" />
 
             <TextView
-                    android:id="@+id/sent_offer_name"
-                    android:textColor="#757575"
+                    android:id="@+id/sent_offer_state"
+                    android:textColor="#FFCC00"
                     android:textSize="14sp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Nome Cliente" />
+                    android:text="In sospeso" />
         </LinearLayout>
 
         <LinearLayout

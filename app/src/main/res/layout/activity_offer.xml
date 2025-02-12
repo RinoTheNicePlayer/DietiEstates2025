@@ -97,7 +97,7 @@
                     android:paddingHorizontal="18dp" />
 
             <LinearLayout
-                    android:id="@+id/offer_button"
+                    android:id="@+id/send_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
@@ -109,7 +109,7 @@
                     android:orientation="vertical">
 
                 <TextView
-                        android:id="@+id/offer_button_text"
+                        android:id="@+id/send_button_text"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
                         android:layout_height="wrap_content"
