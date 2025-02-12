@@ -22,7 +22,7 @@ class AddressBottomSheetFragment(private val onAddressEntered: (String, (Boolean
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val addressEditText = view.findViewById<EditText>(R.id.addressEditText)
+        val addressEditText = view.findViewById<EditText>(R.id.address_edit_text)
         val erroreLabel = view.findViewById<TextView>(R.id.error_label_address)
         val confirmButton = view.findViewById<LinearLayout>(R.id.send_address_button)
 

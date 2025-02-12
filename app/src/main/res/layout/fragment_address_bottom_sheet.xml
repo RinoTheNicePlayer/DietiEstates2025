@@ -6,7 +6,7 @@
         android:padding="16dp">
 
     <EditText
-            android:id="@+id/addressEditText"
+            android:id="@+id/address_edit_text"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:paddingHorizontal="12dp"
