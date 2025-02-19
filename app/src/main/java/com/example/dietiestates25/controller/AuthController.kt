@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
+import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
 import com.amplifyframework.auth.options.AuthSignUpOptions
 import com.amplifyframework.core.Amplify
 import com.example.dietiestates25.view.activity.HomeAgentActivity
@@ -87,6 +88,17 @@ class AuthController {
         )
     }
 
+    /// JUST TESTING
+    private fun fetchIdToken() {
+        Amplify.Auth.fetchAuthSession(
+            { session -> if (session.isSignedIn) {
+                val idToken = (session as AWSCognitoAuthSession).userPoolTokensResult.value?.idToken
+                Log.i("AuthQuickstart", "id Token: $idToken")
+            }},
+            { error -> Log.e("Auth", "Failed to fetch auth session", error) }
+        )
+    }
+
     private fun fetchUserRole(activity: AppCompatActivity) {
         Amplify.Auth.fetchUserAttributes(
             { attributes ->
@@ -95,6 +107,9 @@ class AuthController {
                     role = setRoleToClienteIfNull(role)
                     AuthManager.instance?.role = role
                     Log.i("AuthQuickstart", "User role: $role")
+                    /// JUST TESTING
+                    fetchIdToken()
+                    /// END TESTING
                     goToHome(activity, role)
                 }
             },

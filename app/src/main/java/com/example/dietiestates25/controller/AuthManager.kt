@@ -19,6 +19,7 @@ class AuthManager private constructor() {
         Amplify.Auth.fetchAuthSession(
             { session -> if (session.isSignedIn) {
                 idToken = (session as AWSCognitoAuthSession).userPoolTokensResult.value?.idToken
+                Log.i("AuthQuickstart", "id Token: $idToken")
             }},
             { error -> Log.e("Auth", "Failed to fetch auth session", error) }
         )
