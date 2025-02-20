@@ -63,6 +63,8 @@
     <string name="conferma">Conferma</string>
     <string name="indirizzo_non_valido">indirizzo non valido</string>
     <string name="campi_vuoti">Campi vuoti</string>
+    <string name="comune">Comune</string>
+    <string name="municipality_image">municipality_image</string>
     <string-array name="sale_rent_options">
         <item>In vendita/In affitto</item>
         <item>In vendita</item>

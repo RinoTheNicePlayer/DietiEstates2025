@@ -124,7 +124,7 @@
                     android:background="@drawable/text_field_style"
                     android:paddingVertical="14dp"
                     android:paddingHorizontal="18dp"
-                    android:hint="@string/Comune"
+                    android:hint="@string/comune"
                     android:inputType="textPostalAddress"
                     android:autofillHints="postalAddress" />
         </LinearLayout>
