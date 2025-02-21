@@ -105,7 +105,7 @@ class AuthController {
                 activity.runOnUiThread {
                     var role = attributes.firstOrNull { it.key.keyString == "custom:role" }?.value
                     role = setRoleToClienteIfNull(role)
-                    AuthManager.instance?.role = role
+                    AuthManager.role = role
                     Log.i("AuthQuickstart", "User role: $role")
                     /// JUST TESTING
                     fetchIdToken()

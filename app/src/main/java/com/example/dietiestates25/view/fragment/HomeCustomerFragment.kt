@@ -9,13 +9,14 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.dietiestates25.R
 import com.example.dietiestates25.controller.HomeCustomerController
+import com.example.dietiestates25.controller.PropertySearched
 
 class HomeCustomerFragment : Fragment() {
     private lateinit var homeCustomerController: HomeCustomerController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeCustomerController = HomeCustomerController(requireContext())
+        homeCustomerController = HomeCustomerController()
     }
 
     override fun onCreateView(
@@ -42,8 +43,25 @@ class HomeCustomerFragment : Fragment() {
 
     private fun sendAddressToBackend(address: String, callback: (Boolean) -> Unit) {
         Log.d("HomeCustomerFragment", "Sending address to backend: $address")
-        homeCustomerController.searchPropertyFromAddress(address) { isValid ->
-            callback(isValid)
+        homeCustomerController.searchPropertyFromAddress(address) { properties ->
+            if (properties != null) {
+                PropertySearched.properties = properties
+                callback(true)
+                goToSearchProperty()
+            }
+            else {
+                callback(false)
+            }
         }
     }
+
+    private fun goToSearchProperty() {
+        val searchFragment = SearchFragment()
+        parentFragmentManager.beginTransaction().apply {
+            replace(R.id.fragment_layout_container, searchFragment)
+            addToBackStack(null)
+            commit()
+        }
+    }
+
 }

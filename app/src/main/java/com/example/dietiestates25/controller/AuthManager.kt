@@ -4,10 +4,9 @@ import android.util.Log
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
 import com.amplifyframework.core.Amplify
 
-class AuthManager private constructor() {
-    @get:Synchronized
+object AuthManager {
     val idToken: String?
-        get() {
+        @Synchronized get() {
             return getToken()
         }
 
@@ -25,18 +24,5 @@ class AuthManager private constructor() {
         )
 
         return idToken
-    }
-
-
-    companion object {
-        @get:Synchronized
-        var instance: AuthManager? = null
-            get() {
-                if (field == null) {
-                    field = AuthManager()
-                }
-                return field
-            }
-            private set
     }
 }

@@ -27,21 +27,41 @@ class HomeCustomerActivity: AppCompatActivity() {
             }
             true
         }
+
+        // Add OnBackStackChangedListener to update the visibility of the up button
+        supportFragmentManager.addOnBackStackChangedListener {
+            updateUpButtonVisibility()
+        }
+        // Initial call to set the correct visibility
+        updateUpButtonVisibility()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                onBackPressedDispatcher.onBackPressed()
+                if (supportFragmentManager.backStackEntryCount > 0) {
+                    supportFragmentManager.popBackStack()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+        }
+        return true
+    }
+
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_layout_container, fragment)
             .commit()
+    }
+
+    private fun updateUpButtonVisibility() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(supportFragmentManager.backStackEntryCount > 0)
     }
 }

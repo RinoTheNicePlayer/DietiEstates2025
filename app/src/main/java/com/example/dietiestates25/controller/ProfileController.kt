@@ -23,7 +23,7 @@ class ProfileController {
     fun signUpGestoreOrAgente(email: String, password: String, role: String, errorLabel: TextView, onSuccess: () -> Unit){
         val client = OkHttpClient()
         val url = "/auth/register" /// TODO: da cambiare
-        val token = AuthManager.instance?.idToken
+        val token = AuthManager.idToken
 
         val json = Json.encodeToString(RegistrationRequest(email, password, role))
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())

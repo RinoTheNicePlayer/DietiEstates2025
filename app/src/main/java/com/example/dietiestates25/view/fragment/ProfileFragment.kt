@@ -25,7 +25,7 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        val role = AuthManager.instance?.role
+        val role = AuthManager.role
         val emailUser = view.findViewById<TextView>(R.id.email_value)
         val roleLabel = view.findViewById<TextView>(R.id.role_label)
         val updatePasswordButton = view.findViewById<LinearLayout>(R.id.change_password_button)
