@@ -10,18 +10,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
 import com.example.dietiestates25.adapter.PropertyAdapter
+import com.example.dietiestates25.controller.HomeAgentController
 import com.example.dietiestates25.model.PropertyResponse
 
 class HomeAgentFragment : Fragment() {
+    private lateinit var homeAgentController: HomeAgentController
     private lateinit var recyclerView: RecyclerView
     private lateinit var propertyAdapter: PropertyAdapter
     private val propertyList = mutableListOf<PropertyResponse>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        homeAgentController = HomeAgentController()
     }
 
-    //TODO: gestisci sezione i miei immobili
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,15 +50,13 @@ class HomeAgentFragment : Fragment() {
     }
 
     private fun loadAgentProperties() {
-        /*
-        propertyList.apply {
-            add(PropertyTest("Appartamento 1", "€250,000", ""))
-            add(PropertyTest("Villa 2", "€500,000", ""))
-            add(PropertyTest("Loft 3", "€320,000", ""))
-            add(PropertyTest("Monolocale 4", "€150,000", ""))
-            add(PropertyTest("Attico 5", "€600,000", ""))
+        homeAgentController.getMyProperties { properties ->
+            if (properties != null) {
+                for (property in properties) {
+                    propertyList.add(property)
+                }
+            }
         }
-         */
     }
 
     private fun navigateTo(fragment: Fragment) {
