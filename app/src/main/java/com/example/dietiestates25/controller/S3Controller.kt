@@ -79,7 +79,7 @@ class S3Controller(private val context: Context) {
 
     fun saveProperty(property: Property, onSuccess: () -> Unit) {
         val client = OkHttpClient()
-        val url = "" /// TODO: da cambiare
+        val url = "/immobile/crea" /// TODO: da cambiare
         val token = AuthManager.instance?.idToken
 
         val json = Json.encodeToString(property)

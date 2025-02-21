@@ -22,7 +22,7 @@ import java.io.IOException
 class ProfileController {
     fun signUpGestoreOrAgente(email: String, password: String, role: String, errorLabel: TextView, onSuccess: () -> Unit){
         val client = OkHttpClient()
-        val url = "" /// TODO: da cambiare
+        val url = "/auth/register" /// TODO: da cambiare
         val token = AuthManager.instance?.idToken
 
         val json = Json.encodeToString(RegistrationRequest(email, password, role))

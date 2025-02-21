@@ -62,29 +62,31 @@ class CreatePropertyFragment : Fragment() {
 
         createPropertiesButton.setOnClickListener {
             val address = view.findViewById<EditText>(R.id.address_input_field).text.toString()
+            val municipality = view.findViewById<EditText>(R.id.municipality_input_field).text.toString()
             val description = view.findViewById<EditText>(R.id.description_input_field).text.toString()
             val price = view.findViewById<EditText>(R.id.price_input_field).text.toString().toDouble()
             val nRooms = view.findViewById<EditText>(R.id.rooms_input_field).text.toString().toInt()
             val nBathrooms = view.findViewById<EditText>(R.id.bathrooms_input_field).text.toString().toInt()
             val floor = view.findViewById<EditText>(R.id.floors_input_field).text.toString().toInt()
+            val size = view.findViewById<EditText>(R.id.size_input_field).text.toString().toInt()
 
             if (
-                allFieldsAreValid(saleRentSpinner, balconySpinner, elevatorSpinner, address, description, price, nRooms, nBathrooms, floor)
+                allFieldsAreValid(saleRentSpinner, balconySpinner, elevatorSpinner,
+                    address, municipality, description, price, nRooms, nBathrooms, floor, size)
                 ) {
-                // check latitudine e longitudine
                 val property = Property(
                     description,
                     saveImageToS3(addPropertyImage),
                     price,
+                    size,
                     nBathrooms,
                     nRooms,
                     saleRentSpinner.selectedItem.toString(),
                     address,
-                    "0",
-                    "0",
+                    municipality,
                     floor,
-                    elevatorSpinner.selectedItem.toString() == "Sì",
-                    balconySpinner.selectedItem.toString() == "Sì"
+                    elevatorSpinner.selectedItem.toString() == "Si",
+                    balconySpinner.selectedItem.toString() == "Si"
                 )
 
                 s3Controller.saveProperty(property) {
@@ -151,18 +153,20 @@ class CreatePropertyFragment : Fragment() {
         balconySpinner: Spinner,
         elevatorSpinner: Spinner,
         address: String,
+        city: String,
         description: String,
         price: Double,
         nRooms: Int,
         nBathrooms: Int,
-        floor: Int
+        floor: Int,
+        size: Int
     ): Boolean {
         return optionsAreSelected(saleRentSpinner, balconySpinner, elevatorSpinner)
-                && areValid(address, description, price, nRooms, nBathrooms, floor)
+                && areValid(address, city, description, price, nRooms, nBathrooms, floor, size)
     }
 
-    private fun areValid(address: String, description: String, price: Double, nRooms: Int, nBathrooms: Int, floor: Int): Boolean {
-        return address.isNotEmpty() && description.isNotEmpty() && price > 0 && nRooms > 0 && nBathrooms > 0 && floor > 0
+    private fun areValid(address: String, city: String, description: String, price: Double, nRooms: Int, nBathrooms: Int, floor: Int, size: Int): Boolean {
+        return address.isNotEmpty() && city.isNotEmpty() && description.isNotEmpty() && price > 0 && nRooms > 0 && nBathrooms > 0 && floor > 0 && size > 0
     }
 
     private fun optionsAreSelected(saleRentSpinner: Spinner, balconySpinner: Spinner, elevatorSpinner: Spinner): Boolean {
