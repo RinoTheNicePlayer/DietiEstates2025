@@ -46,8 +46,8 @@ class HomeCustomerFragment : Fragment() {
         homeCustomerController.searchPropertyFromAddress(address) { properties ->
             if (properties != null) {
                 PropertySearched.properties = properties
-                callback(true)
                 goToSearchProperty()
+                callback(true)
             }
             else {
                 callback(false)

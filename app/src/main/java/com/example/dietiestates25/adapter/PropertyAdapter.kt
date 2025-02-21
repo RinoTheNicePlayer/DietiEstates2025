@@ -1,5 +1,6 @@
 package com.example.dietiestates25.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.dietiestates25.R
-import com.example.dietiestates25.model.PropertyTest
+import com.example.dietiestates25.controller.S3Controller
+import com.example.dietiestates25.model.PropertyResponse
 
-class PropertyAdapter(private val propertyTestList: List<PropertyTest>) :
+class PropertyAdapter(private val context: Context, private val propertyList: List<PropertyResponse>) :
     RecyclerView.Adapter<PropertyAdapter.PropertyViewHolder>() {
+
+        private val s3Controller = S3Controller(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PropertyViewHolder {
         val view =
@@ -20,19 +24,26 @@ class PropertyAdapter(private val propertyTestList: List<PropertyTest>) :
     }
 
     override fun onBindViewHolder(holder: PropertyViewHolder, position: Int) {
-        val property = propertyTestList[position]
-        holder.propertyName.text = property.name
-        holder.propertyPrice.text = property.price
+        val property = propertyList[position]
+        holder.propertyName.text = property.address
+        holder.propertyPrice.text = holder.itemView.context.getString(R.string.price_format, property.price)
 
         // Carica l'immagine con Coil
-        holder.propertyImage.load(property.imageUrl) {
-            crossfade(true) // Effetto di transizione
-            placeholder(R.drawable.image2) // Placeholder mentre carica
-            error(R.drawable.image2) // Immagine di errore se fallisce
+        s3Controller.getUrlFromStoragePath(property.pathImage) { url ->
+            if (url != null) {
+                holder.propertyImage.load(url) {
+                    crossfade(true) // Effetto di transizione
+                    placeholder(R.drawable.image2) // Placeholder mentre carica
+                    error(R.drawable.image2) // Immagine di errore se fallisce
+                }
+            }
+            else {
+                holder.propertyImage.setImageResource(R.drawable.image2)
+            }
         }
     }
 
-    override fun getItemCount(): Int = propertyTestList.size
+    override fun getItemCount(): Int = propertyList.size
 
     class PropertyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val propertyName: TextView = itemView.findViewById(R.id.property_name)

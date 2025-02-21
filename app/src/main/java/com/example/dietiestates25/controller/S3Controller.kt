@@ -19,7 +19,6 @@ import okhttp3.Response
 import okhttp3.ResponseBody
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.io.IOException
 import java.util.UUID
 
@@ -58,22 +57,17 @@ class S3Controller(private val context: Context) {
         return uniquePath
     }
 
-    fun downloadToFile(path: String) {
-        val file = File("${context.applicationContext.filesDir}/downloaded_image.jpg")
-
-        Amplify.Storage.downloadFile(
-            StoragePath.fromString(path),
-            file,
-            { Log.i("MyAmplifyApp", "Successfully downloaded: ${it.file.name}") },
-            { Log.e("MyAmplifyApp",  "Download Failure", it) }
-        )
-    }
-
-    fun getUrlFromStoragePath(path: String) {
+    fun getUrlFromStoragePath(path: String, callback: (String?) -> Unit) {
         Amplify.Storage.getUrl(
             StoragePath.fromString(path),
-            { Log.i("MyAmplifyApp", "Successfully generated: ${it.url}") },
-            { Log.e("MyAmplifyApp", "URL generation failure", it) }
+            {
+                Log.i("MyAmplifyApp", "Successfully generated: ${it.url}")
+                callback(it.url.toString())
+            },
+            {
+                Log.e("MyAmplifyApp", "URL generation failure", it)
+                callback(null)
+            }
         )
     }
 

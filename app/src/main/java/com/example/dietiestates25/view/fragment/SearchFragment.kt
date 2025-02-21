@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
 import com.example.dietiestates25.adapter.PropertyAdapter
 import com.example.dietiestates25.controller.PropertySearched
-import com.example.dietiestates25.model.PropertyTest
+import com.example.dietiestates25.model.PropertyResponse
 
 class SearchFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var propertyAdapter: PropertyAdapter
-    private val propertyTestList = mutableListOf<PropertyTest>()
+    private val propertyList = mutableListOf<PropertyResponse>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,24 +36,19 @@ class SearchFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recycler_view_properties)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        loadProperties()
+        loadProperties(properties)
 
-        if (properties != null) {
-            for (property in properties) {
-                propertyTestList.add(PropertyTest(property.description, "€${property.price}", ""))
-            }
-        }
-        //propertyAdapter = PropertyAdapter(propertyTestList)
-        //recyclerView.adapter = propertyAdapter
+        propertyAdapter = PropertyAdapter(requireContext(), propertyList)
+        recyclerView.adapter = propertyAdapter
 
         return view
     }
 
-    private fun loadProperties() {
-        propertyTestList.apply {
-            add(PropertyTest("Immobile#1", "€100,000", ""))
-            add(PropertyTest("Immobile#2", "€150,000", ""))
-            add(PropertyTest("Immobile#3", "€200,000", ""))
+    private fun loadProperties(properties: List<PropertyResponse>?) {
+        if (properties != null) {
+            for (property in properties) {
+                propertyList.add(property)
+            }
         }
     }
 }

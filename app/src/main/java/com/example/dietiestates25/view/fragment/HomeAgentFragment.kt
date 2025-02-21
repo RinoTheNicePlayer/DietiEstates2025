@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
 import com.example.dietiestates25.adapter.PropertyAdapter
-import com.example.dietiestates25.model.PropertyTest
+import com.example.dietiestates25.model.PropertyResponse
 
 class HomeAgentFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var propertyAdapter: PropertyAdapter
-    private val propertyTestList = mutableListOf<PropertyTest>()
+    private val propertyList = mutableListOf<PropertyResponse>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class HomeAgentFragment : Fragment() {
 
         loadAgentProperties()
 
-        propertyAdapter = PropertyAdapter(propertyTestList)
+        propertyAdapter = PropertyAdapter(requireContext(), propertyList)
         recyclerView.adapter = propertyAdapter
 
         val createPropertyButton = view.findViewById<LinearLayout>(R.id.create_property_button)
@@ -48,13 +48,15 @@ class HomeAgentFragment : Fragment() {
     }
 
     private fun loadAgentProperties() {
-        propertyTestList.apply {
+        /*
+        propertyList.apply {
             add(PropertyTest("Appartamento 1", "€250,000", ""))
             add(PropertyTest("Villa 2", "€500,000", ""))
             add(PropertyTest("Loft 3", "€320,000", ""))
             add(PropertyTest("Monolocale 4", "€150,000", ""))
             add(PropertyTest("Attico 5", "€600,000", ""))
         }
+         */
     }
 
     private fun navigateTo(fragment: Fragment) {
