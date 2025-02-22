@@ -8,16 +8,21 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import com.example.dietiestates25.R
 import com.example.dietiestates25.controller.PropertyViewModel
-import androidx.lifecycle.Observer
+import com.example.dietiestates25.controller.PropertyDetailsController
+import com.example.dietiestates25.model.PropertyResponse
+import java.util.Locale
 
 class PropertyDetailsFragment : Fragment() {
     private val propertyViewModel: PropertyViewModel by activityViewModels()
+    private lateinit var propertyDetailsController: PropertyDetailsController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        propertyDetailsController = PropertyDetailsController(requireContext())
     }
 
     override fun onCreateView(
@@ -26,6 +31,10 @@ class PropertyDetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_property_details, container, false)
+
+        // Enable the up back button
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        
         /// TODO: chiamata server per punti di interesse
         val interestingPoint = view.findViewById<TextView>(R.id.location_value)
         val imageProperty = view.findViewById<ImageView>(R.id.property_image)
@@ -45,9 +54,20 @@ class PropertyDetailsFragment : Fragment() {
 
         /// TODO: mappa
 
-        propertyViewModel.selectedProperty.observe(viewLifecycleOwner, Observer{ property ->
-            // Aggiorna la UI con i dettagli dell'immobile
-        })
+        propertyViewModel.selectedProperty.observe(viewLifecycleOwner) { property ->
+            loadImage(property, imageProperty)
+            saleRent.text = property.type
+            address.text = property.address
+            municipality.text = property.municipality
+            price.text = getString(R.string.price_format, property.price)
+            rooms.text = String.format(Locale.getDefault(), "%,d", property.nRooms)
+            size.text = getString(R.string.size_format, property.size)
+            bathrooms.text = String.format(Locale.getDefault(), "%,d", property.nBathrooms)
+            floor.text = String.format(Locale.getDefault(), "%,d", property.floor)
+            elevator.text = if (property.hasElevator) "Sì" else "No"
+            balcony.text = if (property.hasBalcony) "Sì" else "No"
+            description.text = property.description
+        }
 
         offerButton.setOnClickListener {
 
@@ -58,6 +78,10 @@ class PropertyDetailsFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun loadImage(property: PropertyResponse, imageProperty: ImageView) {
+        propertyDetailsController.loadImage(property, imageProperty)
     }
 
 }

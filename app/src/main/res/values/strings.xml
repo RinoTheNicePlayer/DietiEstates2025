@@ -66,6 +66,7 @@
     <string name="comune">Comune</string>
     <string name="municipality_image">municipality_image</string>
     <string name="price_format">%1$.2f €</string>
+    <string name="size_format">%1$.2f m²</string>
     <string name="near_location_logo">near_location_logo</string>
     <string name="fai_un_offerta">Fai un’offerta</string>
     <string name="prenota_una_visita">Prenota una visita</string>
