@@ -1,11 +1,21 @@
 package com.example.dietiestates25.controller
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.widget.ImageView
 import coil.load
 import com.example.dietiestates25.R
 import com.example.dietiestates25.model.PropertyResponse
+import com.example.dietiestates25.model.InterestingPoints
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Request
+import java.io.IOException
 
 class PropertyDetailsController(private val context: Context) {
     private val s3Controller = S3Controller(context)
@@ -24,7 +34,44 @@ class PropertyDetailsController(private val context: Context) {
         }
     }
 
-    fun getInterestingPoints() {
+    fun getInterestingPoints(interestingPoints: InterestingPoints, callback: (Map<String, Int>?) -> Unit) {
         val client = OkHttpClient()
+        val token = AuthManager.idToken
+        val url = "/geodata/conteggio-pdi" /// da cambiare
+
+        val json = Json.encodeToString(interestingPoints)
+        val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
+
+        val request = Request.Builder()
+            .url(url)
+            .addHeader("Authorization", "Bearer $token")
+            .addHeader("Content-Type", "application/json")
+            .post(requestBody)
+            .build()
+
+        client.newCall(request).enqueue(object : okhttp3.Callback {
+            override fun onFailure(call: okhttp3.Call, e: IOException) {
+                Log.e("Interesting point validation", "Errore di rete: ${e.message}")
+                Handler(Looper.getMainLooper()).post {
+                    callback(null)  // Mostra errore
+                }
+            }
+
+            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body.string()
+                    val result: Map<String, Int> = Json.decodeFromString(responseBody)
+
+                    Handler(Looper.getMainLooper()).post {
+                        callback(result)  // punti di interesse trovati
+                    }
+                } else {
+                    Log.e("Interesting point validation", "Errore HTTP: ${response.code}")
+                    Handler(Looper.getMainLooper()).post {
+                        callback(null)  // Mostra errore
+                    }
+                }
+            }
+        })
     }
 }

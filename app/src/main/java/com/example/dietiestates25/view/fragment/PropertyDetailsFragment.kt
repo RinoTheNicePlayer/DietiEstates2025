@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.dietiestates25.R
 import com.example.dietiestates25.controller.PropertyViewModel
 import com.example.dietiestates25.controller.PropertyDetailsController
+import com.example.dietiestates25.model.InterestingPoints
 import com.example.dietiestates25.model.PropertyResponse
 import java.util.Locale
 
@@ -34,8 +35,7 @@ class PropertyDetailsFragment : Fragment() {
 
         // Enable the up back button
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        
-        /// TODO: chiamata server per punti di interesse
+
         val interestingPoint = view.findViewById<TextView>(R.id.location_value)
         val imageProperty = view.findViewById<ImageView>(R.id.property_image)
         val saleRent = view.findViewById<TextView>(R.id.sale_rent_value)
@@ -55,6 +55,7 @@ class PropertyDetailsFragment : Fragment() {
         /// TODO: mappa
 
         propertyViewModel.selectedProperty.observe(viewLifecycleOwner) { property ->
+            getInterestingPoints(property, interestingPoint)
             loadImage(property, imageProperty)
             saleRent.text = property.type
             address.text = property.address
@@ -78,6 +79,39 @@ class PropertyDetailsFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun getInterestingPoints(property: PropertyResponse, interestingPoint: TextView) {
+        val interestingPoints = InterestingPoints(property.latitude, property.longitude)
+        propertyDetailsController.getInterestingPoints(interestingPoints) { result ->
+            handleSetTextInterestingPoints(result, interestingPoint)
+        }
+    }
+
+    private fun handleSetTextInterestingPoints(result: Map<String, Int>?, interestingPoint: TextView) {
+        result?.let {
+            val scuolaCount = it["scuola"] ?: 0
+            val parcoCount = it["parco"] ?: 0
+            val trasportoCount = it["trasporto"] ?: 0
+
+            val messages = mutableListOf<String>()
+
+            if (scuolaCount > 0) {
+                messages.add("vicino a ${if (scuolaCount > 1) "$scuolaCount scuole" else "una scuola"}")
+            }
+            if (parcoCount > 0) {
+                messages.add("vicino a ${if (parcoCount > 1) "$parcoCount parchi" else "un parco"}")
+            }
+            if (trasportoCount > 0) {
+                messages.add("vicino a ${if (trasportoCount > 1) "$trasportoCount fermate" else "una fermata"}")
+            }
+
+            interestingPoint.text = if (messages.isNotEmpty()) {
+                messages.joinToString(" e ")
+            } else {
+                "Nessun punto di interesse vicino"
+            }
+        }
     }
 
     private fun loadImage(property: PropertyResponse, imageProperty: ImageView) {
