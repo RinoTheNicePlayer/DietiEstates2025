@@ -42,7 +42,7 @@
                 android:textSize="16sp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Vicino a una scuola" />
+                android:text="" />
     </LinearLayout>
 
     <LinearLayout
@@ -89,7 +89,7 @@
                 android:textSize="20sp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="In vendita" />
+                android:text="" />
     </LinearLayout>
 
     <LinearLayout
@@ -121,7 +121,7 @@
                 android:textSize="20sp"
                 android:layout_height="wrap_content"
                 android:layout_width="284dp"
-                android:text="Via Napoli 12" />
+                android:text="" />
     </LinearLayout>
 
     <LinearLayout
@@ -138,6 +138,7 @@
                 android:id="@+id/municipality_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:contentDescription="@string/municipality_image"
                 android:src="@drawable/municipality"
                 android:scaleType="fitXY" />
 
@@ -152,7 +153,7 @@
                 android:textSize="20sp"
                 android:layout_height="wrap_content"
                 android:layout_width="284dp"
-                android:text="Calvizzano" />
+                android:text="" />
     </LinearLayout>
 
     <LinearLayout
@@ -170,6 +171,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="18dp"
+                android:contentDescription="@string/price_image"
                 android:src="@drawable/price"
                 android:scaleType="fitXY" />
 
@@ -178,9 +180,8 @@
                 android:textColor="#009951"
                 android:textSize="20sp"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:text="€ 120.000" />
+                android:layout_width="wrap_content"
+                android:text="" />
     </LinearLayout>
 
     <LinearLayout
@@ -197,6 +198,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="9dp"
+                android:contentDescription="@string/rooms_image"
                 android:src="@drawable/number_of_rooms"
                 android:scaleType="fitXY" />
 
@@ -207,13 +209,14 @@
                 android:layout_marginEnd="18dp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="5" />
+                android:text="" />
 
         <ImageView
                 android:id="@+id/size_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="7dp"
+                android:contentDescription="@string/size_room_image"
                 android:src="@drawable/size"
                 android:scaleType="fitXY" />
 
@@ -224,13 +227,14 @@
                 android:layout_marginEnd="13dp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="60 m²" />
+                android:text="" />
 
         <ImageView
                 android:id="@+id/bathrooms_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="7dp"
+                android:contentDescription="@string/bathroom_image"
                 android:src="@drawable/number_of_bathrooms"
                 android:scaleType="fitXY" />
 
@@ -240,7 +244,7 @@
                 android:textSize="16sp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="1" />
+                android:text="" />
 
         <LinearLayout
                 android:id="@+id/container"
@@ -255,6 +259,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="8dp"
+                android:contentDescription="@string/floor_image"
                 android:src="@drawable/floor"
                 android:scaleType="fitXY" />
 
@@ -265,13 +270,14 @@
                 android:layout_marginEnd="19dp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="2" />
+                android:text="" />
 
         <ImageView
                 android:id="@+id/elevator_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="7dp"
+                android:contentDescription="@string/elevator_image"
                 android:src="@drawable/elevator"
                 android:scaleType="fitXY" />
 
@@ -282,13 +288,14 @@
                 android:layout_marginEnd="15dp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Si" />
+                android:text="" />
 
         <ImageView
                 android:id="@+id/balcony_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="7dp"
+                android:contentDescription="@string/balcony_image"
                 android:src="@drawable/balcony"
                 android:scaleType="fitXY" />
 
@@ -298,7 +305,7 @@
                 android:textSize="16sp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Si" />
+                android:text="" />
     </LinearLayout>
 
     <LinearLayout
@@ -337,7 +344,7 @@
                     android:textSize="16sp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Fai un’offerta" />
+                    android:text="@string/fai_un_offerta" />
         </LinearLayout>
 
         <View
@@ -362,7 +369,7 @@
                     android:textSize="16sp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Prenota una visita" />
+                    android:text="@string/prenota_una_visita" />
         </LinearLayout>
     </LinearLayout>
 
@@ -384,7 +391,7 @@
             android:layout_marginStart="26dp"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="Descrizione" />
+            android:text="@string/descrizione" />
 
     <TextView
             android:id="@+id/description_value"
@@ -393,6 +400,6 @@
             android:layout_marginStart="25dp"
             android:layout_height="wrap_content"
             android:layout_width="281dp"
-            android:text="APPARTAMENTO IN VIA NAPOLI Proponiamo in vendita una pregevole unità immobiliare situata..." />
+            android:text="" />
 
 </LinearLayout>
