@@ -6,18 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
 import com.example.dietiestates25.adapter.PropertyAdapter
 import com.example.dietiestates25.controller.HomeAgentController
+import com.example.dietiestates25.controller.PropertyViewModel
 import com.example.dietiestates25.model.PropertyResponse
 
-class HomeAgentFragment : Fragment() {
+class HomeAgentFragment : Fragment(), PropertyAdapter.OnItemClickListener {
     private lateinit var homeAgentController: HomeAgentController
     private lateinit var recyclerView: RecyclerView
     private lateinit var propertyAdapter: PropertyAdapter
     private val propertyList = mutableListOf<PropertyResponse>()
+    private val propertyViewModel: PropertyViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +40,7 @@ class HomeAgentFragment : Fragment() {
 
         loadAgentProperties()
 
-        propertyAdapter = PropertyAdapter(requireContext(), propertyList)
+        propertyAdapter = PropertyAdapter(requireContext(), propertyList, this)
         recyclerView.adapter = propertyAdapter
 
         val createPropertyButton = view.findViewById<LinearLayout>(R.id.create_property_button)
@@ -57,6 +60,11 @@ class HomeAgentFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onItemClick(property: PropertyResponse) {
+        propertyViewModel.selectProperty(property)
+        navigateTo(PropertyDetailsFragment())
     }
 
     private fun navigateTo(fragment: Fragment) {

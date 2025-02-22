@@ -12,14 +12,21 @@ import com.example.dietiestates25.R
 import com.example.dietiestates25.controller.S3Controller
 import com.example.dietiestates25.model.PropertyResponse
 
-class PropertyAdapter(private val context: Context, private val propertyList: List<PropertyResponse>) :
+class PropertyAdapter(
+    private val context: Context,
+    private val propertyList: List<PropertyResponse>,
+    private val itemClickListener: OnItemClickListener
+) :
     RecyclerView.Adapter<PropertyAdapter.PropertyViewHolder>() {
 
-        private val s3Controller = S3Controller(context)
+    interface OnItemClickListener {
+        fun onItemClick(property: PropertyResponse)
+    }
+
+    private val s3Controller = S3Controller(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PropertyViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.activity_item_property, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_item_property, parent, false)
         return PropertyViewHolder(view)
     }
 
@@ -40,6 +47,10 @@ class PropertyAdapter(private val context: Context, private val propertyList: Li
             else {
                 holder.propertyImage.setImageResource(R.drawable.image2)
             }
+        }
+
+        holder.itemView.setOnClickListener {
+            itemClickListener.onItemClick(property)
         }
     }
 

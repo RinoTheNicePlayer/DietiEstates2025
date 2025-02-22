@@ -1,8 +1,10 @@
 [versions]
 agp = "8.7.3"
 awsStorageS3 = "2.24.0"
+coil = "2.4.0"
 core = "2.24.0"
 desugar_jdk_libs = "2.1.4"
+fragmentKtx = "1.8.6"
 kotlin = "2.0.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -18,8 +20,10 @@ playServicesMaps = "19.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 aws-auth-cognito = { module = "com.amplifyframework:aws-auth-cognito", version.ref = "core" }
 aws-storage-s3 = { module = "com.amplifyframework:aws-storage-s3", version.ref = "awsStorageS3" }
+coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 core = { module = "com.amplifyframework:core", version.ref = "core" }
 desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

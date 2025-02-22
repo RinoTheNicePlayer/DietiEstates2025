@@ -57,7 +57,8 @@ secrets {
 }
 
 dependencies {
-    implementation("io.coil-kt:coil:2.4.0")
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.coil)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
     implementation(libs.places)
     implementation(libs.playServicesMaps)
