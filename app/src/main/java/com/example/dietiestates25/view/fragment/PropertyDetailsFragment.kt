@@ -85,7 +85,7 @@ class PropertyDetailsFragment : Fragment() {
 
         reservationButton.setOnClickListener {
             if (AuthManager.role == "Cliente") {
-                navigationCallback?.navigateTo() /// fare fragment
+                navigationCallback?.navigateTo(Reservation1Fragment())
             }
         }
 
