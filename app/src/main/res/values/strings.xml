@@ -74,6 +74,13 @@
     <string name="invia">Invia</string>
     <string name="property_address">%1$s, %2$s</string>
     <string name="property_price">Prezzo Immobile: %1$.2f €</string>
+    <string name="offerta_inviata">OFFERTA INVIATA!</string>
+    <string name="logo_offer_sent">logo_offer_sent</string>
+    <string name="riepilogo">Riepilogo:</string>
+    <string name="torna_alla_home">Torna alla Home</string>
+    <string name="offer_text">Hai offerto %1$d€ per:</string>
+    <string name="property_address_text">Appartamento - %1$s %2$s</string>
+    <string name="property_price_text">Prezzo precedente: €%1$d</string>
     <string-array name="sale_rent_options">
         <item>In vendita/In affitto</item>
         <item>In vendita</item>

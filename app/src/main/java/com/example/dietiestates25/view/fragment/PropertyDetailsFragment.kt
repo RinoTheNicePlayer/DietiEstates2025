@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import com.example.dietiestates25.R
 import com.example.dietiestates25.callback.NavigationCallback
+import com.example.dietiestates25.controller.AuthManager
 import com.example.dietiestates25.controller.PropertyViewModel
 import com.example.dietiestates25.controller.PropertyDetailsController
 import com.example.dietiestates25.model.InterestingPoints
@@ -23,10 +24,14 @@ class PropertyDetailsFragment : Fragment() {
     private val propertyViewModel: PropertyViewModel by activityViewModels()
     private lateinit var propertyDetailsController: PropertyDetailsController
     private var navigationCallback: NavigationCallback? = null
+    private var containerId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         propertyDetailsController = PropertyDetailsController(requireContext())
+        arguments?.let {
+            containerId = it.getInt(ARG_CONTAINER_ID)
+        }
     }
 
     override fun onCreateView(
@@ -74,11 +79,14 @@ class PropertyDetailsFragment : Fragment() {
         }
 
         offerButton.setOnClickListener {
-            navigationCallback?.navigateTo(OfferFragment())
+            val fragment = OfferFragment.newInstance(containerId)
+            navigationCallback?.navigateTo(fragment)
         }
 
         reservationButton.setOnClickListener {
-            navigationCallback?.navigateTo() /// fare fragment
+            if (AuthManager.role == "Cliente") {
+                navigationCallback?.navigateTo() /// fare fragment
+            }
         }
 
         return view
@@ -95,10 +103,10 @@ class PropertyDetailsFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is NavigationCallback) {
-            navigationCallback = context
+        navigationCallback = if (context is NavigationCallback) {
+            context
         } else if (parentFragment is NavigationCallback) {
-            navigationCallback = parentFragment as NavigationCallback
+            parentFragment as NavigationCallback
         } else {
             throw RuntimeException("$context must implement NavigationCallback")
         }
@@ -109,4 +117,15 @@ class PropertyDetailsFragment : Fragment() {
         navigationCallback = null
     }
 
+    companion object {
+        private const val ARG_CONTAINER_ID = "container_id"
+
+        @JvmStatic
+        fun newInstance(containerId: Int) =
+            PropertyDetailsFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(ARG_CONTAINER_ID, containerId)
+                }
+            }
+    }
 }

@@ -65,7 +65,8 @@ class HomeAgentFragment : Fragment(), PropertyAdapter.OnItemClickListener, Navig
 
     override fun onItemClick(property: PropertyResponse) {
         propertyViewModel.selectProperty(property)
-        navigateTo(PropertyDetailsFragment())
+        val fragment = PropertyDetailsFragment.newInstance(R.id.fragment_layout_container2)
+        navigateTo(fragment)
     }
 
     override fun navigateTo(fragment: Fragment) {

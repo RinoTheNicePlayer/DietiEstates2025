@@ -58,7 +58,8 @@ class SearchFragment : Fragment(), PropertyAdapter.OnItemClickListener, Navigati
 
     override fun onItemClick(property: PropertyResponse) {
         propertyViewModel.selectProperty(property)
-        navigateTo(PropertyDetailsFragment())
+        val fragment = PropertyDetailsFragment.newInstance(R.id.fragment_layout_container)
+        navigateTo(fragment)
     }
 
     override fun navigateTo(fragment: Fragment) {

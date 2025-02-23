@@ -1,5 +1,6 @@
 package com.example.dietiestates25.view.fragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,19 +13,27 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import com.example.dietiestates25.R
+import com.example.dietiestates25.callback.NavigationCallback
 import com.example.dietiestates25.controller.OfferController
+import com.example.dietiestates25.controller.OfferViewModel
 import com.example.dietiestates25.controller.PropertyViewModel
 import com.example.dietiestates25.model.Offer
 import com.example.dietiestates25.model.OfferState
 import com.example.dietiestates25.model.PropertyResponse
 
 class OfferFragment : Fragment() {
+    private var containerId: Int = 0
     private val propertyViewModel: PropertyViewModel by activityViewModels()
+    private val offerViewModel: OfferViewModel by activityViewModels()
     private lateinit var offerController: OfferController
+    private var navigationCallback: NavigationCallback? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         offerController = OfferController(requireContext())
+        arguments?.let {
+            containerId = it.getInt(ARG_CONTAINER_ID)
+        }
     }
 
     override fun onCreateView(
@@ -67,8 +76,38 @@ class OfferFragment : Fragment() {
     private fun saveOffer(price: Double, property: PropertyResponse) {
         val offer = Offer(price, OfferState.IN_SOSPESO, property)
         offerController.sendOffer(offer) {
-            /// go to
+            val fragment = OfferSentFragment.newInstance(containerId)
+            offerViewModel.selectOffer(offer)
+            navigationCallback?.navigateTo(fragment)
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        navigationCallback = if (context is NavigationCallback) {
+            context
+        } else if (parentFragment is NavigationCallback) {
+            parentFragment as NavigationCallback
+        } else {
+            throw RuntimeException("$context must implement NavigationCallback")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        navigationCallback = null
+    }
+
+    companion object {
+        private const val ARG_CONTAINER_ID = "container_id"
+
+        @JvmStatic
+        fun newInstance(containerId: Int) =
+            OfferFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(ARG_CONTAINER_ID, containerId)
+                }
+            }
     }
 
 }
