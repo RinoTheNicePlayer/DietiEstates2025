@@ -70,6 +70,10 @@
     <string name="near_location_logo">near_location_logo</string>
     <string name="fai_un_offerta">Fai un’offerta</string>
     <string name="prenota_una_visita">Prenota una visita</string>
+    <string name="offerta">Offerta</string>
+    <string name="invia">Invia</string>
+    <string name="property_address">%1$s, %2$s</string>
+    <string name="property_price">Prezzo Immobile: %1$.2f €</string>
     <string-array name="sale_rent_options">
         <item>In vendita/In affitto</item>
         <item>In vendita</item>

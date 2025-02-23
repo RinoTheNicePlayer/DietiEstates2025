@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.ConfirmedOffersAdapter
 import com.example.dietiestates25.adapter.PendingOffersAdapter
 import com.example.dietiestates25.R
-import com.example.dietiestates25.model.Offer
+import com.example.dietiestates25.model.OfferTest
 
 class OfferAgentFragment : Fragment() {
     private lateinit var recyclerPendingOffers: RecyclerView
@@ -51,19 +51,19 @@ class OfferAgentFragment : Fragment() {
 
     private fun loadOffers() {
         // Simulazione del caricamento dei dati (da sostituire con chiamata al database)
-        val pendingOffers = listOf(
-            Offer("Immobile #1", "Alessandro Rossi", 65000.0.toString()),
-            Offer("Immobile #2", "Marco Bianchi", 120000.0.toString()),
-            Offer("Immobile #3", "Luca Verdi", 85000.0.toString())
+        val pendingOfferTests = listOf(
+            OfferTest("Immobile #1", "Alessandro Rossi", 65000.0.toString()),
+            OfferTest("Immobile #2", "Marco Bianchi", 120000.0.toString()),
+            OfferTest("Immobile #3", "Luca Verdi", 85000.0.toString())
         )
 
-        val confirmedOffers = listOf(
-            Offer("Immobile #4", "Giulia Ferrari", 175000.0.toString()),
-            Offer("Immobile #5", "Maria Esposito", 295000.0.toString()),
-            Offer("Immobile #6", "Davide Ricci", 220000.0.toString())
+        val confirmedOfferTests = listOf(
+            OfferTest("Immobile #4", "Giulia Ferrari", 175000.0.toString()),
+            OfferTest("Immobile #5", "Maria Esposito", 295000.0.toString()),
+            OfferTest("Immobile #6", "Davide Ricci", 220000.0.toString())
         )
 
-        pendingOffersAdapter.updateList(pendingOffers)
-        confirmedOffersAdapter.updateList(confirmedOffers)
+        pendingOffersAdapter.updateList(pendingOfferTests)
+        confirmedOffersAdapter.updateList(confirmedOfferTests)
     }
 }

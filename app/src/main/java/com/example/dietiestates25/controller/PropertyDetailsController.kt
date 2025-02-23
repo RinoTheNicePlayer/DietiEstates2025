@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import coil.load
 import com.example.dietiestates25.R
 import com.example.dietiestates25.model.PropertyResponse
@@ -34,7 +35,39 @@ class PropertyDetailsController(private val context: Context) {
         }
     }
 
-    fun getInterestingPoints(interestingPoints: InterestingPoints, callback: (Map<String, Int>?) -> Unit) {
+    fun getInterestingPoints(interestingPoints: InterestingPoints, interestingPoint: TextView) {
+        getInterestingPointsFromBackend(interestingPoints) { result ->
+            handleSetTextInterestingPoints(result, interestingPoint)
+        }
+    }
+
+    private fun handleSetTextInterestingPoints(result: Map<String, Int>?, interestingPoint: TextView) {
+        result?.let {
+            val scuolaCount = it["scuola"] ?: 0
+            val parcoCount = it["parco"] ?: 0
+            val trasportoCount = it["trasporto"] ?: 0
+
+            val messages = mutableListOf<String>()
+
+            if (scuolaCount > 0) {
+                messages.add("vicino a ${if (scuolaCount > 1) "$scuolaCount scuole" else "una scuola"}")
+            }
+            if (parcoCount > 0) {
+                messages.add("vicino a ${if (parcoCount > 1) "$parcoCount parchi" else "un parco"}")
+            }
+            if (trasportoCount > 0) {
+                messages.add("vicino a ${if (trasportoCount > 1) "$trasportoCount fermate" else "una fermata"}")
+            }
+
+            interestingPoint.text = if (messages.isNotEmpty()) {
+                messages.joinToString(" e ")
+            } else {
+                "Nessun punto di interesse vicino"
+            }
+        }
+    }
+
+    private fun getInterestingPointsFromBackend(interestingPoints: InterestingPoints, callback: (Map<String, Int>?) -> Unit) {
         val client = OkHttpClient()
         val token = AuthManager.idToken
         val url = "/geodata/conteggio-pdi" /// da cambiare

@@ -1,7 +1,14 @@
 package com.example.dietiestates25.model
 
-data class Offer(
-    val propertyName: String,
-    val clientName: String,
-    val amount: String
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Offer (
+    @SerialName("importo")
+    val price: Double,
+    @SerialName("stato")
+    val state: OfferState,
+    @SerialName("immobile")
+    val property: PropertyResponse
 )

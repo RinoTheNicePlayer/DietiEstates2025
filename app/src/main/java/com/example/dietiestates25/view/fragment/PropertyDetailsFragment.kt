@@ -1,5 +1,6 @@
 package com.example.dietiestates25.view.fragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import com.example.dietiestates25.R
+import com.example.dietiestates25.callback.NavigationCallback
 import com.example.dietiestates25.controller.PropertyViewModel
 import com.example.dietiestates25.controller.PropertyDetailsController
 import com.example.dietiestates25.model.InterestingPoints
@@ -20,6 +22,7 @@ import java.util.Locale
 class PropertyDetailsFragment : Fragment() {
     private val propertyViewModel: PropertyViewModel by activityViewModels()
     private lateinit var propertyDetailsController: PropertyDetailsController
+    private var navigationCallback: NavigationCallback? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,11 +74,11 @@ class PropertyDetailsFragment : Fragment() {
         }
 
         offerButton.setOnClickListener {
-
+            navigationCallback?.navigateTo(OfferFragment())
         }
 
         reservationButton.setOnClickListener {
-
+            navigationCallback?.navigateTo() /// fare fragment
         }
 
         return view
@@ -83,39 +86,27 @@ class PropertyDetailsFragment : Fragment() {
 
     private fun getInterestingPoints(property: PropertyResponse, interestingPoint: TextView) {
         val interestingPoints = InterestingPoints(property.latitude, property.longitude)
-        propertyDetailsController.getInterestingPoints(interestingPoints) { result ->
-            handleSetTextInterestingPoints(result, interestingPoint)
-        }
-    }
-
-    private fun handleSetTextInterestingPoints(result: Map<String, Int>?, interestingPoint: TextView) {
-        result?.let {
-            val scuolaCount = it["scuola"] ?: 0
-            val parcoCount = it["parco"] ?: 0
-            val trasportoCount = it["trasporto"] ?: 0
-
-            val messages = mutableListOf<String>()
-
-            if (scuolaCount > 0) {
-                messages.add("vicino a ${if (scuolaCount > 1) "$scuolaCount scuole" else "una scuola"}")
-            }
-            if (parcoCount > 0) {
-                messages.add("vicino a ${if (parcoCount > 1) "$parcoCount parchi" else "un parco"}")
-            }
-            if (trasportoCount > 0) {
-                messages.add("vicino a ${if (trasportoCount > 1) "$trasportoCount fermate" else "una fermata"}")
-            }
-
-            interestingPoint.text = if (messages.isNotEmpty()) {
-                messages.joinToString(" e ")
-            } else {
-                "Nessun punto di interesse vicino"
-            }
-        }
+        propertyDetailsController.getInterestingPoints(interestingPoints, interestingPoint)
     }
 
     private fun loadImage(property: PropertyResponse, imageProperty: ImageView) {
         propertyDetailsController.loadImage(property, imageProperty)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is NavigationCallback) {
+            navigationCallback = context
+        } else if (parentFragment is NavigationCallback) {
+            navigationCallback = parentFragment as NavigationCallback
+        } else {
+            throw RuntimeException("$context must implement NavigationCallback")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        navigationCallback = null
     }
 
 }

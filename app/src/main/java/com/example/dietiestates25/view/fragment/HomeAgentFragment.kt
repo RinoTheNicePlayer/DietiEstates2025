@@ -11,11 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
 import com.example.dietiestates25.adapter.PropertyAdapter
+import com.example.dietiestates25.callback.NavigationCallback
 import com.example.dietiestates25.controller.HomeAgentController
 import com.example.dietiestates25.controller.PropertyViewModel
 import com.example.dietiestates25.model.PropertyResponse
 
-class HomeAgentFragment : Fragment(), PropertyAdapter.OnItemClickListener {
+class HomeAgentFragment : Fragment(), PropertyAdapter.OnItemClickListener, NavigationCallback {
     private lateinit var homeAgentController: HomeAgentController
     private lateinit var recyclerView: RecyclerView
     private lateinit var propertyAdapter: PropertyAdapter
@@ -67,7 +68,7 @@ class HomeAgentFragment : Fragment(), PropertyAdapter.OnItemClickListener {
         navigateTo(PropertyDetailsFragment())
     }
 
-    private fun navigateTo(fragment: Fragment) {
+    override fun navigateTo(fragment: Fragment) {
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_layout_container2, fragment)
             .addToBackStack(null)
