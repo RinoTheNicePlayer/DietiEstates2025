@@ -87,6 +87,10 @@
     <string name="time_image">time_image</string>
     <string name="_00_00">00:00</string>
     <string name="prosegui">Prosegui</string>
+    <string name="data">Data:</string>
+    <string name="orario">Orario:</string>
+    <string name="meteo_giornaliero">Meteo giornaliero:</string>
+    <string name="weather_image">weather_image</string>
     <string-array name="sale_rent_options">
         <item>In vendita/In affitto</item>
         <item>In vendita</item>

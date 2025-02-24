@@ -1,9 +1,16 @@
 package com.example.dietiestates25.model
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Reservation(
-    val propertyName: String,
-    val clientName: String,
+    @SerialName("dataVisita")
     val date: String,
+    @SerialName("oraVisita")
     val time: String,
-    val status: String
+    @SerialName("stato")
+    val status: ReservationState,
+    @SerialName("immobile")
+    val property: PropertyResponse
 )

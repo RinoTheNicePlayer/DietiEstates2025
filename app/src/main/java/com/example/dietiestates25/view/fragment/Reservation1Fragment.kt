@@ -14,12 +14,17 @@ import androidx.fragment.app.activityViewModels
 import com.example.dietiestates25.R
 import com.example.dietiestates25.controller.PropertyViewModel
 import com.example.dietiestates25.controller.ReservationController
+import com.example.dietiestates25.controller.ReservationViewModel
 import com.example.dietiestates25.model.MeteoRequest
+import com.example.dietiestates25.model.PropertyResponse
+import com.example.dietiestates25.model.Reservation
+import com.example.dietiestates25.model.ReservationState
 import java.util.Calendar
 import java.util.Locale
 
 class Reservation1Fragment : Fragment() {
     private val propertyViewModel: PropertyViewModel by activityViewModels()
+    private val reservationViewModel: ReservationViewModel by activityViewModels()
     private lateinit var reservationController: ReservationController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +61,7 @@ class Reservation1Fragment : Fragment() {
 
             if (selectedDate.isNotEmpty() && selectedTime.isNotEmpty()) {
                 property?.let {
-                    getMeteo(it.latitude, it.longitude, selectedDate)
+                    getMeteo(property, selectedDate, selectedTime)
                 }
             }
         }
@@ -97,11 +102,27 @@ class Reservation1Fragment : Fragment() {
         timePickerDialog.show()
     }
 
-    private fun getMeteo(latitude: Double, longitude: Double, selectedDate: String) {
-        val meteoRequest = MeteoRequest(latitude, longitude, selectedDate)
+    private fun getMeteo(property: PropertyResponse, selectedDate: String, selectedTime: String) {
+        val meteoRequest = MeteoRequest(property.latitude, property.longitude, selectedDate)
 
         reservationController.getMeteo(meteoRequest) { result ->
-            // go to reservation2 fragment
+            result?.let {
+                val temperatureMax = it["temperature_max"] as? Double ?: 0.0
+                val temperatureMin = it["temperature_min"] as? Double ?: 0.0
+                val averageTemperature = (temperatureMax + temperatureMin) / 2
+
+                reservationViewModel.selectReservation(Reservation(selectedDate, selectedTime, ReservationState.IN_SOSPESO, property))
+                goToReservation2Property(averageTemperature.toString())
+            }
+        }
+    }
+
+    private fun goToReservation2Property(averageTemp: String) {
+        val fragment = Reservation2Fragment.newInstance(averageTemp)
+        parentFragmentManager.beginTransaction().apply {
+            replace(R.id.fragment_layout_container, fragment)
+            addToBackStack(null)
+            commit()
         }
     }
 

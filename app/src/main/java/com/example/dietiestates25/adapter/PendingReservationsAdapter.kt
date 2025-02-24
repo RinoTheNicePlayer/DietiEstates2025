@@ -7,12 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
-import com.example.dietiestates25.model.Reservation
+import com.example.dietiestates25.model.ReservationTest
 
 class PendingReservationsAdapter(
-    private val reservations: List<Reservation>,
-    private val onAcceptClick: (Reservation) -> Unit,
-    private val onRejectClick: (Reservation) -> Unit
+    private val reservationTests: List<ReservationTest>,
+    private val onAcceptClick: (ReservationTest) -> Unit,
+    private val onRejectClick: (ReservationTest) -> Unit
 ) : RecyclerView.Adapter<PendingReservationsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -31,7 +31,7 @@ class PendingReservationsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val reservation = reservations[position]
+        val reservation = reservationTests[position]
         holder.propertyName.text = reservation.propertyName
         holder.clientName.text = reservation.clientName
         holder.date.text = reservation.date
@@ -41,5 +41,5 @@ class PendingReservationsAdapter(
         holder.rejectButton.setOnClickListener { onRejectClick(reservation) }
     }
 
-    override fun getItemCount() = reservations.size
+    override fun getItemCount() = reservationTests.size
 }

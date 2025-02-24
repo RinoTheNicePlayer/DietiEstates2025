@@ -2,6 +2,7 @@ package com.example.dietiestates25.controller
 
 import android.util.Log
 import com.example.dietiestates25.model.MeteoRequest
+import com.example.dietiestates25.model.Reservation
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -43,6 +44,38 @@ class ReservationController {
                 } else {
                     Log.e("Backend", "Failed to send data: ${response.message}")
                     callback(null)
+                }
+            }
+        })
+    }
+
+    fun saveReservation(reservation: Reservation, onSuccess: () -> Unit) {
+        val client = OkHttpClient()
+        val token = AuthManager.idToken
+        val url = "/visita/prenota" // da cambiare
+
+        val json = Json.encodeToString(reservation)
+        val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
+
+        val request = Request.Builder()
+            .url(url)
+            .addHeader("Authorization", "Bearer $token")
+            .addHeader("Content-Type", "application/json")
+            .post(requestBody)
+            .build()
+
+        client.newCall(request).enqueue(object : okhttp3.Callback {
+            override fun onFailure(call: okhttp3.Call, e: IOException) {
+                Log.e("Backend", "Failed to send data", e)
+            }
+
+            override fun onResponse(call: okhttp3.Call, response: Response) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body.string()
+                    Log.i("Backend", "Data sent successfully: $responseBody")
+                    onSuccess()
+                } else {
+                    Log.e("Backend", "Failed to send data: ${response.message}")
                 }
             }
         })

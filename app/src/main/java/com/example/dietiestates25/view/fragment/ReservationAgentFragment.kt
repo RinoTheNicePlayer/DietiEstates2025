@@ -10,13 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
 import com.example.dietiestates25.adapter.ConfirmedReservationsAdapter
 import com.example.dietiestates25.adapter.PendingReservationsAdapter
-import com.example.dietiestates25.model.Reservation
+import com.example.dietiestates25.model.ReservationTest
 
 class ReservationAgentFragment : Fragment() {
     private lateinit var pendingReservationsAdapter: PendingReservationsAdapter
     private lateinit var confirmedReservationsAdapter: ConfirmedReservationsAdapter
-    private val pendingReservations = mutableListOf<Reservation>()
-    private val confirmedReservations = mutableListOf<Reservation>()
+    private val pendingReservationTests = mutableListOf<ReservationTest>()
+    private val confirmedReservationTests = mutableListOf<ReservationTest>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +37,8 @@ class ReservationAgentFragment : Fragment() {
 
         loadReservations()
 
-        pendingReservationsAdapter = PendingReservationsAdapter(pendingReservations, {}, {})
-        confirmedReservationsAdapter = ConfirmedReservationsAdapter(confirmedReservations)
+        pendingReservationsAdapter = PendingReservationsAdapter(pendingReservationTests, {}, {})
+        confirmedReservationsAdapter = ConfirmedReservationsAdapter(confirmedReservationTests)
 
         recyclerPending.adapter = pendingReservationsAdapter
         recyclerConfirmed.adapter = confirmedReservationsAdapter
@@ -47,8 +47,8 @@ class ReservationAgentFragment : Fragment() {
     }
 
     private fun loadReservations() {
-        pendingReservations.add(
-            Reservation(
+        pendingReservationTests.add(
+            ReservationTest(
                 "Immobile #7",
                 "Sofia Conti",
                 "15/01/25",
@@ -56,8 +56,8 @@ class ReservationAgentFragment : Fragment() {
                 "pending"
             )
         )
-        confirmedReservations.add(
-            Reservation(
+        confirmedReservationTests.add(
+            ReservationTest(
                 "Immobile #4",
                 "Giulia Ferrari",
                 "04/01/25",
