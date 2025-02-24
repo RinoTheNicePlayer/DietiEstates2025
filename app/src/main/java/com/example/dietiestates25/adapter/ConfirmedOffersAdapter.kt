@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dietiestates25.model.OfferTest
+import com.example.dietiestates25.model.OfferResponse
 
-class ConfirmedOffersAdapter(private var offerTests: List<OfferTest>) :
+class ConfirmedOffersAdapter(private var offerTests: List<OfferResponse>) :
     RecyclerView.Adapter<ConfirmedOffersAdapter.OfferViewHolder>() {
 
     class OfferViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -24,15 +24,10 @@ class ConfirmedOffersAdapter(private var offerTests: List<OfferTest>) :
 
     override fun onBindViewHolder(holder: OfferViewHolder, position: Int) {
         val offer = offerTests[position]
-        holder.propertyName.text = offer.propertyName
-        holder.clientName.text = offer.clientName
-        holder.amount.text = "€ ${offer.amount}"
+        holder.propertyName.text = offer.property.address
+        holder.clientName.text = offer.property.municipality
+        holder.amount.text = holder.itemView.context.getString(R.string.offer_amount, offer.amount)
     }
 
     override fun getItemCount() = offerTests.size
-
-    fun updateList(newOfferTests: List<OfferTest>) {
-        offerTests = newOfferTests
-        notifyDataSetChanged()
-    }
 }

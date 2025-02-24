@@ -1,5 +1,6 @@
 package com.example.dietiestates25.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,9 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
-import com.example.dietiestates25.model.OfferTest
+import com.example.dietiestates25.controller.OfferController
+import com.example.dietiestates25.model.OfferResponse
+import com.example.dietiestates25.model.OfferState
 
-class PendingOffersAdapter(private var offerTests: List<OfferTest>) :
+class PendingOffersAdapter(private val context: Context, private var offerTests: List<OfferResponse>) :
     RecyclerView.Adapter<PendingOffersAdapter.OfferViewHolder>() {
 
     class OfferViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -28,23 +31,28 @@ class PendingOffersAdapter(private var offerTests: List<OfferTest>) :
 
     override fun onBindViewHolder(holder: OfferViewHolder, position: Int) {
         val offer = offerTests[position]
-        holder.propertyName.text = offer.propertyName
-        holder.clientName.text = offer.clientName
-        holder.amount.text = "€ ${offer.amount}"
+        holder.propertyName.text = offer.property.address
+        holder.clientName.text = offer.property.municipality
+        holder.amount.text = holder.itemView.context.getString(R.string.offer_amount, offer.amount)
+
+        val offerController = OfferController(context)
 
         // Eventuale gestione click sui bottoni
         holder.editButton.setOnClickListener {
-            // Implementare azione per modificare l'offerta
+            offer.state = OfferState.RIFIUTATA
+            offerController.editOffer(offer) {
+                offerTests = offerTests.filter { it.id != offer.id } // Rimuove l'offerta dalla lista
+                notifyDataSetChanged()
+            }
         }
         holder.acceptButton.setOnClickListener {
-            // Implementare azione per accettare l'offerta
+            offer.state = OfferState.ACCETTATA
+            offerController.editOffer(offer) {
+                offerTests = offerTests.filter { it.id != offer.id } // Rimuove l'offerta dalla lista
+                notifyDataSetChanged()
+            }
         }
     }
 
     override fun getItemCount() = offerTests.size
-
-    fun updateList(newOfferTests: List<OfferTest>) {
-        offerTests = newOfferTests
-        notifyDataSetChanged()
-    }
 }

@@ -10,16 +10,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.ConfirmedOffersAdapter
 import com.example.dietiestates25.adapter.PendingOffersAdapter
 import com.example.dietiestates25.R
-import com.example.dietiestates25.model.OfferTest
+import com.example.dietiestates25.controller.OfferController
+import com.example.dietiestates25.model.OfferResponse
+import com.example.dietiestates25.model.OfferState
 
 class OfferAgentFragment : Fragment() {
-    private lateinit var recyclerPendingOffers: RecyclerView
-    private lateinit var recyclerConfirmedOffers: RecyclerView
+    private lateinit var recyclerView1: RecyclerView
+    private lateinit var recyclerView2: RecyclerView
+    private var offerConfirmed = mutableListOf<OfferResponse>()
+    private var offerPending = mutableListOf<OfferResponse>()
     private lateinit var pendingOffersAdapter: PendingOffersAdapter
     private lateinit var confirmedOffersAdapter: ConfirmedOffersAdapter
+    private lateinit var offerController: OfferController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        offerController = OfferController(requireContext())
     }
 
     override fun onCreateView(
@@ -29,41 +35,35 @@ class OfferAgentFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_offer_agent, container, false)
 
-        recyclerPendingOffers = view.findViewById(R.id.recycler_pending_offers)
-        recyclerConfirmedOffers = view.findViewById(R.id.recycler_confirmed_offers)
+        // trova i recycler
+        recyclerView1 = view.findViewById(R.id.recycler_pending_offers)
+        recyclerView1.layoutManager = LinearLayoutManager(context)
+        recyclerView2 = view.findViewById(R.id.recycler_confirmed_offers)
+        recyclerView2.layoutManager = LinearLayoutManager(context)
 
-        setupRecyclerViews()
+        //builda gli adapter
         loadOffers()
+
+        // assegna adapter
+        pendingOffersAdapter = PendingOffersAdapter(requireContext(), offerPending)
+        recyclerView1.adapter = pendingOffersAdapter
+        confirmedOffersAdapter = ConfirmedOffersAdapter(offerConfirmed)
+        recyclerView2.adapter = confirmedOffersAdapter
 
         return view
     }
 
-    private fun setupRecyclerViews() {
-        recyclerPendingOffers.layoutManager = LinearLayoutManager(context)
-        recyclerConfirmedOffers.layoutManager = LinearLayoutManager(context)
-
-        pendingOffersAdapter = PendingOffersAdapter(emptyList())
-        confirmedOffersAdapter = ConfirmedOffersAdapter(emptyList())
-
-        recyclerPendingOffers.adapter = pendingOffersAdapter
-        recyclerConfirmedOffers.adapter = confirmedOffersAdapter
-    }
-
     private fun loadOffers() {
-        // Simulazione del caricamento dei dati (da sostituire con chiamata al database)
-        val pendingOfferTests = listOf(
-            OfferTest("Immobile #1", "Alessandro Rossi", 65000.0.toString()),
-            OfferTest("Immobile #2", "Marco Bianchi", 120000.0.toString()),
-            OfferTest("Immobile #3", "Luca Verdi", 85000.0.toString())
-        )
-
-        val confirmedOfferTests = listOf(
-            OfferTest("Immobile #4", "Giulia Ferrari", 175000.0.toString()),
-            OfferTest("Immobile #5", "Maria Esposito", 295000.0.toString()),
-            OfferTest("Immobile #6", "Davide Ricci", 220000.0.toString())
-        )
-
-        pendingOffersAdapter.updateList(pendingOfferTests)
-        confirmedOffersAdapter.updateList(confirmedOfferTests)
+        offerController.getOffersFromAgency { offers ->
+            offers?.let { offerResponses ->
+                offerResponses.forEach {
+                    if (it.state == OfferState.ACCETTATA) {
+                        offerConfirmed.add(it)
+                    } else if (it.state == OfferState.IN_SOSPESO){
+                        offerPending.add(it)
+                    }
+                }
+            }
+        }
     }
 }

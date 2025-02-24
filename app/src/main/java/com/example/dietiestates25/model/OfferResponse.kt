@@ -10,7 +10,7 @@ data class OfferResponse (
     @SerialName("importo")
     val amount: Double,
     @SerialName("stato")
-    val state: OfferState,
+    var state: OfferState,
     @SerialName("idCliente")
     val idCustomer: String,
     @SerialName("immobile")

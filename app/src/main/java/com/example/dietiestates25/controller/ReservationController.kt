@@ -87,7 +87,7 @@ class ReservationController {
     fun getMyReservation(callback: (List<ReservationResponse>?) -> Unit) {
         val client = OkHttpClient()
         val token = AuthManager.idToken
-        val url = "/visita/riepilogo" // da cambiare
+        val url = "/visita/riepilogoCliente" // da cambiare
 
         val request = Request.Builder()
             .url(url)
