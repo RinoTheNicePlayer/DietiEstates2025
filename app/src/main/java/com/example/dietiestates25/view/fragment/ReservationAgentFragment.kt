@@ -10,16 +10,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
 import com.example.dietiestates25.adapter.ConfirmedReservationsAdapter
 import com.example.dietiestates25.adapter.PendingReservationsAdapter
-import com.example.dietiestates25.model.ReservationTest
+import com.example.dietiestates25.controller.ReservationController
+import com.example.dietiestates25.model.ReservationResponse
+import com.example.dietiestates25.model.ReservationState
 
 class ReservationAgentFragment : Fragment() {
     private lateinit var pendingReservationsAdapter: PendingReservationsAdapter
     private lateinit var confirmedReservationsAdapter: ConfirmedReservationsAdapter
-    private val pendingReservationTests = mutableListOf<ReservationTest>()
-    private val confirmedReservationTests = mutableListOf<ReservationTest>()
+    private lateinit var reservationController: ReservationController
+    private val pendingReservations = mutableListOf<ReservationResponse>()
+    private val confirmedReservations= mutableListOf<ReservationResponse>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        reservationController = ReservationController()
     }
 
     override fun onCreateView(
@@ -29,17 +33,18 @@ class ReservationAgentFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_reservation_agent, container, false)
 
+        // trovo i recycler
         val recyclerPending = view.findViewById<RecyclerView>(R.id.recycler_pending_reservations)
         val recyclerConfirmed = view.findViewById<RecyclerView>(R.id.recycler_confirmed_reservations)
-
         recyclerPending.layoutManager = LinearLayoutManager(context)
         recyclerConfirmed.layoutManager = LinearLayoutManager(context)
 
+        //buildo gli adapter
         loadReservations()
 
-        pendingReservationsAdapter = PendingReservationsAdapter(pendingReservationTests, {}, {})
-        confirmedReservationsAdapter = ConfirmedReservationsAdapter(confirmedReservationTests)
-
+        // assegno adapter
+        pendingReservationsAdapter = PendingReservationsAdapter(pendingReservations)
+        confirmedReservationsAdapter = ConfirmedReservationsAdapter(confirmedReservations)
         recyclerPending.adapter = pendingReservationsAdapter
         recyclerConfirmed.adapter = confirmedReservationsAdapter
 
@@ -47,23 +52,17 @@ class ReservationAgentFragment : Fragment() {
     }
 
     private fun loadReservations() {
-        pendingReservationTests.add(
-            ReservationTest(
-                "Immobile #7",
-                "Sofia Conti",
-                "15/01/25",
-                "09:00",
-                "pending"
-            )
-        )
-        confirmedReservationTests.add(
-            ReservationTest(
-                "Immobile #4",
-                "Giulia Ferrari",
-                "04/01/25",
-                "10:00",
-                "confirmed"
-            )
-        )
+        reservationController.getReservationFromAgency { reservations ->
+            reservations?.let { reservationsResponse ->
+                reservationsResponse.forEach {
+                    if (it.state == ReservationState.IN_SOSPESO) {
+                        pendingReservations.add(it)
+                    } else if (it.state == ReservationState.CONFERMATA) {
+                        confirmedReservations.add(it)
+                    }
+                }
+            }
+        }
     }
+
 }

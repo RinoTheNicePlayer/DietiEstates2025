@@ -7,13 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
-import com.example.dietiestates25.model.ReservationTest
+import com.example.dietiestates25.controller.ReservationController
+import com.example.dietiestates25.model.ReservationResponse
+import com.example.dietiestates25.model.ReservationState
 
-class PendingReservationsAdapter(
-    private val reservationTests: List<ReservationTest>,
-    private val onAcceptClick: (ReservationTest) -> Unit,
-    private val onRejectClick: (ReservationTest) -> Unit
-) : RecyclerView.Adapter<PendingReservationsAdapter.ViewHolder>() {
+class PendingReservationsAdapter(private var reservationTests: List<ReservationResponse>)
+    : RecyclerView.Adapter<PendingReservationsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val propertyName: TextView = view.findViewById(R.id.pending_reservation_property_name)
@@ -32,13 +31,27 @@ class PendingReservationsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val reservation = reservationTests[position]
-        holder.propertyName.text = reservation.propertyName
-        holder.clientName.text = reservation.clientName
+        holder.propertyName.text = reservation.property.address
+        holder.clientName.text = reservation.property.municipality
         holder.date.text = reservation.date
         holder.time.text = reservation.time
 
-        holder.acceptButton.setOnClickListener { onAcceptClick(reservation) }
-        holder.rejectButton.setOnClickListener { onRejectClick(reservation) }
+        val reservationController = ReservationController()
+
+        holder.acceptButton.setOnClickListener {
+            reservation.state = ReservationState.CONFERMATA
+            reservationController.editReservation(reservation) {
+                reservationTests = reservationTests.filter { it.id != reservation.id } // Rimuove la prenotazione dalla lista
+                notifyDataSetChanged()
+            }
+        }
+        holder.rejectButton.setOnClickListener {
+            reservation.state = ReservationState.RIFIUTATA
+            reservationController.editReservation(reservation) {
+                reservationTests = reservationTests.filter { it.id != reservation.id } // Rimuove la prenotazione dalla lista
+                notifyDataSetChanged()
+            }
+        }
     }
 
     override fun getItemCount() = reservationTests.size

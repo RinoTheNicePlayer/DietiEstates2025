@@ -123,4 +123,75 @@ class ReservationController {
         })
     }
 
+    fun getReservationFromAgency(callback: (List<ReservationResponse>?) -> Unit) {
+        val client = OkHttpClient()
+        val token = AuthManager.idToken
+        val url = "/visita/riepilogoUtenteAgenzia" // da cambiare
+
+        val request = Request.Builder()
+            .url(url)
+            .addHeader("Authorization", "Bearer $token")
+            .addHeader("Content-Type", "application/json")
+            .get()
+            .build()
+
+        client.newCall(request).enqueue(object : okhttp3.Callback {
+            override fun onFailure(call: okhttp3.Call, e: IOException) {
+                Log.e("Backend", "Failed to fetch data", e)
+                Handler(Looper.getMainLooper()).post {
+                    callback(null)  // Mostra errore
+                }
+            }
+
+            override fun onResponse(call: okhttp3.Call, response: Response) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body.string()
+                    val reservations = Json.decodeFromString<List<ReservationResponse>>(responseBody)
+
+                    Handler(Looper.getMainLooper()).post {
+                        callback(reservations)
+                    }
+                    Log.i("Backend", "Data fetched successfully: $responseBody")
+                } else {
+                    Log.e("Backend", "Failed to fetch data: ${response.message}")
+                    Handler(Looper.getMainLooper()).post {
+                        callback(null)  // Mostra errore
+                    }
+                }
+            }
+        })
+    }
+
+    fun editReservation(reservationResponse: ReservationResponse, onSuccess: () -> Unit) {
+        val client = OkHttpClient()
+        val token = AuthManager.idToken
+        val url = "/visita/aggiorna" // da cambiare
+
+        val json = Json.encodeToString(reservationResponse)
+        val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
+
+        val request = Request.Builder()
+            .url(url)
+            .addHeader("Authorization", "Bearer $token")
+            .addHeader("Content-Type", "application/json")
+            .patch(requestBody)
+            .build()
+
+        client.newCall(request).enqueue(object : okhttp3.Callback {
+            override fun onFailure(call: okhttp3.Call, e: IOException) {
+                Log.e("Backend", "Failed to send data", e)
+            }
+
+            override fun onResponse(call: okhttp3.Call, response: Response) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body.string()
+                    Log.i("Backend", "Data sent successfully: $responseBody")
+                    onSuccess()
+                } else {
+                    Log.e("Backend", "Failed to send data: ${response.message}")
+                }
+            }
+        })
+    }
+
 }

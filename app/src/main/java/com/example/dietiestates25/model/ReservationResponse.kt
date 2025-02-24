@@ -12,7 +12,7 @@ data class ReservationResponse (
     @SerialName("oraVisita")
     val time: String,
     @SerialName("statoVisita")
-    val state: ReservationState,
+    var state: ReservationState,
     @SerialName("immobile")
     val property: PropertyResponse
 )

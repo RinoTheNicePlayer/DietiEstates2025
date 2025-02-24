@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
-import com.example.dietiestates25.model.ReservationTest
+import com.example.dietiestates25.model.ReservationResponse
 
 class ConfirmedReservationsAdapter(
-    private val reservationTests: List<ReservationTest>
+    private val reservationTests: List<ReservationResponse>
 ) : RecyclerView.Adapter<ConfirmedReservationsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -27,8 +27,8 @@ class ConfirmedReservationsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val reservation = reservationTests[position]
-        holder.propertyName.text = reservation.propertyName
-        holder.clientName.text = reservation.clientName
+        holder.propertyName.text = reservation.property.address
+        holder.clientName.text = reservation.property.municipality
         holder.date.text = reservation.date
         holder.time.text = reservation.time
     }
