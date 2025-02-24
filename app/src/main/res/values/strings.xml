@@ -91,6 +91,7 @@
     <string name="orario">Orario:</string>
     <string name="meteo_giornaliero">Meteo giornaliero:</string>
     <string name="weather_image">weather_image</string>
+    <string name="prenotazione_effettuata">PRENOTAZIONE EFFETTUATA!</string>
     <string-array name="sale_rent_options">
         <item>In vendita/In affitto</item>
         <item>In vendita</item>

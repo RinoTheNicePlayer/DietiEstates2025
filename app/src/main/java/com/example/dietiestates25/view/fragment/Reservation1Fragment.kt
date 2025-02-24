@@ -110,9 +110,10 @@ class Reservation1Fragment : Fragment() {
                 val temperatureMax = it["temperature_max"] as? Double ?: 0.0
                 val temperatureMin = it["temperature_min"] as? Double ?: 0.0
                 val averageTemperature = (temperatureMax + temperatureMin) / 2
+                val temp = String.format(Locale.getDefault(), "%d", averageTemperature, "°")
 
                 reservationViewModel.selectReservation(Reservation(selectedDate, selectedTime, ReservationState.IN_SOSPESO, property))
-                goToReservation2Property(averageTemperature.toString())
+                goToReservation2Property(temp)
             }
         }
     }

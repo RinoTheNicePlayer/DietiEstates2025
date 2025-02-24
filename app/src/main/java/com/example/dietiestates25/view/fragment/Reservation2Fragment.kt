@@ -42,10 +42,10 @@ class Reservation2Fragment : Fragment() {
         val weatherTemperature = view.findViewById<TextView>(R.id.weather_temperature)
         val confirmButton = view.findViewById<LinearLayout>(R.id.confirm_button)
 
-        reservationViewModel.selectedReservation.observe(viewLifecycleOwner, { reservation ->
+        reservationViewModel.selectedReservation.observe(viewLifecycleOwner) { reservation ->
             dateValue.text = reservation.date
             timeValue.text = reservation.time
-        })
+        }
 
         weatherTemperature.text = averageTemperature
 
@@ -61,12 +61,12 @@ class Reservation2Fragment : Fragment() {
 
     private fun saveReservation(reservation: Reservation) {
         reservationController.saveReservation(reservation) {
-            // go to confirmed
+            goToReservationSent()
         }
     }
 
     private fun goToReservationSent() {
-        val fragment = ReservationSent()
+        val fragment = ReservationSentFragment()
         parentFragmentManager.beginTransaction().apply {
             replace(R.id.fragment_layout_container, fragment)
             addToBackStack(null)
