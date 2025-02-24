@@ -8,17 +8,27 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
-import com.example.dietiestates25.adapters.SentOffersAdapter
-import com.example.dietiestates25.adapters.VisitedReservationsAdapter
-import com.example.dietiestates25.models.SentOffer
-import com.example.dietiestates25.models.VisitedReservation
+import com.example.dietiestates25.adapter.SentOffersAdapter
+import com.example.dietiestates25.adapter.VisitedReservationsAdapter
+import com.example.dietiestates25.controller.OfferController
+import com.example.dietiestates25.controller.ReservationController
+import com.example.dietiestates25.model.OfferResponse
+import com.example.dietiestates25.model.ReservationResponse
 
 class SummaryCustomerFragment : Fragment() {
+    private lateinit var recyclerView1: RecyclerView
+    private lateinit var recyclerView2: RecyclerView
     private lateinit var sentOffersAdapter: SentOffersAdapter
+    private var offerSent = mutableListOf<OfferResponse>()
+    private var reservationSent = mutableListOf<ReservationResponse>()
     private lateinit var visitedReservationsAdapter: VisitedReservationsAdapter
+    private lateinit var offerController: OfferController
+    private lateinit var reservationController: ReservationController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        offerController = OfferController(requireContext())
+        reservationController = ReservationController()
     }
 
     override fun onCreateView(
@@ -28,38 +38,43 @@ class SummaryCustomerFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_summary_customer, container, false)
 
-        val sentOffersRecyclerView: RecyclerView = view.findViewById(R.id.sent_offers_recycler_view)
-        sentOffersRecyclerView.layoutManager = LinearLayoutManager(context)
-        sentOffersAdapter = SentOffersAdapter(emptyList())
-        sentOffersRecyclerView.adapter = sentOffersAdapter
+        /// trova i recycler
+        recyclerView1 = view.findViewById(R.id.sent_offers_recycler_view)
+        recyclerView1.layoutManager = LinearLayoutManager(context)
+        recyclerView2 = view.findViewById(R.id.visited_reservations_recycler_view)
+        recyclerView2.layoutManager = LinearLayoutManager(context)
 
-        val visitedReservationsRecyclerView: RecyclerView =
-            view.findViewById(R.id.visited_reservations_recycler_view)
-        visitedReservationsRecyclerView.layoutManager = LinearLayoutManager(context)
-        visitedReservationsAdapter = VisitedReservationsAdapter(emptyList())
-        visitedReservationsRecyclerView.adapter = visitedReservationsAdapter
+        /// builda gli adapter
+        getMyOffers()
+        getMyReservation()
 
-        fetchSentOffers()
-        fetchVisitedReservations()
+        /// assegna adapter
+        sentOffersAdapter = SentOffersAdapter(offerSent)
+        recyclerView1.adapter = sentOffersAdapter
+        visitedReservationsAdapter = VisitedReservationsAdapter(reservationSent)
+        recyclerView2.adapter = visitedReservationsAdapter
 
         return view
     }
 
-    private fun fetchSentOffers() {
-        val sentOffers = listOf(
-            SentOffer("Immobile #4", "Giulia Ferrari", 175000.0),
-            SentOffer("Immobile #5", "Maria Esposito", 295000.0),
-            SentOffer("Immobile #6", "Davide Ricci", 220000.0)
-        )
-        sentOffersAdapter.updateList(sentOffers)
+    private fun getMyOffers() {
+        offerController.getMyOffers { offers ->
+            offers?.let {
+                for (offer in it) {
+                    offerSent.add(offer)
+                }
+            }
+        }
     }
 
-    private fun fetchVisitedReservations() {
-        val visitedReservations = listOf(
-            VisitedReservation("Immobile #4", "Giulia Ferrari", "04/01/25", "10:00"),
-            VisitedReservation("Immobile #11", "Giulia Ferrari", "07/01/25", "11:00"),
-            VisitedReservation("Immobile #12", "Giulia Ferrari", "12/01/25", "09:00")
-        )
-        visitedReservationsAdapter.updateList(visitedReservations)
+    private fun getMyReservation() {
+        reservationController.getMyReservation { reservations ->
+            reservations?.let {
+                for (reservation in it) {
+                    reservationSent.add(reservation)
+                }
+            }
+        }
     }
+
 }

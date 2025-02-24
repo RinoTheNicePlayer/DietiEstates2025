@@ -1,4 +1,4 @@
-package com.example.dietiestates25.adapters
+package com.example.dietiestates25.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
-import com.example.dietiestates25.models.VisitedReservation
+import com.example.dietiestates25.model.ReservationResponse
 
-class VisitedReservationsAdapter(private var visitedReservations: List<VisitedReservation>) :
+class VisitedReservationsAdapter(private var visitedReservations: List<ReservationResponse>) :
     RecyclerView.Adapter<VisitedReservationsAdapter.VisitedReservationsViewHolder>() {
 
     inner class VisitedReservationsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -30,23 +30,17 @@ class VisitedReservationsAdapter(private var visitedReservations: List<VisitedRe
 
     override fun onBindViewHolder(holder: VisitedReservationsViewHolder, position: Int) {
         val reservation = visitedReservations[position]
-        holder.propertyAddress.text = reservation.propertyAddress
-        holder.reservationState.text = reservation.reservationState
+        holder.propertyAddress.text = reservation.property.address
+        holder.reservationState.text = reservation.state.stato
         holder.date.text = reservation.date
         holder.time.text = reservation.time
 
-        when (reservation.reservationState) {
+        when (reservation.state.stato) {
             "Accettata" -> holder.reservationState.setTextColor(Color.parseColor("#34C759"))
             "Rifiutata" -> holder.reservationState.setTextColor(Color.parseColor("#FF3B30"))
             "In sospeso" -> holder.reservationState.setTextColor(Color.parseColor("#FFCC00"))
-            else -> holder.reservationState.setTextColor(Color.GRAY)
         }
     }
 
     override fun getItemCount(): Int = visitedReservations.size
-
-    fun updateList(newList: List<VisitedReservation>) {
-        visitedReservations = newList
-        notifyDataSetChanged()
-    }
 }

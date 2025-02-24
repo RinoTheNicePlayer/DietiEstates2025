@@ -1,4 +1,4 @@
-package com.example.dietiestates25.adapters
+package com.example.dietiestates25.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
-import com.example.dietiestates25.models.SentOffer
+import com.example.dietiestates25.model.OfferResponse
+import com.example.dietiestates25.model.OfferState
 
-class SentOffersAdapter(private var sentOffers: List<SentOffer>) :
+class SentOffersAdapter(private var sentOffers: List<OfferResponse>) :
     RecyclerView.Adapter<SentOffersAdapter.SentOffersViewHolder>() {
 
     inner class SentOffersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -26,33 +27,24 @@ class SentOffersAdapter(private var sentOffers: List<SentOffer>) :
 
     override fun onBindViewHolder(holder: SentOffersViewHolder, position: Int) {
         val offer = sentOffers[position]
-        holder.propertyAddress.text = offer.propertyAddress
-        holder.offerAmount.text = "€ ${offer.amount}"
+        holder.propertyAddress.text = offer.property.address
+        holder.offerAmount.text = holder.itemView.context.getString(R.string.offer_amount, offer.amount)
 
-        when (offer.offerState) {
-            "Accettata" -> {
-                holder.offerState.text = "Accettata"
+        when (offer.state) {
+            OfferState.ACCETTATA -> {
+                holder.offerState.text = OfferState.ACCETTATA.stato
                 holder.offerState.setTextColor(Color.parseColor("#34C759"))
             }
-            "Rifiutata" -> {
-                holder.offerState.text = "Rifiutata"
+            OfferState.RIFIUTATA -> {
+                holder.offerState.text = OfferState.RIFIUTATA.stato
                 holder.offerState.setTextColor(Color.parseColor("#FF3B30"))
             }
-            "In sospeso" -> {
-                holder.offerState.text = "In sospeso"
+            OfferState.IN_SOSPESO -> {
+                holder.offerState.text = OfferState.IN_SOSPESO.stato
                 holder.offerState.setTextColor(Color.parseColor("#FFCC00"))
-            }
-            else -> {
-                holder.offerState.text = "Stato sconosciuto"
-                holder.offerState.setTextColor(Color.GRAY)
             }
         }
     }
 
     override fun getItemCount(): Int = sentOffers.size
-
-    fun updateList(newList: List<SentOffer>) {
-        sentOffers = newList
-        notifyDataSetChanged()
-    }
 }

@@ -1,8 +1,11 @@
 package com.example.dietiestates25.controller
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.example.dietiestates25.model.MeteoRequest
 import com.example.dietiestates25.model.Reservation
+import com.example.dietiestates25.model.ReservationResponse
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -76,6 +79,45 @@ class ReservationController {
                     onSuccess()
                 } else {
                     Log.e("Backend", "Failed to send data: ${response.message}")
+                }
+            }
+        })
+    }
+
+    fun getMyReservation(callback: (List<ReservationResponse>?) -> Unit) {
+        val client = OkHttpClient()
+        val token = AuthManager.idToken
+        val url = "/visita/riepilogo" // da cambiare
+
+        val request = Request.Builder()
+            .url(url)
+            .addHeader("Authorization", "Bearer $token")
+            .addHeader("Content-Type", "application/json")
+            .get()
+            .build()
+
+        client.newCall(request).enqueue(object : okhttp3.Callback {
+            override fun onFailure(call: okhttp3.Call, e: IOException) {
+                Log.e("Backend", "Failed to fetch data", e)
+                Handler(Looper.getMainLooper()).post {
+                    callback(null)  // Mostra errore
+                }
+            }
+
+            override fun onResponse(call: okhttp3.Call, response: Response) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body.string()
+                    val reservations = Json.decodeFromString<List<ReservationResponse>>(responseBody)
+
+                    Handler(Looper.getMainLooper()).post {
+                        callback(reservations)
+                    }
+                    Log.i("Backend", "Data fetched successfully: $responseBody")
+                } else {
+                    Log.e("Backend", "Failed to fetch data: ${response.message}")
+                    Handler(Looper.getMainLooper()).post {
+                        callback(null)  // Mostra errore
+                    }
                 }
             }
         })
