@@ -18,13 +18,20 @@ import com.example.dietiestates25.controller.PropertyViewModel
 import com.example.dietiestates25.controller.PropertyDetailsController
 import com.example.dietiestates25.model.InterestingPoints
 import com.example.dietiestates25.model.PropertyResponse
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import java.util.Locale
 
-class PropertyDetailsFragment : Fragment() {
+class PropertyDetailsFragment : Fragment(), OnMapReadyCallback {
     private val propertyViewModel: PropertyViewModel by activityViewModels()
     private lateinit var propertyDetailsController: PropertyDetailsController
     private var navigationCallback: NavigationCallback? = null
     private var containerId: Int = 0
+    private lateinit var googleMap: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +51,10 @@ class PropertyDetailsFragment : Fragment() {
         // Enable the up back button
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        // Get the map
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
         val interestingPoint = view.findViewById<TextView>(R.id.location_value)
         val imageProperty = view.findViewById<ImageView>(R.id.property_image)
         val saleRent = view.findViewById<TextView>(R.id.sale_rent_value)
@@ -59,8 +70,6 @@ class PropertyDetailsFragment : Fragment() {
         val description = view.findViewById<TextView>(R.id.description_value)
         val offerButton = view.findViewById<LinearLayout>(R.id.offer_button)
         val reservationButton = view.findViewById<LinearLayout>(R.id.reservation_button)
-
-        /// TODO: mappa
 
         propertyViewModel.selectedProperty.observe(viewLifecycleOwner) { property ->
             getInterestingPoints(property, interestingPoint)
@@ -128,4 +137,18 @@ class PropertyDetailsFragment : Fragment() {
                 }
             }
     }
+
+    override fun onMapReady(map: GoogleMap) {
+        googleMap = map
+        propertyViewModel.selectedProperty.observe(viewLifecycleOwner) { property ->
+            val propertyLocation = LatLng(property.latitude, property.longitude)
+            googleMap.addMarker(
+                MarkerOptions().position(propertyLocation).title(property.address)
+            )
+            googleMap.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(propertyLocation, 15f)
+            )
+        }
+    }
+
 }
