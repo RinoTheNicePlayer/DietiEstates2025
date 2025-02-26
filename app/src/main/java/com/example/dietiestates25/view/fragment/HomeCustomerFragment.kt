@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.dietiestates25.R
-import com.example.dietiestates25.controller.HomeCustomerController
+import com.example.dietiestates25.controller.PropertyController
 import com.example.dietiestates25.controller.PropertySearched
 
 class HomeCustomerFragment : Fragment() {
-    private lateinit var homeCustomerController: HomeCustomerController
+    private lateinit var propertyController: PropertyController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeCustomerController = HomeCustomerController()
+        propertyController = PropertyController()
     }
 
     override fun onCreateView(
@@ -43,7 +43,7 @@ class HomeCustomerFragment : Fragment() {
 
     private fun sendAddressToBackend(address: String, callback: (Boolean) -> Unit) {
         Log.d("HomeCustomerFragment", "Sending address to backend: $address")
-        homeCustomerController.searchPropertyFromAddress(address) { properties ->
+        propertyController.searchPropertyFromAddress(address) { properties ->
             if (properties != null) {
                 PropertySearched.properties = properties
                 goToSearchProperty()

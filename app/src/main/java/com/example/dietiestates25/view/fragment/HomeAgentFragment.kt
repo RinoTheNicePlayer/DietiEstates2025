@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dietiestates25.R
 import com.example.dietiestates25.adapter.PropertyAdapter
 import com.example.dietiestates25.callback.NavigationCallback
-import com.example.dietiestates25.controller.HomeAgentController
+import com.example.dietiestates25.controller.PropertyController
 import com.example.dietiestates25.controller.PropertyViewModel
 import com.example.dietiestates25.model.PropertyResponse
 
 class HomeAgentFragment : Fragment(), PropertyAdapter.OnItemClickListener, NavigationCallback {
-    private lateinit var homeAgentController: HomeAgentController
+    private lateinit var propertyController: PropertyController
     private lateinit var recyclerView: RecyclerView
     private lateinit var propertyAdapter: PropertyAdapter
     private val propertyList = mutableListOf<PropertyResponse>()
@@ -25,7 +25,7 @@ class HomeAgentFragment : Fragment(), PropertyAdapter.OnItemClickListener, Navig
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeAgentController = HomeAgentController()
+        propertyController = PropertyController()
     }
 
     override fun onCreateView(
@@ -54,7 +54,7 @@ class HomeAgentFragment : Fragment(), PropertyAdapter.OnItemClickListener, Navig
     }
 
     private fun loadAgentProperties() {
-        homeAgentController.getMyProperties { properties ->
+        propertyController.getMyProperties { properties ->
             if (properties != null) {
                 for (property in properties) {
                     propertyList.add(property)

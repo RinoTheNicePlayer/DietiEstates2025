@@ -15,16 +15,19 @@ import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dietiestates25.R
+import com.example.dietiestates25.controller.PropertyController
 import com.example.dietiestates25.controller.S3Controller
 import com.example.dietiestates25.model.Property
 
 class CreatePropertyFragment : Fragment() {
     private var selectedImageUri: Uri? = null
     private lateinit var s3Controller: S3Controller
+    private lateinit var propertyController: PropertyController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         s3Controller = S3Controller(requireContext())
+        propertyController = PropertyController()
     }
 
     override fun onCreateView(
@@ -89,7 +92,7 @@ class CreatePropertyFragment : Fragment() {
                     balconySpinner.selectedItem.toString() == "Si"
                 )
 
-                s3Controller.saveProperty(property) {
+                propertyController.saveProperty(property) {
                     goBack()
                     errorLabel.visibility = View.INVISIBLE
                 }

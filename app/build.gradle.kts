@@ -57,6 +57,7 @@ secrets {
 }
 
 dependencies {
+    implementation(libs.mockito.core)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.coil)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
