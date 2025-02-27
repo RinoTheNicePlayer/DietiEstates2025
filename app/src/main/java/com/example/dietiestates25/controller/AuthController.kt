@@ -140,7 +140,8 @@ class AuthController {
     }
 
     fun areValid(email: String, password: String): Boolean {
-        return email.isNotEmpty() && password.isNotEmpty()
+        val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$".toRegex()
+        return email.matches(emailRegex) && password.length >= 8
     }
 
     private fun goToHome(activity: AppCompatActivity, role: String?){
