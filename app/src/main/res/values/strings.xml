@@ -94,6 +94,7 @@
     <string name="prenotazione_effettuata">PRENOTAZIONE EFFETTUATA!</string>
     <string name="offer_amount">€ %1$.2f</string>
     <string name="unknown_state">Stato sconosciuto</string>
+    <string name="filtro">Filtro</string>
     <string-array name="sale_rent_options">
         <item>In vendita/In affitto</item>
         <item>In vendita</item>

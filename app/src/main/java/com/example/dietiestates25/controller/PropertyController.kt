@@ -17,8 +17,9 @@ import java.io.IOException
 import java.net.URLEncoder
 
 class PropertyController {
+    private val client = OkHttpClient()
+
     fun saveProperty(property: Property, onSuccess: () -> Unit) {
-        val client = OkHttpClient()
         val url = "/immobile/crea" /// TODO: da cambiare
         val token = AuthManager.idToken
 
@@ -51,7 +52,6 @@ class PropertyController {
     }
 
     fun getMyProperties(callback: (List<PropertyResponse>?) -> Unit) {
-        val client = OkHttpClient()
         val token = AuthManager.idToken
 
         val request = Request.Builder()
@@ -93,13 +93,14 @@ class PropertyController {
         type: String? = null,
         priceMin: Double? = null,
         priceMax: Double? = null,
-        size: Double? = null,
+        size: Int? = null,
         nBathrooms: Int? = null,
+        page: Int = 0,
+        pageSize: Int = 5,
         callback: (List<PropertyResponse>?) -> Unit
     ) {
-        val client = OkHttpClient()
         val token = AuthManager.idToken
-        val urlBuilder = stringBuilder(address, type, priceMin, priceMax, size, nBathrooms)
+        val urlBuilder = stringBuilder(page, pageSize, address, type, priceMin, priceMax, size, nBathrooms)
 
         val request = Request.Builder()
             .url(urlBuilder.toString())
@@ -135,15 +136,17 @@ class PropertyController {
     }
 
     private fun stringBuilder(
+        page: Int,
+        pageSize: Int,
         address: String,
         type: String?,
         priceMin: Double?,
         priceMax: Double?,
-        size: Double?,
+        size: Int?,
         nBathrooms: Int?
     ): StringBuilder {
         /// cambiare il primo url con ip
-        val urlBuilder = StringBuilder("/immobile/cerca?comune=${URLEncoder.encode(address, "UTF-8")}")
+        val urlBuilder = StringBuilder("/immobile/cerca?page=$page&size=$pageSize&comune=${URLEncoder.encode(address, "UTF-8")}")
         type?.let { urlBuilder.append("&tipologia=${URLEncoder.encode(it, "UTF-8")}") }
         priceMin?.let { urlBuilder.append("&prezzoMin=$it") }
         priceMax?.let { urlBuilder.append("&prezzoMax=$it") }

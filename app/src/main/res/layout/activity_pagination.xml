@@ -10,6 +10,8 @@
             android:id="@+id/previous_page_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:clickable="true"
+            android:focusable="true"
             android:src="@drawable/left_arrow"
             android:scaleType="fitXY" />
 
@@ -47,6 +49,8 @@
             android:id="@+id/next_page_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:clickable="true"
+            android:focusable="true"
             android:src="@drawable/right_arrow"
             android:scaleType="fitXY" />
 </LinearLayout>

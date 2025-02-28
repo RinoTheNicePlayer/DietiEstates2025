@@ -4,4 +4,5 @@ import com.example.dietiestates25.model.PropertyResponse
 
 object PropertySearched {
     var properties: List<PropertyResponse>? = null
+    var address: String? = null
 }
