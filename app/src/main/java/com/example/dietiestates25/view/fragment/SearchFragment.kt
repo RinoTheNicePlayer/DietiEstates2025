@@ -48,6 +48,7 @@ class SearchFragment : Fragment(), PropertyAdapter.OnItemClickListener, Navigati
         val previousPageIcon = view.findViewById<ImageView>(R.id.previous_page_icon)
         val nextPageIcon = view.findViewById<ImageView>(R.id.next_page_icon)
         val currentPageText = view.findViewById<TextView>(R.id.current_page_text)
+        val filterButton = view.findViewById<TextView>(R.id.filter_button)
         val properties = PropertySearched.properties
         recyclerView = view.findViewById(R.id.recycler_view_properties)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -63,6 +64,10 @@ class SearchFragment : Fragment(), PropertyAdapter.OnItemClickListener, Navigati
 
         nextPageIcon.setOnClickListener {
             loadNextProperties(currentPageText)
+        }
+
+        filterButton.setOnClickListener {
+            navigateTo(FilterFragment())
         }
 
         updatePaginationButtons(previousPageIcon, nextPageIcon)
