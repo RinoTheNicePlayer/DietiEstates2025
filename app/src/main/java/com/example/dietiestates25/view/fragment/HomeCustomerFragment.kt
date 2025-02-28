@@ -29,16 +29,20 @@ class HomeCustomerFragment : Fragment() {
         val searchButton = view.findViewById<LinearLayout>(R.id.search_button)
 
         searchButton.setOnClickListener {
-            val bottomSheet = AddressBottomSheetFragment { address, callback ->
-                sendAddressToBackend(address) { isValid ->
-                    callback(isValid)  // Aggiorna la UI della bottom sheet
-                }
-            }
-
-            bottomSheet.show(parentFragmentManager, "AddressBottomSheet")
+            openAddressBottomSheet()
         }
 
         return view
+    }
+
+    private fun openAddressBottomSheet() {
+        val bottomSheet = AddressBottomSheetFragment { address, callback ->
+            sendAddressToBackend(address) { isValid ->
+                callback(isValid)  // Aggiorna la UI della bottom sheet
+            }
+        }
+
+        bottomSheet.show(parentFragmentManager, "AddressBottomSheet")
     }
 
     private fun sendAddressToBackend(address: String, callback: (Boolean) -> Unit) {

@@ -28,21 +28,25 @@ class AddressBottomSheetFragment(private val onAddressEntered: (String, (Boolean
 
         confirmButton.setOnClickListener {
             val address = addressEditText.text.toString()
-
-            if (address.isNotEmpty()) {
-                erroreLabel.visibility = View.INVISIBLE
-
-                // Invia l'indirizzo e ricevi il risultato della validazione
-                onAddressEntered(address) { isValid ->
-                    if (isValid) {
-                        dismiss()  // Chiudi la bottom sheet se l'indirizzo è valido
-                    } else {
-                        erroreLabel.visibility = View.VISIBLE  // Mostra l'errore
-                    }
-                }
-            } else {
-                erroreLabel.visibility = View.VISIBLE
-            }
+            sendAddress(address, erroreLabel)
         }
     }
+
+    private fun sendAddress(address: String, erroreLabel: TextView) {
+        if (address.isNotEmpty()) {
+            erroreLabel.visibility = View.INVISIBLE
+
+            // Invia l'indirizzo e ricevi il risultato della validazione
+            onAddressEntered(address) { isValid ->
+                if (isValid) {
+                    dismiss()  // Chiudi la bottom sheet se l'indirizzo è valido
+                } else {
+                    erroreLabel.visibility = View.VISIBLE  // Mostra l'errore
+                }
+            }
+        } else {
+            erroreLabel.visibility = View.VISIBLE
+        }
+    }
+
 }

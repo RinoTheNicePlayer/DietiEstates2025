@@ -73,36 +73,69 @@ class CreatePropertyFragment : Fragment() {
             val floor = view.findViewById<EditText>(R.id.floors_input_field).text.toString().toInt()
             val size = view.findViewById<EditText>(R.id.size_input_field).text.toString().toInt()
 
-            if (
-                allFieldsAreValid(saleRentSpinner, balconySpinner, elevatorSpinner,
-                    address, municipality, description, price, nRooms, nBathrooms, floor, size)
-                ) {
-                val property = Property(
-                    description,
-                    saveImageToS3(addPropertyImage),
-                    price,
-                    size,
-                    nBathrooms,
-                    nRooms,
-                    saleRentSpinner.selectedItem.toString(),
-                    address,
-                    municipality,
-                    floor,
-                    elevatorSpinner.selectedItem.toString() == "Si",
-                    balconySpinner.selectedItem.toString() == "Si"
-                )
-
-                propertyController.saveProperty(property) {
-                    goBack()
-                    errorLabel.visibility = View.INVISIBLE
-                }
-            }
-            else {
-                errorLabel.visibility = View.VISIBLE
-            }
+            createProperty(
+                saleRentSpinner,
+                balconySpinner,
+                elevatorSpinner,
+                address,
+                municipality,
+                description,
+                price,
+                nRooms,
+                nBathrooms,
+                floor,
+                size,
+                addPropertyImage,
+                errorLabel
+            )
         }
 
         return view
+    }
+
+    private fun createProperty(
+        saleRentSpinner: Spinner,
+        balconySpinner: Spinner,
+        elevatorSpinner: Spinner,
+        address: String,
+        municipality: String,
+        description: String,
+        price: Double,
+        nRooms: Int,
+        nBathrooms: Int,
+        floor: Int,
+        size: Int,
+        addPropertyImage: ImageView,
+        errorLabel: TextView
+    ) {
+        if (
+            allFieldsAreValid(
+                saleRentSpinner, balconySpinner, elevatorSpinner,
+                address, municipality, description, price, nRooms, nBathrooms, floor, size
+            )
+        ) {
+            val property = Property(
+                description,
+                saveImageToS3(addPropertyImage),
+                price,
+                size,
+                nBathrooms,
+                nRooms,
+                saleRentSpinner.selectedItem.toString(),
+                address,
+                municipality,
+                floor,
+                elevatorSpinner.selectedItem.toString() == "Si",
+                balconySpinner.selectedItem.toString() == "Si"
+            )
+
+            propertyController.saveProperty(property) {
+                goBack()
+                errorLabel.visibility = View.INVISIBLE
+            }
+        } else {
+            errorLabel.visibility = View.VISIBLE
+        }
     }
 
     private fun saveImageToS3(addPropertyImage: ImageView): String {

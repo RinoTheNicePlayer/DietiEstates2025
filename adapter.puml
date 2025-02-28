@@ -1,0 +1,123 @@
+@startuml
+class com.example.dietiestates25.adapter.SentOffersAdapter$SentOffersViewHolder {
++ TextView propertyAddress
++ TextView offerState
++ TextView offerAmount
+}
+
+class com.example.dietiestates25.adapter.SentOffersAdapter {
++ SentOffersViewHolder onCreateViewHolder(ViewGroup,Int)
++ void onBindViewHolder(SentOffersViewHolder,Int)
++ Int getItemCount()
+}
+
+interface com.example.dietiestates25.adapter.PropertyAdapter$OnItemClickListener {
++ void onItemClick(PropertyResponse)
+}
+
+class com.example.dietiestates25.adapter.PropertyAdapter$PropertyViewHolder {
++ TextView propertyName
++ TextView propertyPrice
++ ImageView propertyImage
+}
+
+class com.example.dietiestates25.adapter.PropertyAdapter {
+-  s3Controller
++ PropertyViewHolder onCreateViewHolder(ViewGroup,Int)
++ void onBindViewHolder(PropertyViewHolder,Int)
++ Int getItemCount()
+}
+
+
+class com.example.dietiestates25.adapter.VisitedReservationsAdapter$VisitedReservationsViewHolder {
++ TextView propertyAddress
++ TextView reservationState
++ TextView date
++ TextView time
+}
+
+class com.example.dietiestates25.adapter.VisitedReservationsAdapter {
++ VisitedReservationsViewHolder onCreateViewHolder(ViewGroup,Int)
++ void onBindViewHolder(VisitedReservationsViewHolder,Int)
++ Int getItemCount()
+}
+
+class com.example.dietiestates25.adapter.ConfirmedReservationsAdapter$ViewHolder {
++ TextView propertyName
++ TextView clientName
++ TextView date
++ TextView time
+}
+
+class com.example.dietiestates25.adapter.ConfirmedReservationsAdapter {
++ ViewHolder onCreateViewHolder(ViewGroup,Int)
++ void onBindViewHolder(ViewHolder,Int)
++ void getItemCount()
+}
+
+class com.example.dietiestates25.adapter.PendingOffersAdapter$OfferViewHolder {
++ TextView propertyName
++ TextView clientName
++ TextView amount
++ ImageView editButton
++ ImageView acceptButton
+}
+
+class com.example.dietiestates25.adapter.PendingOffersAdapter {
++ OfferViewHolder onCreateViewHolder(ViewGroup,Int)
++ void onBindViewHolder(OfferViewHolder,Int)
++ void getItemCount()
+}
+
+class com.example.dietiestates25.adapter.PendingReservationsAdapter$ViewHolder {
++ TextView propertyName
++ TextView clientName
++ TextView date
++ TextView time
++ ImageView acceptButton
++ ImageView rejectButton
+}
+
+class com.example.dietiestates25.adapter.PendingReservationsAdapter {
++ ViewHolder onCreateViewHolder(ViewGroup,Int)
++ void onBindViewHolder(ViewHolder,Int)
++ void getItemCount()
+}
+
+class com.example.dietiestates25.ConfirmedOffersAdapter$OfferViewHolder {
++ TextView propertyName
++ TextView clientName
++ TextView amount
+}
+
+class com.example.dietiestates25.ConfirmedOffersAdapter {
++ OfferViewHolder onCreateViewHolder(ViewGroup,Int)
++ void onBindViewHolder(OfferViewHolder,Int)
++ void getItemCount()
+}
+
+
+
+com.example.dietiestates25.adapter.SentOffersAdapter +.. com.example.dietiestates25.adapter.SentOffersAdapter$SentOffersViewHolder
+com.example.dietiestates25.adapter.ViewHolder <|-- com.example.dietiestates25.adapter.SentOffersAdapter$SentOffersViewHolder
+com.example.dietiestates25.adapter.Adapter <|-- com.example.dietiestates25.adapter.SentOffersAdapter
+com.example.dietiestates25.adapter.PropertyAdapter +.. com.example.dietiestates25.adapter.PropertyAdapter$OnItemClickListener
+com.example.dietiestates25.adapter.PropertyAdapter +.. com.example.dietiestates25.adapter.PropertyAdapter$PropertyViewHolder
+com.example.dietiestates25.adapter.ViewHolder <|-- com.example.dietiestates25.adapter.PropertyAdapter$PropertyViewHolder
+com.example.dietiestates25.adapter.Adapter <|-- com.example.dietiestates25.adapter.PropertyAdapter
+com.example.dietiestates25.adapter.VisitedReservationsAdapter +.. com.example.dietiestates25.adapter.VisitedReservationsAdapter$VisitedReservationsViewHolder
+com.example.dietiestates25.adapter.ViewHolder <|-- com.example.dietiestates25.adapter.VisitedReservationsAdapter$VisitedReservationsViewHolder
+com.example.dietiestates25.adapter.Adapter <|-- com.example.dietiestates25.adapter.VisitedReservationsAdapter
+com.example.dietiestates25.adapter.ConfirmedReservationsAdapter +.. com.example.dietiestates25.adapter.ConfirmedReservationsAdapter$ViewHolder
+com.example.dietiestates25.adapter.ViewHolder <|-- com.example.dietiestates25.adapter.ConfirmedReservationsAdapter$ViewHolder
+com.example.dietiestates25.adapter.Adapter <|-- com.example.dietiestates25.adapter.ConfirmedReservationsAdapter
+com.example.dietiestates25.adapter.PendingOffersAdapter +.. com.example.dietiestates25.adapter.PendingOffersAdapter$OfferViewHolder
+com.example.dietiestates25.adapter.ViewHolder <|-- com.example.dietiestates25.adapter.PendingOffersAdapter$OfferViewHolder
+com.example.dietiestates25.adapter.Adapter <|-- com.example.dietiestates25.adapter.PendingOffersAdapter
+com.example.dietiestates25.adapter.PendingReservationsAdapter +.. com.example.dietiestates25.adapter.PendingReservationsAdapter$ViewHolder
+com.example.dietiestates25.adapter.ViewHolder <|-- com.example.dietiestates25.adapter.PendingReservationsAdapter$ViewHolder
+com.example.dietiestates25.adapter.Adapter <|-- com.example.dietiestates25.adapter.PendingReservationsAdapter
+com.example.dietiestates25.ConfirmedOffersAdapter +.. com.example.dietiestates25.ConfirmedOffersAdapter$OfferViewHolder
+com.example.dietiestates25.ViewHolder <|-- com.example.dietiestates25.ConfirmedOffersAdapter$OfferViewHolder
+com.example.dietiestates25.Adapter <|-- com.example.dietiestates25.ConfirmedOffersAdapter
+@enduml

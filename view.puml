@@ -1,0 +1,329 @@
+@startuml
+class com.example.dietiestates25.view.fragment.PropertyDetailsFragment$Companion {
+-  ARG_CONTAINER_ID
++ void newInstance(Int)
+}
+
+
+class com.example.dietiestates25.view.fragment.PropertyDetailsFragment {
+- PropertyViewModel propertyViewModel
+- PropertyDetailsController propertyDetailsController
+- NavigationCallback? navigationCallback
+- Int containerId
+- GoogleMap googleMap
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void getInterestingPoints(PropertyResponse,TextView)
+- void loadImage(PropertyResponse,ImageView)
++ void onAttach(Context)
++ void onDetach()
++ void onMapReady(GoogleMap)
+}
+
+
+class com.example.dietiestates25.view.activity.MainActivity {
+- AuthController authController
++ void onCreate(Bundle?)
+- void goToHomeIfLogged()
+- void login(TextView)
+- void loginExternal()
+- void goToRegister()
+}
+
+
+class com.example.dietiestates25.view.fragment.SummaryCustomerFragment {
+- RecyclerView recyclerView1
+- RecyclerView recyclerView2
+- SentOffersAdapter sentOffersAdapter
+-  offerSent
+-  reservationSent
+- VisitedReservationsAdapter visitedReservationsAdapter
+- OfferController offerController
+- ReservationController reservationController
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void getMyOffers()
+- void getMyReservation()
+}
+
+
+class com.example.dietiestates25.view.fragment.OfferSentFragment$Companion {
+-  ARG_CONTAINER_ID
++ void newInstance(Int)
+}
+
+
+class com.example.dietiestates25.view.fragment.OfferSentFragment {
+- Int containerId
+- PropertyViewModel propertyViewModel
+- OfferViewModel offerViewModel
+- S3Controller s3Controller
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void goBackToHome()
+- void loadImage(PropertyResponse,ImageView)
+}
+
+
+class com.example.dietiestates25.view.fragment.RegistrationAgentFragment {
+- ProfileController profileController
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void registerAgent(String,String,TextView)
+- Boolean areValid(String,String)
+- void goBack()
+}
+
+
+class com.example.dietiestates25.view.fragment.ReservationAgentFragment {
+- PendingReservationsAdapter pendingReservationsAdapter
+- ConfirmedReservationsAdapter confirmedReservationsAdapter
+- ReservationController reservationController
+-  pendingReservations
+-  confirmedReservations
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void loadReservations()
+}
+
+
+class com.example.dietiestates25.view.activity.HomeCustomerActivity {
++ void onCreate(Bundle?)
++ Boolean onOptionsItemSelected(MenuItem)
++ Boolean onSupportNavigateUp()
+- void replaceFragment(Fragment)
+- void updateUpButtonVisibility()
+}
+
+class com.example.dietiestates25.view.fragment.Reservation2Fragment$Companion {
+-  ARG_AVERAGE_TEMP
++ void newInstance(String)
+}
+
+
+class com.example.dietiestates25.view.fragment.Reservation2Fragment {
+- ReservationViewModel reservationViewModel
+- String? averageTemperature
+- ReservationController reservationController
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void saveReservation(Reservation)
+- void goToReservationSent()
+}
+
+
+class com.example.dietiestates25.view.fragment.OfferAgentFragment {
+- RecyclerView recyclerView1
+- RecyclerView recyclerView2
+-  offerConfirmed
+-  offerPending
+- PendingOffersAdapter pendingOffersAdapter
+- ConfirmedOffersAdapter confirmedOffersAdapter
+- OfferController offerController
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void loadOffers()
+}
+
+
+class com.example.dietiestates25.view.fragment.ReservationSentFragment {
+- PropertyViewModel propertyViewModel
+- ReservationViewModel reservationViewModel
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void goBackToHomeCustomer()
+}
+
+
+class com.example.dietiestates25.view.activity.RegisterActivity {
+- AuthController controller
++ void onCreate(Bundle?)
+- void signUp()
++ Boolean onOptionsItemSelected(MenuItem)
+}
+
+
+class com.example.dietiestates25.view.activity.HomeAgentActivity {
++ void onCreate(Bundle?)
++ Boolean onOptionsItemSelected(MenuItem)
++ Boolean onSupportNavigateUp()
+- void replaceFragment(Fragment)
+- void updateUpButtonVisibility()
+}
+
+class com.example.dietiestates25.view.fragment.OfferFragment$Companion {
+-  ARG_CONTAINER_ID
++ void newInstance(Int)
+}
+
+
+class com.example.dietiestates25.view.fragment.OfferFragment {
+- Int containerId
+- PropertyViewModel propertyViewModel
+- OfferViewModel offerViewModel
+- OfferController offerController
+- NavigationCallback? navigationCallback
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void loadImage(PropertyResponse,ImageView)
+- void saveOffer(Double,PropertyResponse)
++ void onAttach(Context)
++ void onDetach()
+}
+
+
+class com.example.dietiestates25.view.fragment.RegistrationManagerFragment {
+- ProfileController profileController
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void registerManager(String,String,TextView)
+- Boolean areValid(String,String)
+- void goBack()
+}
+
+
+class com.example.dietiestates25.view.fragment.AddressBottomSheetFragment {
++ View onCreateView(LayoutInflater,ViewGroup?,Bundle?)
++ void onViewCreated(View,Bundle?)
+}
+
+class com.example.dietiestates25.view.fragment.ProfileFragment {
+- ProfileController profileController
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void orderVisibilityButtonForRole(String,LinearLayout,LinearLayout,LinearLayout)
+- void signOut()
+- void fetchUserMail(TextView)
+- void navigateTo(Fragment)
+}
+
+
+class com.example.dietiestates25.view.fragment.SearchFragment {
+- RecyclerView recyclerView
+- PropertyAdapter propertyAdapter
+-  propertyList
+- PropertyViewModel propertyViewModel
+- PropertyController propertyController
+-  isLoading
+-  currentPage
+-  totalPages
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void loadNextProperties(TextView)
+- void loadPreviousProperties(TextView)
+- void loadProperties(List<PropertyResponse>?)
+- void loadMoreProperties(Int)
+- Int calculateTotalPages(Int)
+- void updatePaginationButtons(ImageView?,ImageView?)
++ void onItemClick(PropertyResponse)
++ void navigateTo(Fragment)
+}
+
+
+class com.example.dietiestates25.view.fragment.HomeAgentFragment {
+- PropertyController propertyController
+- RecyclerView recyclerView
+- PropertyAdapter propertyAdapter
+-  propertyList
+- PropertyViewModel propertyViewModel
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void loadAgentProperties()
++ void onItemClick(PropertyResponse)
++ void navigateTo(Fragment)
+}
+
+
+class com.example.dietiestates25.view.fragment.Reservation1Fragment {
+- PropertyViewModel propertyViewModel
+- ReservationViewModel reservationViewModel
+- ReservationController reservationController
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void showDatePickerDialog(EditText)
+- void showTimePickerDialog(EditText)
+- void getMeteo(PropertyResponse,String,String)
+- void goToReservation2Property(String)
+}
+
+
+class com.example.dietiestates25.view.fragment.UpdatePasswordFragment {
+- ProfileController profileController
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- Boolean areValid(String,String)
+- void updatePassword(String,String,TextView)
+- void goBack()
+}
+
+
+class com.example.dietiestates25.view.fragment.FilterFragment {
+- PropertyController propertyController
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void applyFiltersToProperties(Spinner,EditText,EditText,EditText,EditText)
+- void goBack()
+}
+
+
+class com.example.dietiestates25.view.fragment.CreatePropertyFragment {
+- Uri? selectedImageUri
+- S3Controller s3Controller
+- PropertyController propertyController
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- String saveImageToS3(ImageView)
+- void initSaleRentSpinner(Spinner)
+- void initBalconySpinner(Spinner)
+- void initElevatorSpinner(Spinner)
+- Boolean allFieldsAreValid(Spinner,Spinner,Spinner,String,String,String,Double,Int,Int,Int,Int)
+- Boolean areValid(String,String,String,Double,Int,Int,Int,Int)
+- Boolean optionsAreSelected(Spinner,Spinner,Spinner)
+- void goBack()
+}
+
+
+class com.example.dietiestates25.view.fragment.HomeCustomerFragment {
+- PropertyController propertyController
++ void onCreate(Bundle?)
++ View? onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+- void sendAddressToBackend(String,(Boolean) -> Unit)
+- void goToSearchProperty()
+}
+
+
+
+
+com.example.dietiestates25.view.fragment.PropertyDetailsFragment +.. com.example.dietiestates25.view.fragment.PropertyDetailsFragment$Companion
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.PropertyDetailsFragment
+com.google.android.gms.maps.OnMapReadyCallback <|.. com.example.dietiestates25.view.fragment.PropertyDetailsFragment
+androidx.appcompat.app.AppCompatActivity <|-- com.example.dietiestates25.view.activity.MainActivity
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.SummaryCustomerFragment
+com.example.dietiestates25.view.fragment.OfferSentFragment +.. com.example.dietiestates25.view.fragment.OfferSentFragment$Companion
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.OfferSentFragment
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.RegistrationAgentFragment
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.ReservationAgentFragment
+androidx.appcompat.app.AppCompatActivity <|-- com.example.dietiestates25.view.activity.HomeCustomerActivity
+com.example.dietiestates25.view.fragment.Reservation2Fragment +.. com.example.dietiestates25.view.fragment.Reservation2Fragment$Companion
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.Reservation2Fragment
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.OfferAgentFragment
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.ReservationSentFragment
+androidx.appcompat.app.AppCompatActivity <|-- com.example.dietiestates25.view.activity.RegisterActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.dietiestates25.view.activity.HomeAgentActivity
+com.example.dietiestates25.view.fragment.OfferFragment +.. com.example.dietiestates25.view.fragment.OfferFragment$Companion
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.OfferFragment
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.RegistrationManagerFragment
+com.google.android.material.bottomsheet.BottomSheetDialogFragment <|-- com.example.dietiestates25.view.fragment.AddressBottomSheetFragment
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.ProfileFragment
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.SearchFragment
+com.example.dietiestates25.view.fragment.OnItemClickListener <|.. com.example.dietiestates25.view.fragment.SearchFragment
+com.example.dietiestates25.callback.NavigationCallback <|.. com.example.dietiestates25.view.fragment.SearchFragment
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.HomeAgentFragment
+com.example.dietiestates25.view.fragment.OnItemClickListener <|.. com.example.dietiestates25.view.fragment.HomeAgentFragment
+com.example.dietiestates25.callback.NavigationCallback <|.. com.example.dietiestates25.view.fragment.HomeAgentFragment
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.Reservation1Fragment
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.UpdatePasswordFragment
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.FilterFragment
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.CreatePropertyFragment
+androidx.fragment.app.Fragment <|-- com.example.dietiestates25.view.fragment.HomeCustomerFragment
+@enduml

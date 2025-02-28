@@ -56,7 +56,7 @@ class RegistrationManagerFragment : Fragment() {
     }
 
     private fun areValid(oldPassword: String, newPassword: String): Boolean {
-        return oldPassword.isNotEmpty() && newPassword.isNotEmpty()
+        return profileController.arePasswordValid(oldPassword, newPassword)
     }
 
     private fun goBack() {

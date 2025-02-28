@@ -118,6 +118,19 @@ class ProfileController {
         )
     }
 
+    fun areEmailValid(email: String, password: String): Boolean {
+        val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$".toRegex()
+        return email.matches(emailRegex) && password.length >= 8
+    }
+
+    fun arePasswordValid(oldPassword: String, newPassword: String): Boolean {
+        return if (oldPassword != newPassword){
+            oldPassword.length >= 8 && newPassword.length >= 8
+        } else {
+            false
+        }
+    }
+
     private fun comeBackToLogin(fragment: Fragment){
         val intent = Intent(fragment.requireContext(), MainActivity::class.java)
         fragment.startActivity(intent)

@@ -1,0 +1,6 @@
+@startuml
+interface com.example.dietiestates25.callback.NavigationCallback {
++ void navigateTo(Fragment)
+}
+
+@enduml

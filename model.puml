@@ -1,0 +1,44 @@
+@startuml
+class com.example.dietiestates25.model.OfferResponse {
+}
+class com.example.dietiestates25.model.PropertyResponse {
+}
+class com.example.dietiestates25.model.Offer {
+}
+class com.example.dietiestates25.model.RegistrationRequest {
+}
+class com.example.dietiestates25.model.InterestingPoints {
+}
+class com.example.dietiestates25.model.Reservation {
+}
+class com.example.dietiestates25.model.ReservationState$Companion {
++ ReservationState fromString(String)
+}
+
+enum com.example.dietiestates25.model.ReservationState {
++  CONFERMATA
++  RIFIUTATA
++  IN_SOSPESO
+}
+
+class com.example.dietiestates25.model.MeteoRequest {
+}
+class com.example.dietiestates25.model.ReservationResponse {
+}
+class com.example.dietiestates25.model.OfferState$Companion {
++ OfferState fromString(String)
+}
+
+enum com.example.dietiestates25.model.OfferState {
++  ACCETTATA
++  RIFIUTATA
++  IN_SOSPESO
+}
+
+class com.example.dietiestates25.model.Property {
+}
+
+
+com.example.dietiestates25.model.ReservationState +.. com.example.dietiestates25.model.ReservationState$Companion
+com.example.dietiestates25.model.OfferState +.. com.example.dietiestates25.model.OfferState$Companion
+@enduml

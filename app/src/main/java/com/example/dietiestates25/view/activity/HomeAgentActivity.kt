@@ -21,14 +21,9 @@ class HomeAgentActivity : AppCompatActivity() {
         replaceFragment(HomeAgentFragment())
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation2View)
+
         bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home2 -> replaceFragment(HomeAgentFragment())
-                R.id.nav_offerte -> replaceFragment(OfferAgentFragment())
-                R.id.nav_reservation -> replaceFragment(ReservationAgentFragment())
-                R.id.nav_profile2 -> replaceFragment(ProfileFragment())
-            }
-            true
+            navigationTab(item)
         }
 
         // Add OnBackStackChangedListener to update the visibility of the up button
@@ -37,6 +32,16 @@ class HomeAgentActivity : AppCompatActivity() {
         }
         // Initial call to set the correct visibility
         updateUpButtonVisibility()
+    }
+
+    private fun navigationTab(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_home2 -> replaceFragment(HomeAgentFragment())
+            R.id.nav_offerte -> replaceFragment(OfferAgentFragment())
+            R.id.nav_reservation -> replaceFragment(ReservationAgentFragment())
+            R.id.nav_profile2 -> replaceFragment(ProfileFragment())
+        }
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

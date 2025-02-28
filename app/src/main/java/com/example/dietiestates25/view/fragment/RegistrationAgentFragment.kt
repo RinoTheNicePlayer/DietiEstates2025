@@ -55,7 +55,7 @@ class RegistrationAgentFragment : Fragment() {
     }
 
     private fun areValid(email: String, password: String): Boolean {
-        return email.isNotEmpty() && password.isNotEmpty()
+        return profileController.areEmailValid(email, password)
     }
 
     private fun goBack() {

@@ -20,12 +20,7 @@ class HomeCustomerActivity: AppCompatActivity() {
         val bottomNavBar = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
         bottomNavBar.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home ->      replaceFragment(HomeCustomerFragment())
-                R.id.nav_riepilogo -> replaceFragment(SummaryCustomerFragment())
-                R.id.nav_profile ->   replaceFragment(ProfileFragment())
-            }
-            true
+            navigationTab(item)
         }
 
         // Add OnBackStackChangedListener to update the visibility of the up button
@@ -34,6 +29,15 @@ class HomeCustomerActivity: AppCompatActivity() {
         }
         // Initial call to set the correct visibility
         updateUpButtonVisibility()
+    }
+
+    private fun navigationTab(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_home -> replaceFragment(HomeCustomerFragment())
+            R.id.nav_riepilogo -> replaceFragment(SummaryCustomerFragment())
+            R.id.nav_profile -> replaceFragment(ProfileFragment())
+        }
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
