@@ -9,7 +9,6 @@ import com.example.dietiestates25.model.ReservationResponse
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
@@ -17,9 +16,9 @@ import java.io.IOException
 
 class ReservationController {
     fun getMeteo(meteoRequest: MeteoRequest, callback: (Map<String, Any>?) -> Unit) {
-        val client = OkHttpClient()
+        val client = HttpClient.client
         val token = AuthManager.idToken
-        val url = "/api/meteo" // da cambiare
+        val url = "http://13.60.254.218:8080/api/meteo" // da cambiare
 
         val json = Json.encodeToString(meteoRequest)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
@@ -45,7 +44,7 @@ class ReservationController {
                     Log.i("Backend", "Data sent successfully: $responseBody")
                     callback(result)
                 } else {
-                    Log.e("Backend", "Failed to send data: ${response.message}")
+                    Log.e("Backend", "Failed to send data: ${response.code}")
                     callback(null)
                 }
             }
@@ -53,9 +52,9 @@ class ReservationController {
     }
 
     fun saveReservation(reservation: Reservation, onSuccess: () -> Unit) {
-        val client = OkHttpClient()
+        val client = HttpClient.client
         val token = AuthManager.idToken
-        val url = "/visita/prenota" // da cambiare
+        val url = "http://13.60.254.218:8080/visita/prenota" // da cambiare
 
         val json = Json.encodeToString(reservation)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
@@ -78,16 +77,16 @@ class ReservationController {
                     Log.i("Backend", "Data sent successfully: $responseBody")
                     onSuccess()
                 } else {
-                    Log.e("Backend", "Failed to send data: ${response.message}")
+                    Log.e("Backend", "Failed to send data: ${response.code}")
                 }
             }
         })
     }
 
     fun getMyReservation(callback: (List<ReservationResponse>?) -> Unit) {
-        val client = OkHttpClient()
+        val client = HttpClient.client
         val token = AuthManager.idToken
-        val url = "/visita/riepilogoCliente" // da cambiare
+        val url = "http://13.60.254.218:8080/visita/riepilogoCliente" // da cambiare
 
         val request = Request.Builder()
             .url(url)
@@ -114,7 +113,7 @@ class ReservationController {
                     }
                     Log.i("Backend", "Data fetched successfully: $responseBody")
                 } else {
-                    Log.e("Backend", "Failed to fetch data: ${response.message}")
+                    Log.e("Backend", "Failed to fetch data: ${response.code}")
                     Handler(Looper.getMainLooper()).post {
                         callback(null)  // Mostra errore
                     }
@@ -124,9 +123,9 @@ class ReservationController {
     }
 
     fun getReservationFromAgency(callback: (List<ReservationResponse>?) -> Unit) {
-        val client = OkHttpClient()
+        val client = HttpClient.client
         val token = AuthManager.idToken
-        val url = "/visita/riepilogoUtenteAgenzia" // da cambiare
+        val url = "http://13.60.254.218:8080/visita/riepilogoUtenteAgenzia" // da cambiare
 
         val request = Request.Builder()
             .url(url)
@@ -153,7 +152,7 @@ class ReservationController {
                     }
                     Log.i("Backend", "Data fetched successfully: $responseBody")
                 } else {
-                    Log.e("Backend", "Failed to fetch data: ${response.message}")
+                    Log.e("Backend", "Failed to fetch data: ${response.code}")
                     Handler(Looper.getMainLooper()).post {
                         callback(null)  // Mostra errore
                     }
@@ -163,9 +162,9 @@ class ReservationController {
     }
 
     fun editReservation(reservationResponse: ReservationResponse, onSuccess: () -> Unit) {
-        val client = OkHttpClient()
+        val client = HttpClient.client
         val token = AuthManager.idToken
-        val url = "/visita/aggiorna" // da cambiare
+        val url = "http://13.60.254.218:8080/visita/aggiorna" // da cambiare
 
         val json = Json.encodeToString(reservationResponse)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
@@ -188,7 +187,7 @@ class ReservationController {
                     Log.i("Backend", "Data sent successfully: $responseBody")
                     onSuccess()
                 } else {
-                    Log.e("Backend", "Failed to send data: ${response.message}")
+                    Log.e("Backend", "Failed to send data: ${response.code}")
                 }
             }
         })

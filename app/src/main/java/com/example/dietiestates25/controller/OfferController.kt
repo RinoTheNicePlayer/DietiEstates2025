@@ -13,7 +13,6 @@ import com.example.dietiestates25.model.PropertyResponse
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
@@ -38,9 +37,9 @@ class OfferController(private val context: Context) {
     }
 
     fun sendOffer(offer: Offer, onSuccess: () -> Unit) {
-        val client = OkHttpClient()
+        val client = HttpClient.client
         val token = AuthManager.idToken
-        val url = "/offerta/aggiungi" ///da cambiare
+        val url = "http://13.60.254.218:8080/offerta/aggiungi" ///da cambiare
 
         val json = Json.encodeToString(offer)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
@@ -64,16 +63,16 @@ class OfferController(private val context: Context) {
                     Log.i("Backend", "Data sent successfully: $responseMessage")
                     onSuccess()
                 } else {
-                    Log.e("Backend", "Failed to send data: ${response.message}")
+                    Log.e("Backend", "Failed to send data: ${response.code}")
                 }
             }
         })
     }
 
     fun getMyOffers(callback: (List<OfferResponse>?) -> Unit) {
-        val client = OkHttpClient()
+        val client = HttpClient.client
         val token = AuthManager.idToken
-        val url = "/offerta/riepilogoCliente" // da cambiare
+        val url = "http://13.60.254.218:8080/offerta/riepilogoCliente" // da cambiare
 
         val request = Request.Builder()
             .url(url)
@@ -100,7 +99,7 @@ class OfferController(private val context: Context) {
                     }
                     Log.i("Backend", "Data fetched successfully: $responseBody")
                 } else {
-                    Log.e("Backend", "Failed to fetch data: ${response.message}")
+                    Log.e("Backend", "Failed to fetch data: ${response.code}")
                     Handler(Looper.getMainLooper()).post {
                         callback(null)  // Mostra errore
                     }
@@ -110,9 +109,9 @@ class OfferController(private val context: Context) {
     }
 
     fun getOffersFromAgency(callback: (List<OfferResponse>?) -> Unit) {
-        val client = OkHttpClient()
+        val client = HttpClient.client
         val token = AuthManager.idToken
-        val url = "/offerta/riepilogoUtenteAgenzia" // da cambiare
+        val url = "http://13.60.254.218:8080/offerta/riepilogoUtenteAgenzia" // da cambiare
 
         val request = Request.Builder()
             .url(url)
@@ -139,7 +138,7 @@ class OfferController(private val context: Context) {
                     }
                     Log.i("Backend", "Data fetched successfully: $responseBody")
                 } else {
-                    Log.e("Backend", "Failed to fetch data: ${response.message}")
+                    Log.e("Backend", "Failed to fetch data: ${response.code}")
                     Handler(Looper.getMainLooper()).post {
                         callback(null)  // Mostra errore
                     }
@@ -149,9 +148,9 @@ class OfferController(private val context: Context) {
     }
 
     fun editOffer(offerResponse: OfferResponse, onSuccess: () -> Unit) {
-        val client = OkHttpClient()
+        val client = HttpClient.client
         val token = AuthManager.idToken
-        val url = "/offerta/aggiorna" // da cambiare
+        val url = "http://13.60.254.218:8080/offerta/aggiorna" // da cambiare
 
         val json = Json.encodeToString(offerResponse)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
@@ -175,7 +174,7 @@ class OfferController(private val context: Context) {
                     Log.i("Backend", "Data sent successfully: $responseMessage")
                     onSuccess()
                 } else {
-                    Log.e("Backend", "Failed to send data: ${response.message}")
+                    Log.e("Backend", "Failed to send data: ${response.code}")
                 }
             }
         })

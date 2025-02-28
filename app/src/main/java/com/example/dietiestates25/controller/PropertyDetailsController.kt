@@ -13,7 +13,6 @@ import com.example.dietiestates25.model.InterestingPoints
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.OkHttpClient
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Request
 import java.io.IOException
@@ -68,9 +67,9 @@ class PropertyDetailsController(private val context: Context) {
     }
 
     private fun getInterestingPointsFromBackend(interestingPoints: InterestingPoints, callback: (Map<String, Int>?) -> Unit) {
-        val client = OkHttpClient()
+        val client = HttpClient.client
         val token = AuthManager.idToken
-        val url = "/geodata/conteggio-pdi" /// da cambiare
+        val url = "http://13.60.254.218:8080/geodata/conteggio-pdi" /// da cambiare
 
         val json = Json.encodeToString(interestingPoints)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())

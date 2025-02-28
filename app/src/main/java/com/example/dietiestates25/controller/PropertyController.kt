@@ -8,7 +8,6 @@ import com.example.dietiestates25.model.PropertyResponse
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
@@ -17,10 +16,9 @@ import java.io.IOException
 import java.net.URLEncoder
 
 class PropertyController {
-    private val client = OkHttpClient()
-
     fun saveProperty(property: Property, onSuccess: () -> Unit) {
-        val url = "/immobile/crea" /// TODO: da cambiare
+        val client = HttpClient.client
+        val url = "http://13.60.254.218:8080/immobile/crea" /// TODO: da cambiare
         val token = AuthManager.idToken
 
         val json = Json.encodeToString(property)
@@ -52,15 +50,15 @@ class PropertyController {
     }
 
     fun getMyProperties(callback: (List<PropertyResponse>?) -> Unit) {
+        val client = HttpClient.client
         val token = AuthManager.idToken
 
         val request = Request.Builder()
-            .url("/immobile/personali")  /// Sostituisci con il tuo URL
+            .url("http://13.60.254.218:8080/immobile/personali")  /// Sostituisci con il tuo URL
             .addHeader("Authorization", "Bearer $token")
             .addHeader("Content-Type", "application/json")
             .get()
             .build()
-
 
         client.newCall(request).enqueue(object : okhttp3.Callback {
             override fun onFailure(call: okhttp3.Call, e: IOException) {
@@ -103,7 +101,7 @@ class PropertyController {
             callback(null)
             return
         }
-
+        val client = HttpClient.client
         val token = AuthManager.idToken
         val urlBuilder = stringBuilder(page, pageSize, address, type, priceMin, priceMax, size, nBathrooms)
 
@@ -151,7 +149,7 @@ class PropertyController {
         nBathrooms: Int?
     ): StringBuilder {
         /// cambiare il primo url con ip
-        val urlBuilder = StringBuilder("/immobile/cerca?page=$page&size=$pageSize&comune=${URLEncoder.encode(address, "UTF-8")}")
+        val urlBuilder = StringBuilder("http://13.60.254.218:8080/immobile/cerca?page=$page&size=$pageSize&comune=${URLEncoder.encode(address, "UTF-8")}")
         type?.let { urlBuilder.append("&tipologia=${URLEncoder.encode(it, "UTF-8")}") }
         priceMin?.let { urlBuilder.append("&prezzoMin=$it") }
         priceMax?.let { urlBuilder.append("&prezzoMax=$it") }

@@ -12,7 +12,6 @@ import com.example.dietiestates25.view.activity.MainActivity
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
@@ -21,8 +20,8 @@ import java.io.IOException
 
 class ProfileController {
     fun signUpGestoreOrAgente(email: String, password: String, role: String, errorLabel: TextView, onSuccess: () -> Unit){
-        val client = OkHttpClient()
-        val url = "/auth/register" /// TODO: da cambiare
+        val client = HttpClient.client
+        val url = "http://13.60.254.218:8080/auth/register" /// TODO: da cambiare
         val token = AuthManager.idToken
 
         val json = Json.encodeToString(RegistrationRequest(email, password, role))
@@ -50,7 +49,7 @@ class ProfileController {
                     onSuccess()
                 } else {
                     errorLabel.visibility = TextView.VISIBLE
-                    Log.e("Backend", "Failed to send data: ${response.message}")
+                    Log.e("Backend", "Failed to send data: ${response.code}")
                 }
             }
         })
