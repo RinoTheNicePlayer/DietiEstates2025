@@ -99,6 +99,11 @@ class PropertyController {
         pageSize: Int = 5,
         callback: (List<PropertyResponse>?) -> Unit
     ) {
+        if (!validateSearchParameters(address, type, priceMin, priceMax, size, nBathrooms)) {
+            callback(null)
+            return
+        }
+
         val token = AuthManager.idToken
         val urlBuilder = stringBuilder(page, pageSize, address, type, priceMin, priceMax, size, nBathrooms)
 
@@ -154,5 +159,34 @@ class PropertyController {
         nBathrooms?.let { urlBuilder.append("&nBagni=$it") }
 
         return urlBuilder
+    }
+
+    fun validateSearchParameters(
+        address: String,
+        type: String?,
+        priceMin: Double?,
+        priceMax: Double?,
+        size: Int?,
+        nBathrooms: Int?
+    ): Boolean {
+        if (address == "") {
+            return false
+        }
+        if (type != null && (type == "" || (type != "In Affitto" && type != "In Vendita"))) {
+            return false
+        }
+        if (priceMin != null && priceMin <= 0) {
+            return false
+        }
+        if (priceMax != null && priceMax <= 0) {
+            return false
+        }
+        if (size != null && size <= 0) {
+            return false
+        }
+        if (nBathrooms != null && nBathrooms <= 0) {
+            return false
+        }
+        return true
     }
 }
