@@ -21,38 +21,39 @@ import java.io.IOException
 class ProfileController {
     fun signUpGestoreOrAgente(email: String, password: String, role: String, errorLabel: TextView, onSuccess: () -> Unit){
         val client = HttpClient.client
-        val url = "http://13.60.254.218:8080/auth/register" /// TODO: da cambiare
-        val token = AuthManager.idToken
+        val url = "http://51.20.116.174:8080/auth/register" /// TODO: da cambiare
 
         val json = Json.encodeToString(RegistrationRequest(email, password, role))
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
 
-        val request = Request.Builder()
-            .url(url)
-            .addHeader("Authorization", "Bearer $token")
-            .addHeader("Content-Type", "application/json")
-            .post(requestBody)
-            .build()
+        AuthManager.getToken { token ->
+            val request = Request.Builder()
+                .url(url)
+                .addHeader("Authorization", "Bearer $token")
+                .addHeader("Content-Type", "application/json")
+                .post(requestBody)
+                .build()
 
-        client.newCall(request).enqueue(object : okhttp3.Callback {
-            override fun onFailure(call: okhttp3.Call, e: IOException) {
-                errorLabel.visibility = TextView.VISIBLE
-                Log.e("Backend", "Failed to send data", e)
-            }
-
-            override fun onResponse(call: okhttp3.Call, response: Response) {
-                if (response.isSuccessful) {
-                    val responseBody: ResponseBody = response.body
-                    val responseMessage = responseBody.string()
-                    errorLabel.visibility = TextView.INVISIBLE
-                    Log.i("Backend", "Data sent successfully: $responseMessage")
-                    onSuccess()
-                } else {
+            client.newCall(request).enqueue(object : okhttp3.Callback {
+                override fun onFailure(call: okhttp3.Call, e: IOException) {
                     errorLabel.visibility = TextView.VISIBLE
-                    Log.e("Backend", "Failed to send data: ${response.code}")
+                    Log.e("Backend", "Failed to send data", e)
                 }
-            }
-        })
+
+                override fun onResponse(call: okhttp3.Call, response: Response) {
+                    if (response.isSuccessful) {
+                        val responseBody: ResponseBody = response.body
+                        val responseMessage = responseBody.string()
+                        errorLabel.visibility = TextView.INVISIBLE
+                        Log.i("Backend", "Data sent successfully: $responseMessage")
+                        onSuccess()
+                    } else {
+                        errorLabel.visibility = TextView.VISIBLE
+                        Log.e("Backend", "Failed to send data: ${response.code}")
+                    }
+                }
+            })
+        }
     }
 
     fun updatePassword(oldPassword: String, newPassword: String, errorLabel: TextView, onSuccess: () -> Unit) {

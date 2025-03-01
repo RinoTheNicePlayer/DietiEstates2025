@@ -68,42 +68,44 @@ class PropertyDetailsController(private val context: Context) {
 
     private fun getInterestingPointsFromBackend(interestingPoints: InterestingPoints, callback: (Map<String, Int>?) -> Unit) {
         val client = HttpClient.client
-        val token = AuthManager.idToken
-        val url = "http://13.60.254.218:8080/geodata/conteggio-pdi" /// da cambiare
+        val url = "http://51.20.116.174:8080/geodata/conteggio-pdi" /// da cambiare
 
         val json = Json.encodeToString(interestingPoints)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
 
-        val request = Request.Builder()
-            .url(url)
-            .addHeader("Authorization", "Bearer $token")
-            .addHeader("Content-Type", "application/json")
-            .post(requestBody)
-            .build()
+        AuthManager.getToken { token ->
+            val request = Request.Builder()
+                .url(url)
+                .addHeader("Authorization", "Bearer $token")
+                .addHeader("Content-Type", "application/json")
+                .post(requestBody)
+                .build()
 
-        client.newCall(request).enqueue(object : okhttp3.Callback {
-            override fun onFailure(call: okhttp3.Call, e: IOException) {
-                Log.e("Interesting point validation", "Errore di rete: ${e.message}")
-                Handler(Looper.getMainLooper()).post {
-                    callback(null)  // Mostra errore
-                }
-            }
-
-            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
-                if (response.isSuccessful) {
-                    val responseBody = response.body.string()
-                    val result: Map<String, Int> = Json.decodeFromString(responseBody)
-
-                    Handler(Looper.getMainLooper()).post {
-                        callback(result)  // punti di interesse trovati
-                    }
-                } else {
-                    Log.e("Interesting point validation", "Errore HTTP: ${response.code}")
+            client.newCall(request).enqueue(object : okhttp3.Callback {
+                override fun onFailure(call: okhttp3.Call, e: IOException) {
+                    Log.e("Interesting point validation", "Errore di rete: ${e.message}")
                     Handler(Looper.getMainLooper()).post {
                         callback(null)  // Mostra errore
                     }
                 }
-            }
-        })
+
+                override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body.string()
+                        val result: Map<String, Int> = Json.decodeFromString(responseBody)
+
+                        Handler(Looper.getMainLooper()).post {
+                            callback(result)  // punti di interesse trovati
+                        }
+                    } else {
+                        Log.e("Interesting point validation", "Errore HTTP: ${response.code}")
+                        Handler(Looper.getMainLooper()).post {
+                            callback(null)  // Mostra errore
+                        }
+                    }
+                }
+            })
+        }
     }
+
 }

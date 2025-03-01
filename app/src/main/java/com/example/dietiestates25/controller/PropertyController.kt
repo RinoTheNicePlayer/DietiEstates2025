@@ -18,72 +18,74 @@ import java.net.URLEncoder
 class PropertyController {
     fun saveProperty(property: Property, onSuccess: () -> Unit) {
         val client = HttpClient.client
-        val url = "http://13.60.254.218:8080/immobile/crea" /// TODO: da cambiare
-        val token = AuthManager.idToken
+        val url = "http://51.20.116.174:8080/immobile/crea" /// TODO: da cambiare
 
         val json = Json.encodeToString(property)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
 
-        val request = Request.Builder()
-            .url(url)
-            .addHeader("Authorization", "Bearer $token")
-            .addHeader("Content-Type", "application/json")
-            .post(requestBody)
-            .build()
+        AuthManager.getToken { token ->
+            val request = Request.Builder()
+                .url(url)
+                .addHeader("Authorization", "Bearer $token")
+                .addHeader("Content-Type", "application/json")
+                .post(requestBody)
+                .build()
 
-        client.newCall(request).enqueue(object : okhttp3.Callback {
-            override fun onFailure(call: okhttp3.Call, e: IOException) {
-                Log.e("Backend", "Failed to send data", e)
-            }
-
-            override fun onResponse(call: okhttp3.Call, response: Response) {
-                if (response.isSuccessful) {
-                    val responseBody: ResponseBody = response.body
-                    val responseMessage = responseBody.string()
-                    Log.i("Backend", "Data sent successfully: $responseMessage")
-                    onSuccess()
-                } else {
-                    Log.e("Backend", "Failed to send data: ${response.message}")
+            client.newCall(request).enqueue(object : okhttp3.Callback {
+                override fun onFailure(call: okhttp3.Call, e: IOException) {
+                    Log.e("Backend", "Failed to send data", e)
                 }
-            }
-        })
+
+                override fun onResponse(call: okhttp3.Call, response: Response) {
+                    if (response.isSuccessful) {
+                        val responseBody: ResponseBody = response.body
+                        val responseMessage = responseBody.string()
+                        Log.i("Backend", "Data sent successfully: $responseMessage")
+                        onSuccess()
+                    } else {
+                        Log.e("Backend", "Failed to send data: ${response.message}")
+                    }
+                }
+            })
+        }
     }
 
     fun getMyProperties(callback: (List<PropertyResponse>?) -> Unit) {
         val client = HttpClient.client
-        val token = AuthManager.idToken
 
-        val request = Request.Builder()
-            .url("http://13.60.254.218:8080/immobile/personali")  /// Sostituisci con il tuo URL
-            .addHeader("Authorization", "Bearer $token")
-            .addHeader("Content-Type", "application/json")
-            .get()
-            .build()
+        AuthManager.getToken { token ->
+            val request = Request.Builder()
+                .url("http://51.20.116.174:8080/immobile/personali")  /// Sostituisci con il tuo URL
+                .addHeader("Authorization", "Bearer $token")
+                .addHeader("Content-Type", "application/json")
+                .get()
+                .build()
 
-        client.newCall(request).enqueue(object : okhttp3.Callback {
-            override fun onFailure(call: okhttp3.Call, e: IOException) {
-                Log.e("Recupero miei immobili ", "Errore di rete: ${e.message}")
-                Handler(Looper.getMainLooper()).post {
-                    callback(null)  // Mostra errore
-                }
-            }
-
-            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
-                if (response.isSuccessful) {
-                    val responseBody = response.body.string()
-                    val properties = Json.decodeFromString<List<PropertyResponse>>(responseBody)
-
-                    Handler(Looper.getMainLooper()).post {
-                        callback(properties)  //immobili trovati
-                    }
-                } else {
-                    Log.e("Recupero miei immobili", "Errore HTTP: ${response.code}")
+            client.newCall(request).enqueue(object : okhttp3.Callback {
+                override fun onFailure(call: okhttp3.Call, e: IOException) {
+                    Log.e("Recupero miei immobili ", "Errore di rete: ${e.message}")
                     Handler(Looper.getMainLooper()).post {
                         callback(null)  // Mostra errore
                     }
                 }
-            }
-        })
+
+                override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body.string()
+                        val properties = Json.decodeFromString<List<PropertyResponse>>(responseBody)
+
+                        Handler(Looper.getMainLooper()).post {
+                            callback(properties)  //immobili trovati
+                        }
+                    } else {
+                        Log.e("Recupero miei immobili", "Errore HTTP: ${response.code}")
+                        Handler(Looper.getMainLooper()).post {
+                            callback(null)  // Mostra errore
+                        }
+                    }
+                }
+            })
+        }
     }
 
     fun searchPropertyFromAddress(
@@ -102,40 +104,41 @@ class PropertyController {
             return
         }
         val client = HttpClient.client
-        val token = AuthManager.idToken
         val urlBuilder = stringBuilder(page, pageSize, address, type, priceMin, priceMax, size, nBathrooms)
 
-        val request = Request.Builder()
-            .url(urlBuilder.toString())
-            .addHeader("Authorization", "Bearer $token")
-            .addHeader("Content-Type", "application/json")
-            .get()
-            .build()
+        AuthManager.getToken { token ->
+            val request = Request.Builder()
+                .url(urlBuilder.toString())
+                .addHeader("Authorization", "Bearer $token")
+                .addHeader("Content-Type", "application/json")
+                .get()
+                .build()
 
-        client.newCall(request).enqueue(object : okhttp3.Callback {
-            override fun onFailure(call: okhttp3.Call, e: IOException) {
-                Log.e("AddressValidation", "Errore di rete: ${e.message}")
-                Handler(Looper.getMainLooper()).post {
-                    callback(null)  // Mostra errore
-                }
-            }
-
-            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
-                if (response.isSuccessful) {
-                    val responseBody = response.body.string()
-                    val properties = Json.decodeFromString<List<PropertyResponse>>(responseBody)
-
-                    Handler(Looper.getMainLooper()).post {
-                        callback(properties)  // Indirizzo valido → immobili trovati
-                    }
-                } else {
-                    Log.e("AddressValidation", "Errore HTTP: ${response.code}")
+            client.newCall(request).enqueue(object : okhttp3.Callback {
+                override fun onFailure(call: okhttp3.Call, e: IOException) {
+                    Log.e("AddressValidation", "Errore di rete: ${e.message}")
                     Handler(Looper.getMainLooper()).post {
                         callback(null)  // Mostra errore
                     }
                 }
-            }
-        })
+
+                override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body.string()
+                        val properties = Json.decodeFromString<List<PropertyResponse>>(responseBody)
+
+                        Handler(Looper.getMainLooper()).post {
+                            callback(properties)  // Indirizzo valido → immobili trovati
+                        }
+                    } else {
+                        Log.e("AddressValidation", "Errore HTTP: ${response.code}")
+                        Handler(Looper.getMainLooper()).post {
+                            callback(null)  // Mostra errore
+                        }
+                    }
+                }
+            })
+        }
     }
 
     private fun stringBuilder(
@@ -149,7 +152,7 @@ class PropertyController {
         nBathrooms: Int?
     ): StringBuilder {
         /// cambiare il primo url con ip
-        val urlBuilder = StringBuilder("http://13.60.254.218:8080/immobile/cerca?page=$page&size=$pageSize&comune=${URLEncoder.encode(address, "UTF-8")}")
+        val urlBuilder = StringBuilder("http://51.20.116.174:8080/immobile/cerca?page=$page&size=$pageSize&comune=${URLEncoder.encode(address, "UTF-8")}")
         type?.let { urlBuilder.append("&tipologia=${URLEncoder.encode(it, "UTF-8")}") }
         priceMin?.let { urlBuilder.append("&prezzoMin=$it") }
         priceMax?.let { urlBuilder.append("&prezzoMax=$it") }

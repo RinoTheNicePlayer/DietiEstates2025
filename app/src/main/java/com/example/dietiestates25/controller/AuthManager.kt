@@ -5,24 +5,20 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
 import com.amplifyframework.core.Amplify
 
 object AuthManager {
-    val idToken: String?
-        @Synchronized get() {
-            return getToken()
-        }
-
     var role: String? = null
 
-    private fun getToken(): String? {
-        var idToken: String? = null
-
+    fun getToken(callBack: (String?) -> Unit) {
         Amplify.Auth.fetchAuthSession(
             { session -> if (session.isSignedIn) {
-                idToken = (session as AWSCognitoAuthSession).userPoolTokensResult.value?.idToken
+                val idToken = (session as AWSCognitoAuthSession).userPoolTokensResult.value?.idToken
                 Log.i("AuthQuickstart", "id Token: $idToken")
+                callBack(idToken)
             }},
-            { error -> Log.e("Auth", "Failed to fetch auth session", error) }
+            {
+                error -> Log.e("Auth", "Failed to fetch auth session", error)
+                callBack(null)
+            }
         )
-
-        return idToken
     }
+
 }
