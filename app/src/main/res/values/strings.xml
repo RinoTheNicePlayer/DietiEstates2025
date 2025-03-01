@@ -99,6 +99,9 @@
     <string name="prezzo_max">Prezzo max</string>
     <string name="prezzo_min">Prezzo min</string>
     <string name="dimensione">Dimensione</string>
+    <string name="i_miei_immobili">I miei immobili:</string>
+    <string name="crea_immobile">Crea immobile</string>
+    <string name="plus_button">plus_button</string>
     <string-array name="sale_rent_options">
         <item>In vendita/In affitto</item>
         <item>In vendita</item>

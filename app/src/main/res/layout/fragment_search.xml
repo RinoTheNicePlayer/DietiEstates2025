@@ -43,7 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:layout_marginHorizontal="22dp" />
+            android:layout_marginHorizontal="22dp"
+            android:minHeight="200dp"/>
 
     <include layout="@layout/activity_pagination"/>
 
