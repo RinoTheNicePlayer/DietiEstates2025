@@ -68,7 +68,7 @@ class PropertyDetailsController(private val context: Context) {
 
     private fun getInterestingPointsFromBackend(interestingPoints: InterestingPoints, callback: (Map<String, Int>?) -> Unit) {
         val client = HttpClient.client
-        val url = "http://51.20.116.174:8080/geodata/conteggio-pdi" /// da cambiare
+        val url = "http://16.16.26.105:8080/geodata/conteggio-pdi" /// da cambiare
 
         val json = Json.encodeToString(interestingPoints)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())

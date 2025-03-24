@@ -18,7 +18,7 @@ import java.net.URLEncoder
 class PropertyController {
     fun saveProperty(property: Property, onSuccess: () -> Unit) {
         val client = HttpClient.client
-        val url = "http://51.20.116.174:8080/immobile/crea" /// TODO: da cambiare
+        val url = "http://16.16.26.105:8080/immobile/crea" /// TODO: da cambiare
 
         val json = Json.encodeToString(property)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
@@ -55,7 +55,7 @@ class PropertyController {
 
         AuthManager.getToken { token ->
             val request = Request.Builder()
-                .url("http://51.20.116.174:8080/immobile/personali")  /// Sostituisci con il tuo URL
+                .url("http://16.16.26.105:8080/immobile/personali")  /// Sostituisci con il tuo URL
                 .addHeader("Authorization", "Bearer $token")
                 .addHeader("Content-Type", "application/json")
                 .get()
@@ -152,7 +152,7 @@ class PropertyController {
         nBathrooms: Int?
     ): StringBuilder {
         /// cambiare il primo url con ip
-        val urlBuilder = StringBuilder("http://51.20.116.174:8080/immobile/cerca?page=$page&size=$pageSize&comune=${URLEncoder.encode(address, "UTF-8")}")
+        val urlBuilder = StringBuilder("http://16.16.26.105:8080/immobile/cerca?page=$page&size=$pageSize&comune=${URLEncoder.encode(address, "UTF-8")}")
         type?.let { urlBuilder.append("&tipologia=${URLEncoder.encode(it, "UTF-8")}") }
         priceMin?.let { urlBuilder.append("&prezzoMin=$it") }
         priceMax?.let { urlBuilder.append("&prezzoMax=$it") }

@@ -21,7 +21,7 @@ import java.io.IOException
 class ProfileController {
     fun signUpGestoreOrAgente(email: String, password: String, role: String, errorLabel: TextView, onSuccess: () -> Unit){
         val client = HttpClient.client
-        val url = "http://51.20.116.174:8080/auth/register" /// TODO: da cambiare
+        val url = "http://16.16.26.105:8080/auth/register" /// TODO: da cambiare
 
         val json = Json.encodeToString(RegistrationRequest(email, password, role))
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())

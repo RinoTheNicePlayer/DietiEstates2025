@@ -1,0 +1,108 @@
+@startuml
+class com.example.dietiestates25.controller.ReservationController {
++ void getMeteo(MeteoRequest,(Map<String, Any>?) -> Unit)
++ void saveReservation(Reservation,() -> Unit)
++ void getMyReservation((List<ReservationResponse>?) -> Unit)
++ void getReservationFromAgency((List<ReservationResponse>?) -> Unit)
++ void editReservation(ReservationResponse,() -> Unit)
+}
+
+class com.example.dietiestates25.controller.PropertyDetailsController {
+-  s3Controller
++ void loadImage(PropertyResponse,ImageView)
++ void getInterestingPoints(InterestingPoints,TextView)
+- void handleSetTextInterestingPoints(Map<String, Int>?,TextView)
+- void getInterestingPointsFromBackend(InterestingPoints,(Map<String, Int>?) -> Unit)
+}
+
+
+class com.example.dietiestates25.controller.ProfileController {
++ void signUpGestoreOrAgente(String,String,String,TextView,() -> Unit)
++ void updatePassword(String,String,TextView,() -> Unit)
++ void signOut(Fragment)
++ void fetchUserMail((String?) -> Unit)
++ Boolean areEmailValid(String,String)
++ Boolean arePasswordValid(String,String)
+- void comeBackToLogin(Fragment)
+}
+
+class com.example.dietiestates25.controller.OfferViewModel {
+-  _offerSent
++ LiveData<Offer> selectedOffer
++ void selectOffer(Offer)
+}
+
+
+class com.example.dietiestates25.controller.OfferController {
+-  s3Controller
++ void loadImage(PropertyResponse,ImageView)
++ void sendOffer(Offer,() -> Unit)
++ void getMyOffers((List<OfferResponse>?) -> Unit)
++ void getOffersFromAgency((List<OfferResponse>?) -> Unit)
++ void editOffer(OfferResponse,() -> Unit)
+}
+
+
+class com.example.dietiestates25.controller.S3Controller {
++ String uploadInputStream(Uri)
++ String uploadDefaultImage(ImageView)
++ void getUrlFromStoragePath(String,(String?) -> Unit)
+}
+
+class com.example.dietiestates25.controller.PropertyViewModel {
+-  _selectedProperty
++ LiveData<PropertyResponse> selectedProperty
++ void selectProperty(PropertyResponse)
+}
+
+
+class com.example.dietiestates25.controller.ReservationViewModel {
+-  _reservation
++ LiveData<Reservation> selectedReservation
++ void selectReservation(Reservation)
+}
+
+
+class com.example.dietiestates25.controller.PropertySearched {
++ List<PropertyResponse>? properties
++ String? address
+}
+
+class com.example.dietiestates25.controller.AuthManager {
++ String? role
++ void getToken((String?) -> Unit)
+}
+
+
+class com.example.dietiestates25.controller.HttpClient {
++ OkHttpClient client
+}
+
+class com.example.dietiestates25.controller.AuthController {
++ void signUpWithAmplify(String,String,String,TextView,AppCompatActivity)
++ void loginWithAmplify(String,String,TextView,AppCompatActivity)
++ void loginWithThirdProviders(AppCompatActivity)
++ void userIsSignedIn(AppCompatActivity)
+- void fetchUserRole(AppCompatActivity)
+- String setRoleToClienteIfNull(String?)
++ void navigateTo(AppCompatActivity,AppCompatActivity)
++ Boolean areValid(String,String)
+- void goToHome(AppCompatActivity,String?)
+- void goToHomeClienti(AppCompatActivity)
+- void goToHomeAgenti(AppCompatActivity)
+}
+
+class com.example.dietiestates25.controller.PropertyController {
++ void saveProperty(Property,() -> Unit)
++ void getMyProperties((List<PropertyResponse>?) -> Unit)
++ void searchPropertyFromAddress(String,String?,Double?,Double?,Int?,Int?,Int,Int,(List<PropertyResponse>?) -> Unit)
+- StringBuilder stringBuilder(Int,Int,String,String?,Double?,Double?,Int?,Int?)
++ Boolean validateSearchParameters(String,String?,Double?,Double?,Int?,Int?)
+}
+
+
+
+androidx.lifecycle.ViewModel <|-- com.example.dietiestates25.controller.OfferViewModel
+androidx.lifecycle.ViewModel <|-- com.example.dietiestates25.controller.PropertyViewModel
+androidx.lifecycle.ViewModel <|-- com.example.dietiestates25.controller.ReservationViewModel
+@enduml

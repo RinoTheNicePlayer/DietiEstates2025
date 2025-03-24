@@ -38,7 +38,7 @@ class OfferController(private val context: Context) {
 
     fun sendOffer(offer: Offer, onSuccess: () -> Unit) {
         val client = HttpClient.client
-        val url = "http://51.20.116.174:8080/offerta/aggiungi" ///da cambiare
+        val url = "http://16.16.26.105:8080/offerta/aggiungi" ///da cambiare
 
         val json = Json.encodeToString(offer)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
@@ -72,7 +72,7 @@ class OfferController(private val context: Context) {
 
     fun getMyOffers(callback: (List<OfferResponse>?) -> Unit) {
         val client = HttpClient.client
-        val url = "http://51.20.116.174:8080/offerta/riepilogoCliente" // da cambiare
+        val url = "http://16.16.26.105:8080/offerta/riepilogoCliente" // da cambiare
 
         AuthManager.getToken { token ->
             val request = Request.Builder()
@@ -112,7 +112,7 @@ class OfferController(private val context: Context) {
 
     fun getOffersFromAgency(callback: (List<OfferResponse>?) -> Unit) {
         val client = HttpClient.client
-        val url = "http://51.20.116.174:8080/offerta/riepilogoUtenteAgenzia" // da cambiare
+        val url = "http://16.16.26.105:8080/offerta/riepilogoUtenteAgenzia" // da cambiare
 
         AuthManager.getToken { token ->
             val request = Request.Builder()
@@ -152,7 +152,7 @@ class OfferController(private val context: Context) {
 
     fun editOffer(offerResponse: OfferResponse, onSuccess: () -> Unit) {
         val client = HttpClient.client
-        val url = "http://51.20.116.174:8080/offerta/aggiorna" // da cambiare
+        val url = "http://16.16.26.105:8080/offerta/aggiorna" // da cambiare
 
         val json = Json.encodeToString(offerResponse)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())

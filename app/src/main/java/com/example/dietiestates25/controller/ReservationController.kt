@@ -17,7 +17,7 @@ import java.io.IOException
 class ReservationController {
     fun getMeteo(meteoRequest: MeteoRequest, callback: (Map<String, Any>?) -> Unit) {
         val client = HttpClient.client
-        val url = "http://51.20.116.174:8080/api/meteo" // da cambiare
+        val url = "http://16.16.26.105:8080/api/meteo" // da cambiare
 
         val json = Json.encodeToString(meteoRequest)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
@@ -54,7 +54,7 @@ class ReservationController {
 
     fun saveReservation(reservation: Reservation, onSuccess: () -> Unit) {
         val client = HttpClient.client
-        val url = "http://51.20.116.174:8080/visita/prenota" // da cambiare
+        val url = "http://16.16.26.105:8080/visita/prenota" // da cambiare
 
         val json = Json.encodeToString(reservation)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
@@ -87,7 +87,7 @@ class ReservationController {
 
     fun getMyReservation(callback: (List<ReservationResponse>?) -> Unit) {
         val client = HttpClient.client
-        val url = "http://51.20.116.174:8080/visita/riepilogoCliente" // da cambiare
+        val url = "http://16.16.26.105:8080/visita/riepilogoCliente" // da cambiare
 
         AuthManager.getToken { token ->
             val request = Request.Builder()
@@ -127,7 +127,7 @@ class ReservationController {
 
     fun getReservationFromAgency(callback: (List<ReservationResponse>?) -> Unit) {
         val client = HttpClient.client
-        val url = "http://51.20.116.174:8080/visita/riepilogoUtenteAgenzia" // da cambiare
+        val url = "http://16.16.26.105:8080/visita/riepilogoUtenteAgenzia" // da cambiare
 
         AuthManager.getToken { token ->
             val request = Request.Builder()
@@ -167,7 +167,7 @@ class ReservationController {
 
     fun editReservation(reservationResponse: ReservationResponse, onSuccess: () -> Unit) {
         val client = HttpClient.client
-        val url = "http://51.20.116.174:8080/visita/aggiorna" // da cambiare
+        val url = "http://16.16.26.105:8080/visita/aggiorna" // da cambiare
 
         val json = Json.encodeToString(reservationResponse)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
